@@ -2,7 +2,7 @@
   "name": "abstract-things",
   "version": "0.1.0",
   "license": "MIT",
-  "description": "",
+  "description": "Base for building libraries that interact with physical things, such as IoT-devices",
   "repository": "tinkerhub/abstract-things",
   "keywords": [],
   "scripts": {
@@ -25,7 +25,7 @@
     "mkdirp": "^0.5.1"
   },
   "devDependencies": {
-    "eslint": "^4.11.0",
+    "eslint": "^4.12.0",
     "eslint-plugin-node": "^5.2.1"
   }
 }
