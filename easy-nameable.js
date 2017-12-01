@@ -19,6 +19,7 @@ module.exports = Thing.capability(Appliance => class extends Appliance.with(Name
 	}
 
 	changeName(name) {
-		return this.storage.set('name', name);
+		return this.storage.set('name', name)
+			.then(() => this.metadata.name = name);
 	}
 });
