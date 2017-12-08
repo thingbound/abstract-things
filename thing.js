@@ -58,13 +58,6 @@ function collectMetadata(instance) {
 			for(const action of api) {
 				builder.action(action).done();
 			}
-		} else if(typeof api === 'undefined') {
-			// No API defined, automatically define actions
-			for(const action of Object.getOwnPropertyNames(prototype)) {
-				if(typeof action === 'string' && action[0] != '_') {
-					builder.action(action).done();
-				}
-			}
 		}
 
 		prototype = Object.getPrototypeOf(prototype);
