@@ -337,8 +337,10 @@ const quantities = [
 	'mass',
 	'power',
 	'pressure',
+	'soundPressureLevel',
 	'speed',
 	'temperature',
+	'voltage',
 	'volume'
 ];
 
