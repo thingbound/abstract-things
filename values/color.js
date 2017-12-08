@@ -259,7 +259,7 @@ module.exports.is = function(v) {
 	return v instanceof Color;
 };
 
-[ 'rgb', 'temperature', 'mired', 'xyY', 'hsl', 'hsv' ].forEach(function(name) {
+[ 'cmyk', 'rgb', 'temperature', 'mired', 'xyz', 'xyY', 'hsl', 'hsv' ].forEach(function(name) {
 	module.exports[name] = function() {
 		return new Color(Array.prototype.slice.call(arguments), name);
 	};
