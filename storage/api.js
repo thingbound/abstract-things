@@ -47,7 +47,7 @@ class SubStorage {
 
 	get(key) {
 		return this._storage.get(this._path + '/' + key)
-			.then(json => values.fromJSON('mixed'));
+			.then(json => values.fromJSON('mixed', json));
 	}
 
 	set(key, value) {
