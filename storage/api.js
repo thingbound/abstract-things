@@ -6,6 +6,8 @@ const mkdirp = require('mkdirp');
 const AppDirectory = require('appdirectory');
 const Storage = require('dwaal');
 
+const values = require('../values');
+
 let storage;
 let parent;
 
@@ -44,11 +46,13 @@ class SubStorage {
 	}
 
 	get(key) {
-		return this._storage.get(this._path + '/' + key);
+		return this._storage.get(this._path + '/' + key)
+			.then(json => values.fromJSON('mixed'));
 	}
 
 	set(key, value) {
-		return this._storage.set(this._path + '/' + key, value);
+		return this._storage.set(this._path + '/' + key, values.toJSON('mixed', value));
+	}
 	}
 
 	inspect() {
