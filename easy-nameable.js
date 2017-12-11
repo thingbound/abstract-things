@@ -12,8 +12,8 @@ module.exports = Thing.capability(Appliance => class extends Appliance.with(Name
 		super(...args);
 	}
 
-	init() {
-		return super.init()
+	initCallback() {
+		return super.initCallback()
 			.then(() => this.storage.get('name'))
 			.then(name => this.metadata.name = name);
 	}

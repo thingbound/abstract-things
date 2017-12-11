@@ -72,6 +72,9 @@ const debugProperty = Symbol('debug');
 const eventQueue = Symbol('eventQueue');
 const eventEmitter = Symbol('eventEmitter');
 
+const isInitialized = Symbol('isInitialized');
+const isDestroyed = Symbol('isDestroyed');
+
 const Thing = module.exports = toExtendable(class Thing {
 	constructor() {
 		this.metadata = collectMetadata(this);
@@ -83,6 +86,30 @@ const Thing = module.exports = toExtendable(class Thing {
 	}
 
 	init() {
+		if(this[isInitialized]) return Promise.resolve(this);
+
+		this[isInitialized] = true;
+		return Promise.resolve(this.initCallback())
+			.then(() => this);
+	}
+
+	initCallback() {
+		return Promise.resolve();
+	}
+
+	/**
+	 * Destroy this appliance, freeing any resources that it is using.
+	 */
+	destroy() {
+		if(! this[isInitialized] || this[isDestroyed]) return Promise.resolve();
+
+		this[isDestroyed] = true;
+		this[isInitialized] = false;
+		return Promise.resolve(this.destroyCallback())
+			.then(() => undefined);
+	}
+
+	destroyCallback() {
 		return Promise.resolve();
 	}
 
@@ -165,13 +192,6 @@ const Thing = module.exports = toExtendable(class Thing {
 	 */
 	matches(...tags) {
 		return this.metadata.matches(...tags);
-	}
-
-	/**
-	 * Destroy this appliance, freeing any resources that it is using.
-	 */
-	destroy() {
-		return Promise.resolve();
 	}
 
 	/**
