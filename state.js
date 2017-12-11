@@ -51,7 +51,13 @@ module.exports = Thing.capability(Thing => class extends Thing {
 		} else {
 			// Value has changed, update and queue event emittal
 			this.state[key] = value;
-			this.emitEvent('state', this.state);
+			const event = {
+				key: key,
+				value: this.state
+			};
+			this.emitEvent('stateChanged', event, {
+				multiple: e => e.key === key
+			});
 
 			return true;
 		}

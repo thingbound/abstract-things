@@ -100,12 +100,23 @@ const Thing = module.exports = toExtendable(class Thing {
 
 		const shouldQueueEmit = queue.length === 0;
 
-		if(! options || ! options.multiple) {
+		const multiple = options ? options.multiple : false;
+		if(! multiple) {
 			// Check if there is already an even scheduled
 			const idx = queue.findIndex(e => e[0] === event);
 			if(idx >= 0) {
 				// Remove the event - only a single event can is emitted per tick
 				queue.splice(idx, 1);
+			}
+		} else if(typeof multiple === 'function') {
+			// More advanced matching using a function
+			for(let i=0; i<queue.length; i++) {
+				const e = queue[i];
+				if(e[0] === event && multiple(e[1])) {
+					// This event matches, remove it
+					queue.splice(i, 1);
+					break;
+				}
 			}
 		}
 
