@@ -53,6 +53,9 @@ class SubStorage {
 	set(key, value) {
 		return this._storage.set(this._path + '/' + key, values.toJSON('mixed', value));
 	}
+
+	sub(key) {
+		return new SubStorage(this._storage, this._path + '/' + key);
 	}
 
 	inspect() {
