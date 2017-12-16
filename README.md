@@ -1,13 +1,15 @@
 # abstract-things
 
 `abstract-things` is a JavaScript library that provides a simple base for
-building libraries that interact with physical things, such as IoT-devices
-and [appliances](https://github.com/tinkerhub/appliances), and virtual things.
+building libraries that interact with physical things, such as IoT-devices, and virtual things.
 
 This library provides a base class named `Thing` that supports mixins of
 various types. Things are described using two types of tags, one describing
 the type of the thing and one describing its capabilities. Things are also
 expected to describe their public API, to make remote use easier.
+
+Types and capabilities are designed to be stable and to be combined. When
+combined they describe a thing and what it can do.
 
 ## Building a simple thing
 
