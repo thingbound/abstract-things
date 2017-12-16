@@ -69,7 +69,18 @@ module.exports = Thing.capability(Thing => class extends Thing {
 	 * @param {string} key
 	 */
 	removeState(key) {
+		const emitEvent = typeof this.state[key] !== 'undefined';
 		delete this.state[key];
+
+		if(emitEvent) {
+			const event = {
+				key: key,
+				value: null
+			};
+			this.emitEvent('stateChanged', event, {
+				multiple: e => e.key === key
+			});
+		}
 	}
 
 	/**
