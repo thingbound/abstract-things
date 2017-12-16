@@ -53,7 +53,7 @@ module.exports = Thing.capability(Thing => class extends Thing {
 			this.state[key] = value;
 			const event = {
 				key: key,
-				value: this.state
+				value: value
 			};
 			this.emitEvent('stateChanged', event, {
 				multiple: e => e.key === key
