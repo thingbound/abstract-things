@@ -84,7 +84,7 @@ module.exports = Thing.capability(Parent => class extends Parent.with(State) {
 	/**
 	 * Get the available modes of the device.
 	 */
-	modes() {
+	get modes() {
 		return this.getState('modes');
 	}
 
