@@ -17,7 +17,7 @@ combined they describe a thing and what it can do.
 	:caption: Getting started
 
 	using-things
-	building-things
+	building-things/index
 
 .. toctree::
 	:maxdepth: 2

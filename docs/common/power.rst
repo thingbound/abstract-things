@@ -10,6 +10,8 @@ state.
 		console.log('Power is', thing.power());
 	}
 
+Related capabilities: :doc:`switchable-power <switchable-power>`, :doc:`state <state>`
+
 Actions
 --------
 
@@ -29,10 +31,16 @@ Actions
 
 	State-key indicating the current power state.
 
+	Example:
+
+	.. sourcecode:: js
+
+		console.log(thing.state.power);
+
 Events
 ------
 
-.. js:data:: power
+.. describe:: power
 
 	The current power state has changed.
 
