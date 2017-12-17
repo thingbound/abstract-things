@@ -22,6 +22,8 @@ Thing API
 	* ``uuid:8125606b-7b57-405b-94d6-e5720c44aa6a``
 	* ``space:global``
 
+	See :doc:`../naming` for more details.
+
 .. js:attribute:: metadata
 
 	Metadata associated with the thing. Contains information about types and
