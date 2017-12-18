@@ -1,12 +1,12 @@
 'use strict';
 
-const Thing = require('./thing');
+const Thing = require('../thing');
 const State = require('./state');
 
 /**
  * Capability for things that can be renamed.
  */
-module.exports = Thing.capability(Thing => class extends Thing.with(State) {
+module.exports = Thing.capability(Parent => class extends Parent.with(State) {
 	static availableAPI(builder) {
 		builder.action('setName')
 			.description('Set the name of this appliance')

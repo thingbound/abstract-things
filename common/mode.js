@@ -1,7 +1,7 @@
 'use strict';
 
 const Thing = require('../thing');
-const State = require('../state');
+const State = require('./state');
 
 /**
  * Mode capability, for appliances that support different modes.

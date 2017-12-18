@@ -1,7 +1,7 @@
 'use strict';
 
 const Thing = require('../thing');
-const State = require('../state');
+const State = require('../common/state');
 
 module.exports = Thing.capability(Parent => class extends Parent.with(State) {
 	/**

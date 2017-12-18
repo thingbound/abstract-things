@@ -2,7 +2,7 @@
 
 const Thing = require('../thing');
 const Power = require('./power');
-const RestorableState = require('../restorable-state');
+const RestorableState = require('./restorable-state');
 const { boolean } = require('../values');
 
 /**

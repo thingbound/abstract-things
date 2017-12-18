@@ -1,13 +1,13 @@
 'use strict';
 
-const Thing = require('./thing');
+const Thing = require('../thing');
 const Nameable = require('./nameable');
-const Storage = require('./storage');
+const Storage = require('../storage');
 
 /**
  * Capability for things that store their own name in the storage.
  */
-module.exports = Thing.capability(Appliance => class extends Appliance.with(Nameable, Storage) {
+module.exports = Thing.capability(Parent => class extends Parent.with(Nameable, Storage) {
 	constructor(...args) {
 		super(...args);
 	}

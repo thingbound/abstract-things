@@ -2,7 +2,7 @@
 
 const Thing = require('../thing');
 const PowerChannels = require('./power-channels');
-const RestorableState = require('../restorable-state');
+const RestorableState = require('./restorable-state');
 const { string, boolean } = require('../values');
 
 

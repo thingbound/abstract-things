@@ -1,7 +1,7 @@
 'use strict';
 
 const Thing = require('../thing');
-const State = require('../state');
+const State = require('../common/state');
 
 /**
  * Controller, such as switches and remote controls.

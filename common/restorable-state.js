@@ -1,12 +1,12 @@
 'use strict';
 
-const Thing = require('./thing');
+const Thing = require('../thing');
 const State = require('./state');
 
 /**
  * Restorable state capability. Restorable state is used for those things
  */
-module.exports = Thing.capability(Thing => class extends Thing.with(State) {
+module.exports = Thing.capability(Parent => class extends Parent.with(State) {
 	static availableAPI(builder) {
 		builder.action('restorableState')
 			.description('Get the properties that will be captured')
