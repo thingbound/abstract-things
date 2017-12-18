@@ -81,5 +81,7 @@ fired.
 	:caption: Topics
 
 	naming
+	metadata
+	mixins
 	events
 

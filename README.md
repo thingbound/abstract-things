@@ -11,6 +11,8 @@ expected to describe their public API, to make remote use easier.
 Types and capabilities are designed to be stable and to be combined. When
 combined they describe a thing and what it can do.
 
+Detailed documentation is available at: http://abstract-things.readthedocs.io/en/latest/
+
 ## Building a simple thing
 
 ```
