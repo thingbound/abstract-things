@@ -9,7 +9,7 @@ const { boolean } = require('../values');
  * Switchable capability, for appliances where the power can be switched on
  * or off.
  */
-module.exports = Thing.capability(Parent => class extends Parent.with(Power, RestorableState) {
+module.exports = Thing.mixin(Parent => class extends Parent.with(Power, RestorableState) {
 	/**
 	* Define the API of appliances that can manage their power.
 	*/

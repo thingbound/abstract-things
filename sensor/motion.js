@@ -5,7 +5,7 @@ const Sensor = require('./sensor');
 const { boolean, duration } = require('../values');
 const idleTimer = Symbol('autoIdle');
 
-module.exports = Thing.capability(Parent => class extends Parent.with(Sensor) {
+module.exports = Thing.mixin(Parent => class extends Parent.with(Sensor) {
 	static get capability() {
 		return 'motion';
 	}

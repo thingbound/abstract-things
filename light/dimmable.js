@@ -6,7 +6,7 @@ const LightState = require('./light-state');
 const Brightness = require('./brightness');
 const { duration, percentage, 'percentage:change': change } = require('../values');
 
-module.exports = Thing.capability(Parent => class extends Parent.with(Brightness, LightState) {
+module.exports = Thing.mixin(Parent => class extends Parent.with(Brightness, LightState) {
 	/**
 	 * Expose the brightness API.
 	 */

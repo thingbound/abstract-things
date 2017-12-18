@@ -4,7 +4,7 @@ const Thing = require('../thing');
 const api = require('./api');
 const storage = Symbol('storage');
 
-module.exports = Thing.capability(Parent => class extends Parent {
+module.exports = Thing.mixin(Parent => class extends Parent {
 	static get storage() {
 		return api.global();
 	}

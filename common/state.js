@@ -9,7 +9,7 @@ const deepEqual = require('deep-equal');
  * Use `updateState(key, value)` to change the state of the given key and emit
  * an event to clients that the state has changed.
  */
-module.exports = Thing.capability(Parent => class extends Parent {
+module.exports = Thing.mixin(Parent => class extends Parent {
 	/**
 	 * Get the API that appliances with state make available.
 	 */

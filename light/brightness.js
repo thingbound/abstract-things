@@ -3,7 +3,7 @@
 const Thing = require('../thing');
 const State = require('../common/state');
 
-module.exports = Thing.capability(Parent => class extends Parent.with(State) {
+module.exports = Thing.mixin(Parent => class extends Parent.with(State) {
 	/**
 	 * Expose the brightness API.
 	 */

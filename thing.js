@@ -208,7 +208,7 @@ const Thing = module.exports = toExtendable(class Thing {
 	 *
 	 * @param {function} func
 	 */
-	static capability(func) {
+	static mixin(func) {
 		return Mixin(func);
 	}
 
@@ -218,7 +218,7 @@ const Thing = module.exports = toExtendable(class Thing {
 	 * @param {*} obj
 	 * @param {array} mixins
 	 */
-	static mixin(obj, ...mixins) {
+	static mixinDynamic(obj, ...mixins) {
 		const direct = Object.getPrototypeOf(obj);
 		const parent = Object.getPrototypeOf(direct);
 
@@ -242,6 +242,6 @@ const Thing = module.exports = toExtendable(class Thing {
 	 * @param {array} mixins
 	 */
 	extendWith(...mixins) {
-		Thing.mixin(this, ...mixins);
+		Thing.mixinDynamic(this, ...mixins);
 	}
 });

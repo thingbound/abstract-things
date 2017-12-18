@@ -8,7 +8,7 @@ const childrenSymbol = Symbol('children');
  * primarily for things that bridge other networks, such as Zigbee, Z-wave
  * and Bluetooth networks.
  */
-module.exports = Thing.capability(Parent => class extends Parent {
+module.exports = Thing.mixin(Parent => class extends Parent {
 
 	constructor(...args) {
 		super(...args);

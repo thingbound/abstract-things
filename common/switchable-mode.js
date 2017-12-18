@@ -6,7 +6,7 @@ const Mode = require('./mode');
 /**
  * Switchable mode capability.
  */
-module.exports = Thing.capability(Parent => class extends Parent.with(Mode) {
+module.exports = Thing.mixin(Parent => class extends Parent.with(Mode) {
 	/**
 	* Define the API of appliances that can manage their mode.
 	*/

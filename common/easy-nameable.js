@@ -7,7 +7,7 @@ const Storage = require('../storage');
 /**
  * Capability for things that store their own name in the storage.
  */
-module.exports = Thing.capability(Parent => class extends Parent.with(Nameable, Storage) {
+module.exports = Thing.mixin(Parent => class extends Parent.with(Nameable, Storage) {
 	constructor(...args) {
 		super(...args);
 	}

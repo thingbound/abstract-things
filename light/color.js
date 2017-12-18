@@ -5,7 +5,7 @@ const Light = require('./light');
 const LightState = require('./light-state');
 const { duration, color } = require('../values');
 
-module.exports = Thing.capability(Parent => class extends Parent.with(LightState) {
+module.exports = Thing.mixin(Parent => class extends Parent.with(LightState) {
 	/**
 	 * Expose the color methods.
 	 */

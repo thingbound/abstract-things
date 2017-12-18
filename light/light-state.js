@@ -3,7 +3,7 @@
 const Thing = require('../thing');
 const RestorableState = require('../common/restorable-state');
 
-module.exports = Thing.capability(Parent => class extends Parent.with(RestorableState) {
+module.exports = Thing.mixin(Parent => class extends Parent.with(RestorableState) {
 	/**
 	 * Set the state of this light. The default implementation simply
 	 * delegates to `change`-methods in capabilities.

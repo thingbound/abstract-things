@@ -5,7 +5,7 @@ const SwitchablePower = require('../common/switchable-power');
 const LightState = require('./light-state');
 const { boolean } = require('../values');
 
-module.exports = Thing.capability(Parent => class extends Parent.with(SwitchablePower, LightState) {
+module.exports = Thing.mixin(Parent => class extends Parent.with(SwitchablePower, LightState) {
 
 	changePowerState(state) {
 		// Do nothing, setLightState handles power changes instead

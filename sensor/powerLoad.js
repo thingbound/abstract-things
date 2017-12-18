@@ -4,7 +4,7 @@ const Thing = require('../thing');
 const Sensor = require('./sensor');
 const { power } = require('../values');
 
-module.exports = Thing.capability(Parent => class extends Parent.with(Sensor) {
+module.exports = Thing.mixin(Parent => class extends Parent.with(Sensor) {
 	static get capability() {
 		return 'power-load';
 	}

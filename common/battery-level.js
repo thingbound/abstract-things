@@ -4,7 +4,7 @@ const Thing = require('../thing');
 const State = require('./state');
 const { percentage } = require('../values');
 
-module.exports = Thing.capability(Parent => class extends Parent.with(State) {
+module.exports = Thing.mixin(Parent => class extends Parent.with(State) {
 
 	static availableAPI(builder) {
 		builder.state('batteryLevel')

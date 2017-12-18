@@ -11,7 +11,7 @@ const { string, boolean } = require('../values');
  * one or more power channels. This is used for things such as sockets and
  * power strips.
  */
-module.exports = Thing.capability(Parent => class extends Parent.with(PowerChannels, RestorableState) {
+module.exports = Thing.mixin(Parent => class extends Parent.with(PowerChannels, RestorableState) {
 	static availableAPI(builder) {
 		builder.action('power')
 			.description('Get if any channel on this appliance has power')

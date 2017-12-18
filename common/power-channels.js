@@ -9,7 +9,7 @@ const { string } = require('../values');
  * one or more power channels. This is used for things such as sockets and
  * power strips.
  */
-module.exports = Thing.capability(Parent => class extends Parent.with(State) {
+module.exports = Thing.mixin(Parent => class extends Parent.with(State) {
 	static availableAPI(builder) {
 		builder.state('power')
 			.type('boolean')

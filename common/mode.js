@@ -6,7 +6,7 @@ const State = require('./state');
 /**
  * Mode capability, for appliances that support different modes.
  */
-module.exports = Thing.capability(Parent => class extends Parent.with(State) {
+module.exports = Thing.mixin(Parent => class extends Parent.with(State) {
 	/**
 	* Define the API of appliances that can manage their power.
 	*/

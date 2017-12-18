@@ -7,7 +7,7 @@ const State = require('./state');
  * Power capability, for appliances that support switching and monitoring the
  * power status of themselves.
  */
-module.exports = Thing.capability(Parent => class extends Parent.with(State) {
+module.exports = Thing.mixin(Parent => class extends Parent.with(State) {
 	/**
 	* Define the API of appliances that can manage their power.
 	*/
