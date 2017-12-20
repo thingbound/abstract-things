@@ -38,7 +38,7 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(LightState) {
 	 * Mark the light as dimmable.
 	 */
 	static get capabilities() {
-		return [ 'color' ];
+		return [ 'colorable' ];
 	}
 
 	/**
