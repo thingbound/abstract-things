@@ -2,70 +2,10 @@
 
 const { Class, Mixin, toExtendable, mix } = require('foibles');
 const { EventEmitter } = require('./events');
-const DefinitionBuilder = require('./utils/define-api');
 const debug = require('debug');
 
-const Metadata = require('./metadata');
+const collectMetadata = require('./utils/collectMetadata');
 const merge = require('./utils/merge');
-
-/**
- * Go through the prototype chain of a class looking for information that
- * is used to create metadata about an instance.
- */
-function collectMetadata(instance) {
-	const metadata = new Metadata(instance);
-	const builder = new DefinitionBuilder();
-
-	let prototype = instance.constructor;
-	while(prototype != Thing) {
-		// static get types() { return [ 'typeA', 'typeB ] }
-		const types = prototype.types;
-		if(typeof types !== 'undefined') {
-			if(! Array.isArray(types)) {
-				metadata.addTypes(types);
-			} else {
-				metadata.addTypes(...types);
-			}
-		}
-
-		// static get type() { return 'type' }
-		const type = prototype.type;
-		if(typeof type === 'string') {
-			metadata.addTypes(type);
-		}
-
-		// static get capabilities() { return [ 'capA', 'capB ] }
-		const capabilities = prototype.capabilities;
-		if(typeof capabilities !== 'undefined') {
-			if(! Array.isArray(capabilities)) {
-				metadata.addCapabilities(capabilities);
-			} else {
-				metadata.addCapabilities(...capabilities);
-			}
-		}
-
-		// static get capability() { return 'cap' }
-		const capability = prototype.capability;
-		if(typeof capability === 'string') {
-			metadata.addCapabilities(capability);
-		}
-
-		const api = prototype.availableAPI;
-		if(typeof api === 'function') {
-			prototype.availableAPI(builder);
-		} else if(Array.isArray(api)) {
-			// If an array treat each entry as a name
-			for(const action of api) {
-				builder.action(action).done();
-			}
-		}
-
-		prototype = Object.getPrototypeOf(prototype);
-	}
-
-	Object.assign(metadata, builder.done());
-	return metadata;
-}
 
 const debugProperty = Symbol('debug');
 
@@ -75,9 +15,9 @@ const eventEmitter = Symbol('eventEmitter');
 const isInitialized = Symbol('isInitialized');
 const isDestroyed = Symbol('isDestroyed');
 
-const Thing = module.exports = toExtendable(class Thing {
+module.exports = toExtendable(class Thing {
 	constructor() {
-		this.metadata = collectMetadata(this);
+		this.metadata = collectMetadata(Thing, this);
 
 		this[eventQueue] = [];
 		this[eventEmitter] = new EventEmitter({

@@ -160,6 +160,10 @@ class DefBuilder {
 		this._state = {};
 	}
 
+	markWith(tags) {
+		this._tags = tags;
+	}
+
 	action(name) {
 		return new ActionBuilder(name, def => {
 			const current = this._actions[name];
@@ -167,6 +171,7 @@ class DefBuilder {
 				// TODO: Check compatibility, but for now ignore this action
 				return this;
 			}
+			def.tags = this._tags;
 			this._actions[name] = def;
 			return this;
 		});
@@ -175,6 +180,7 @@ class DefBuilder {
 	event(name) {
 		return new EventBuilder(name, def => {
 			this._events[name] = def;
+			def.tags = this._tags;
 			return this;
 		});
 	}
@@ -182,6 +188,7 @@ class DefBuilder {
 	state(name) {
 		return new StateBuilder(name, def => {
 			this._state[name] = def;
+			def.tags = this._tags;
 			return this;
 		});
 	}
