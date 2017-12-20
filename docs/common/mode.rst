@@ -9,9 +9,8 @@
 		console.log('Mode is', thing.mode());
 	}
 
-Actions
----------
-
+API
+---
 
 .. js:function:: mode()
 
@@ -59,7 +58,7 @@ Events
 
 	The available modes have changed.
 
-Protected functions
+Protected methods
 -------------------
 
 .. js:function:: updateMode(mode)

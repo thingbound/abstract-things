@@ -17,8 +17,8 @@ for things that can also switch their power state.
 
 Related capabilities: :doc:`power <power>`, :doc:`state <state>`
 
-Actions
---------
+API
+---
 
 .. js:function:: power([powerState])
 

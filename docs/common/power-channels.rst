@@ -15,8 +15,8 @@ thing.
 
 Related capabilities: :doc:`switchable-power-channels <switchable-power-channels>`, :doc:`state <state>`
 
-Actions
---------
+API
+---
 
 .. js:attribute:: powerChannels
 
@@ -88,8 +88,8 @@ Events
 			console.log('Channel', change.channel, 'now has power', change.power)
 		);
 
-Protected functions
-------------------------
+Protected methods
+-----------------
 
 .. js:function:: updatePowerChannel(channel, power)
 

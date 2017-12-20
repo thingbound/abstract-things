@@ -4,8 +4,8 @@
 The ``state``-capability provides a way to get and update the state of a thing.
 State is split into several state keys that are updated separately.
 
-Actions
---------
+API
+---
 
 .. js:attribute:: state
 
@@ -34,8 +34,8 @@ Events
 			console.log('Key', change.key, 'changed to', change.value)
 		);
 
-Protected functions
-------------------------
+Protected methods
+-----------------
 
 .. js:function:: getState(key[, defaultValue])
 

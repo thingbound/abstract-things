@@ -11,8 +11,8 @@
 			.catch(err => console.log('Error occurred during update:', err));
 	}
 
-Actions
---------
+API
+---
 
 .. js:function:: setName(name)
 
@@ -21,8 +21,8 @@ Actions
 	:param string name: Name for thing.
 	:returns: The name set
 
-Protected functions
--------------------
+Protected methods
+-----------------
 
 .. js:function:: changeName(name)
 

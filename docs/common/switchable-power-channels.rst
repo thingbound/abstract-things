@@ -18,8 +18,8 @@ for things that can also switch the power state of their channels.
 
 Related capabilities: :doc:`power-channels <power-channels>`
 
-Actions
---------
+API
+---
 
 .. js:function:: power([channel], [powerState])
 

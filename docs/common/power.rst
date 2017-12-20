@@ -12,8 +12,8 @@ state.
 
 Related capabilities: :doc:`switchable-power <switchable-power>`, :doc:`state <state>`
 
-Actions
---------
+API
+---
 
 .. js:function:: power()
 
@@ -48,8 +48,8 @@ Events
 
 		thing.on('power', power => console.log('power is now:', power));
 
-Protected functions
-------------------------
+Protected methods
+-----------------
 
 .. js:function:: updatePower(power)
 

@@ -4,8 +4,8 @@
 ``restorable-state`` provides an extension to :doc:`state <state>` that supports
 capturing and setting state.
 
-Actions
--------
+API
+---
 
 .. js:attribute:: restorableState
 
@@ -46,8 +46,8 @@ Actions
 			.then(...)
 			.catch(...);
 
-Protected functions
--------------------
+Protected methods
+-----------------
 
 .. js:function:: changeState(state)
 
