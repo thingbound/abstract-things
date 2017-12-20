@@ -4,7 +4,7 @@ const Thing = require('../thing');
 const Light = require('./light');
 const LightState = require('./light-state');
 const Brightness = require('./brightness');
-const { duration, percentage, 'percentage:change': change } = require('../values');
+const { boolean, duration, percentage, 'percentage:change': change } = require('../values');
 
 module.exports = Thing.mixin(Parent => class extends Parent.with(Brightness, LightState) {
 	/**
@@ -53,34 +53,40 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(Brightness, Lig
 		if(typeof brightness !== 'undefined') {
 			brightness = change(brightness);
 
+			let powerOn = true;
 			let toSet;
 			if(brightness.isIncrease) {
 				toSet = currentBrightness + brightness.value;
 			} else if(brightness.isDecrease) {
 				toSet = currentBrightness - brightness.value;
+				powerOn = false;
 			} else {
 				toSet = brightness.value;
 			}
-			return this.setBrightness(toSet, duration);
+			return this.setBrightness(toSet, duration, powerOn);
 		}
 
 		return currentBrightness;
 	}
 
 	increaseBrightness(amount, duration=Light.DURATION) {
-		return this.setBrightness(Math.min(100, this.state.brightness + amount), duration);
+		return this.setBrightness(Math.min(100, this.state.brightness + amount), duration, true);
 	}
 
 	decreaseBrightness(amount, duration=Light.DURATION) {
-		return this.setBrightness(Math.max(0, this.state.brightness - amount), duration);
+		return this.setBrightness(Math.max(0, this.state.brightness - amount), duration, false);
 	}
 
-	setBrightness(brightness, duration0=Light.DURATION) {
+	setBrightness(brightness, duration0=Light.DURATION, powerOn=true) {
 		if(typeof brightness === 'undefined') throw new Error('Brightness must be specified');
 		brightness = percentage(brightness);
-		duration0 = duration(duration0);
 
-		return Promise.resolve(this.changeBrightness(brightness, duration0))
+		const options = {
+			duration: duration(duration0),
+			powerOn: boolean(powerOn)
+		};
+
+		return Promise.resolve(this.changeBrightness(brightness, options))
 			.then(() => this.getState('brightness', 0));
 	}
 
@@ -89,9 +95,13 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(Brightness, Lig
 	 * call `updateBrightness` with the brightness that has actually been set.
 	 *
 	 * @param {number} brightness
-	 * @param {Duration} duration
+	 * @param {object} options
+	 *   the options to apply. Currently available:
+	 *
+	 *   * duration: Duration of change if this light supports timing.
+	 *   * powerOn: Boolean indcating if the power should be switched on.
 	 */
-	changeBrightness(brightness, duration) {
+	changeBrightness(brightness, options) {
 		throw new Error('changeBrightness not implemented');
 	}
 
@@ -103,7 +113,11 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(Brightness, Lig
 		return super.setLightState(state)
 			.then(() => {
 				if(typeof state.brightness !== 'undefined') {
-					return this.changeBrightness(state.brightness, Light.DURATION);
+					const options = {
+						duration: Light.DURATION,
+						powerOn: typeof state.power !== 'undefined' ? state.power : true
+					};
+					return this.changeBrightness(state.brightness, options);
 				}
 			});
 	}
