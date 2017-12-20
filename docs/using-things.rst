@@ -80,6 +80,32 @@ Thing API
 	:param string eventName: The name of the event that the listener was registered for.
 	:param function listener: Function that was used when registering the listener.
 
+.. js:function:: init()
+
+	Initialize the thing. Most commonly used when creating a new thing. Many
+	libraries provide already initalized things via their main discovery or
+	creation function.
+
+	:returns: Promise that resolves to the instance being initalized.
+
+	.. sourcecode:: js
+
+		thing.init()
+			.then(thing => /* do something with the thing */)
+			.catch(/* handle error */);
+
+.. js:function:: destroy()
+
+	Destroy the thing. Should be called whenever the thing is no longer needed.
+
+	:returns: Promise that resolves to the instance being destroyed.
+
+	.. sourcecode:: js
+
+		thing.destroy()
+			.then(thing => /* do something with the thing */)
+			.catch(/* handle error */);
+
 Remote API
 --------------
 

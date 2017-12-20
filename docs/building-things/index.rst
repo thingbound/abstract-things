@@ -83,5 +83,5 @@ fired.
 	naming
 	metadata
 	mixins
+	init-destroy
 	events
-
