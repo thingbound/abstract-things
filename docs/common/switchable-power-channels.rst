@@ -50,6 +50,23 @@ API
 			.then(...)
 			.catch(...);
 
+Protected methods
+-----------------
+
+.. js:function:: changePowerChannel(channel, power)
+
+	*Abstract*. Change the power state of the specified channel. Called
+	whenever a power change is requested. Implementations should call
+	``updatePowerChannel`` before resolving to indicate that a change has
+	occurred.
+
+	Can be called with the same state as is currently set for the channel. When
+	changing multiple power state this method will be called multiple times.
+
+	:param string channel: The channel to change power for.
+	:param boolean power: The new power state of the channel.
+	:returns: Promise if asynchronous.
+
 Implementing capability
 -----------------------
 

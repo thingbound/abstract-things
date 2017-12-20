@@ -97,6 +97,20 @@ API
 			.then(result => console.log('Power is now', result))
 			.catch(err => console.log('Error occurred', err);
 
+Protected methods
+-----------------
+
+.. js:function:: changePower(power)
+
+	*Abstract*. Change the power of this thing. Called on the thing when of
+	the power methods request a change. Implementations should call
+	``updatePower`` before resolving to indicate that a change has occurred.
+
+	Can be called with the same power state as is currently set.
+
+	:param boolean power: The new power of the thing.
+	:returns: Promise if asynchronous.
+
 Implementing capability
 -----------------------
 
