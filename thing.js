@@ -7,6 +7,7 @@ const debug = require('debug');
 const collectMetadata = require('./utils/collectMetadata');
 const merge = require('./utils/merge');
 
+const id = Symbol('id');
 const debugProperty = Symbol('debug');
 
 const eventQueue = Symbol('eventQueue');
@@ -25,12 +26,48 @@ module.exports = toExtendable(class Thing {
 		});
 	}
 
+	get id() {
+		return this[id] || null;
+	}
+
+	set id(identifier) {
+		// Make sure the identifier is not changed after device init
+		if(this[isInitialized]) {
+			throw new Error('Identifier can not be changed after initialization has been done');
+		}
+
+		// Do a simple check to ensure the identifier is a string
+		if(typeof identifier !== 'string') {
+			throw new Error('Identifier should be a string');
+		}
+
+		/*
+		 * Set the identifier without further validation. This allows it to be
+		 * set to something invalid and then enhanced via initCallbacks
+		 */
+		this[id] = identifier;
+	}
+
 	init() {
 		if(this[isInitialized]) return Promise.resolve(this);
 
-		this[isInitialized] = true;
 		return Promise.resolve(this.initCallback())
-			.then(() => this);
+			.then(() => {
+				/*
+				 * Validate the identifier after initialization to ensure that
+				 * it is correctly set.
+				 */
+				if(typeof this.id !== 'string') {
+					throw new Error('Identifier needs to be set either during thing construction or during init');
+				}
+
+				if(this.id.indexOf(':') <= 0) {
+					throw new Error('Identifier does not contain a namespace, currently: `' + this.id + '`');
+				}
+
+				this[isInitialized] = true;
+				return this;
+			});
 	}
 
 	initCallback() {
