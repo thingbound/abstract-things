@@ -1,6 +1,8 @@
 'use strict';
 
 module.exports.Light = require('./light');
+module.exports.Fading = require('./fading');
+
 module.exports.Brightness = require('./brightness');
 module.exports.Dimmable = require('./dimmable');
 module.exports.Colorable = require('./colorable');
