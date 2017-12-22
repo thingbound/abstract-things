@@ -83,7 +83,7 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(Brightness, Lig
 
 		const options = {
 			duration: duration(duration0),
-			powerOn: boolean(powerOn)
+			powerOn: brightness <= 0 ? false : boolean(powerOn)
 		};
 
 		return Promise.resolve(this.changeBrightness(brightness, options))
