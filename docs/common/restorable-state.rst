@@ -4,6 +4,20 @@
 ``restorable-state`` provides an extension to :doc:`state <state>` that supports
 capturing and setting state.
 
+.. sourcecode:: js
+
+	if(thing.matches('cap:restorable-state')) {
+		console.log('Keys that can be restored:' , thing.restorableState);
+
+		// Capture the state
+		const state = thing.captureState();
+
+		// A bit later the state can be restored
+		thing.setState(state)
+			.then(() => console.log('State has been restored'))
+			.catch(err => console.log('Error during state restore', err));
+	}
+
 API
 ---
 

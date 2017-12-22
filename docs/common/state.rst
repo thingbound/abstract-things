@@ -4,6 +4,12 @@
 The ``state``-capability provides a way to get and update the state of a thing.
 State is split into several state keys that are updated separately.
 
+.. sourcecode:: js
+
+	if(thing.matches('cap:state')) {
+		console.log('Current state:', this.state);
+	}
+
 API
 ---
 
