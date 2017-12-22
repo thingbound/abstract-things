@@ -31,4 +31,4 @@ combined they describe a thing and what it can do.
 	:caption: Types and capabilities
 
 	common/index
-
+	lights/index
