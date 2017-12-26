@@ -25,6 +25,7 @@ combined they describe a thing and what it can do.
 
 	using-things
 	building-things/index
+	values/index
 
 .. toctree::
 	:maxdepth: 2
