@@ -20,3 +20,4 @@ The main type for lights is ``light``. Lights commonly use at least the
 	brightness
 	dimmable
 	colorable
+	color-temperature
