@@ -12,7 +12,7 @@ Capability used to mark lights that support setting any color.
 Implementing capability
 -----------------------
 
-Implementors of this capability have no special requirements place upon them.
+Implementors of this capability have no special requirements placed upon them.
 
 Example:
 

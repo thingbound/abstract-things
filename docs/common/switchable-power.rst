@@ -24,8 +24,8 @@ API
 
 	Get or set the current power state.
 
-	:param boolean powerState: Optional boolean to change power state to.
-	:returns: Promise when switching state, boolean if getting.
+	:param boolean powerState: Optional :doc:`boolean </values/boolean>` to change power state to.
+	:returns: Promise when switching state, :doc:`boolean </values/boolean>` if getting.
 
 	Example:
 
@@ -43,7 +43,7 @@ API
 
 	Set the power of the thing.
 
-	:param boolean powerState: The new power state.
+	:param boolean powerState: The new power state as a :doc:`boolean </values/boolean>`.
 	:returns: Promise that will resolve to the new power state.
 
 	Example:
@@ -108,7 +108,7 @@ Protected methods
 
 	Can be called with the same power state as is currently set.
 
-	:param boolean power: The new power of the thing.
+	:param boolean power: The new power of the thing as a :doc:`boolean </values/boolean>`.
 	:returns: Promise if asynchronous.
 
 Implementing capability

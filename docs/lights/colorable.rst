@@ -21,12 +21,14 @@ API
 	Get the current color or change the color of the light.
 
 	:param color:
-		Optional color to set. The color can be specified in many formats,
-		hex value such as ``#00ff00``, color names such as ``red`` and
-		``blue``, and color temperatures such as ``4000K`` or ``overcast``.
+		Optional :doc:`color </values/color>` to set. The color can be
+		specified in many formats, hex values such as ``#00ff00``, color names
+		such as ``red`` and ``blue``, and color temperatures such as ``4000K``
+		or ``overcast``.
 	:param Duration duration:
-		Optional duration to perform change in color over. Supported
-		when the light has the :doc:`fading <fading>`-capability.
+		Optional :doc:`duration </values/duration>` to perform change in
+		brightness over. Supported when the light has the
+		:doc:`fading <fading>`-capability.
 
 	Example:
 
@@ -50,7 +52,7 @@ Events
 
 .. js:data:: colorChanged
 
-	Color has changed.
+	Color has changed. Payload will be the new :doc:`color </values/color>`.
 
 	.. sourcecode:: js
 
@@ -65,7 +67,7 @@ Protected methods
 	in color occurs for the light. If the color set has changed this will emit
 	the ``color`` event.
 
-	:param color: The color of the light.
+	:param color: The :doc:`color </values/color>` of the light.
 
 	.. sourcecode:: js
 
@@ -76,15 +78,16 @@ Protected methods
 
 .. js:function:: changeColor(color, options)
 
-	*Abstract*. Change the color of the light. Implementation should support
-	the following:
+	*Abstract*. Change the :doc:`color </values/color>` of the light.
+	Implementation should support the following:
 
 	* ``color`` should be converted to something supported by the light.
 	* ``options.duration`` should be respected if the light supports fading.
 
 	:param color:
-		The new color of the light. The colorspace of the light can be be
-		anything, but is most commonly temperatures or rgb-values.
+		The new :doc:`color </values/color>` of the light. The colorspace of
+		the light can be be anything, but is most commonly temperatures or
+		rgb-values.
 	:param options:
 		Options for changing the color. The only option available is
 		``duration`` which indicates amount of time the change should occur

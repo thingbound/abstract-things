@@ -19,7 +19,8 @@ API
 	Get the brightness of the light.
 
 	:returns:
-		Percentage, number between 0 and 100, representing the brightness.
+		:doc:`Percentage </values/percentage>`, number between 0 and 100,
+		representing the brightness.
 
 	Example:
 
@@ -32,7 +33,8 @@ Events
 
 .. js:data:: brightnessChanged
 
-	Brightness has changed.
+	Brightness has changed. The payload of the event will be the brightness as
+	a :doc:`percentage </values/percentage>`.
 
 	.. sourcecode:: js
 
@@ -46,7 +48,7 @@ Protected functions
 	Update the current brightness. Should be called whenever the brightness
 	has been detected to have changed.
 
-	:param number brightness: The new brightness.
+	:param number brightness: The new brightness as a :doc:`percentage </values/percentage>`.
 
 Implementing capability
 -----------------------

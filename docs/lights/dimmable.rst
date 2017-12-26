@@ -26,12 +26,13 @@ API
 	increasing the brightness will turn it on.
 
 	:param percentage brightnessChange:
-		Optional brightness percentage to set as a number or a change in
-		brightness as a string. ``20`` would be 20% brightness, ``'+10'``
-		would be an increase of 10%.
+		Optional brightness :doc:`percentage </values/percentage>` to set as a
+		number or a change in brightness as a string. ``20`` would be 20%
+		brightness, ``'+10'`` would be an increase of 10%.
 	:param Duration duration:
-		Optional duration to perform change in brightness over. Supported
-		when the light has the :doc:`fading <fading>`-capability.
+		Optional :doc:`duration </values/duration>` to perform change in
+		brightness over. Supported when the light has the
+		:doc:`fading <fading>`-capability.
 	:returns: Current brightness when getting, promise when setting.
 
 	Example:
@@ -62,7 +63,13 @@ API
 	power off the light. Setting the brightness to non-zero such as when
 	increasing the brightness will turn it on.
 
-	:param percentage brightness: The brightness the light should try to set.
+	:param percentage brightness:
+		The brightness as a :doc:`percentage </values/percentage>` the light
+		should try to set.
+	:param Duration duration:
+		Optional :doc:`duration </values/duration>` to perform change in
+		brightness over. Supported when the light has the
+		:doc:`fading <fading>`-capability.
 	:returns: Promise resolving to the new brightness.
 
 	Example:
@@ -77,7 +84,13 @@ API
 
 	Increase the brightness of the light. This will turn on the light.
 
-	:param percentage amount: The amount to increase the brightness.
+	:param percentage amount:
+		The amount as a :doc:`percentage </values/percentage>` to increase the
+		brightness.
+	:param Duration duration:
+		Optional :doc:`duration </values/duration>` to perform change in
+		brightness over. Supported when the light has the
+		:doc:`fading <fading>`-capability.
 	:returns: Promise that resolves to the new brightness.
 
 	Example:
@@ -93,7 +106,13 @@ API
 	Decrease the brightness of the light. Decreasing to zero will power off
 	the light.
 
-	:param percentage amount: The amount to decrease the brightness.
+	:param percentage amount:
+		The amount as a :doc:`percentage </values/percentage>` to decrease the
+		brightness.
+	:param Duration duration:
+		Optional :doc:`duration </values/duration>` to perform change in
+		brightness over. Supported when the light has the
+		:doc:`fading <fading>`-capability.
 	:returns: Promise that resolves to the new brightness.
 
 	Example:
@@ -116,12 +135,14 @@ Protected methods
 	* If ``options.powerOn`` is ``true`` the light should be powered on.
 	* ``options.duration`` should be respected if the light supports fading.
 
-	:param number targetBrightness: The percentage the brightness should be.
+	:param number targetBrightness:
+		The :doc:`percentage </values/percentage>` the brightness should be.
 	:param options:
 		Options for changing the brightness. Two options are available,
-		``duration`` which is the requested duration of the change and
-		``powerOn`` which indicates if the power should be switched on if
-		the thing is off.
+		``duration`` (of type :doc:`duration </values/duration>`) which is the
+		requested duration of the change and ``powerOn`` (of type
+		:doc:`boolean </values/boolean>`) which indicates if the power should
+		be switched on if the thing is off.
 	:returns: Promise if change is asynchronous.
 
 	Example:

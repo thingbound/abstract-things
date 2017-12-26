@@ -28,7 +28,7 @@ API
 	to switch the state of either a specific channel or all channels.
 
 	:param string channel: Optional channel to get or change power state for.
-	:param boolean powerState: Optional boolean to change power state to.
+	:param boolean powerState: Optional :doc:`boolean </values/boolean>` to change power state to.
 	:returns: Promise when switching state, boolean if getting.
 
 	Example:
@@ -64,7 +64,7 @@ Protected methods
 	changing multiple power state this method will be called multiple times.
 
 	:param string channel: The channel to change power for.
-	:param boolean power: The new power state of the channel.
+	:param boolean power: The new power state of the channel as a :doc:`boolean </values/boolean>`.
 	:returns: Promise if asynchronous.
 
 Implementing capability

@@ -16,7 +16,7 @@ API
 
 .. js:attribute:: maxChangeTime
 
-	The maximum duration of time a change can be.
+	The maximum :doc:`duration </values/duration>` of time a change can be.
 
 Implementing capability
 -----------------------

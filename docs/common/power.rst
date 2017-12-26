@@ -21,7 +21,7 @@ API
 
 	Get the current power state.
 
-	:returns: Boolean representing the current power state.
+	:returns: :doc:`Boolean </values/boolean>` representing the current power state.
 
 	Example:
 
@@ -44,7 +44,8 @@ Events
 
 .. describe:: powerChanged
 
-	The current power state has changed.
+	The current power state has changed. Payload will be current power state
+	as a :doc:`boolean </values/boolean>`.
 
 	.. sourcecode:: js
 

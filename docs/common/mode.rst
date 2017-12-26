@@ -18,7 +18,7 @@ API
 
 	Get the current mode of the thing.
 
-	:returns: String indicating the mode.
+	:returns: :doc:`String </values/string>` indicating the mode.
 
 	Example:
 
@@ -50,7 +50,8 @@ Events
 
 .. describe:: modeChanged
 
-	The current mode has changed.
+	The current mode has changed. Payload of the event is the current mode as
+	a :doc:`string </values/string>`.
 
 	.. sourcecode:: js
 
