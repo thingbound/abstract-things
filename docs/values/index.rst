@@ -22,6 +22,7 @@ including conversions from strings and to and from JSON.
 	number
 	object
 	percentage
+	power
 	pressure
 	soundPressureLevel
 	speed
