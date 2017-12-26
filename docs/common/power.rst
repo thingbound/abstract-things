@@ -8,6 +8,8 @@ state.
 
 	if(thing.matches('cap:power')) {
 		console.log('Power is', thing.power());
+
+		thing.on('powerChanged', power => console.log('Power is now', power));
 	}
 
 Related capabilities: :doc:`switchable-power <switchable-power>`, :doc:`state <state>`
@@ -40,13 +42,13 @@ API
 Events
 ------
 
-.. describe:: power
+.. describe:: powerChanged
 
 	The current power state has changed.
 
 	.. sourcecode:: js
 
-		thing.on('power', power => console.log('power is now:', power));
+		thing.on('powerChanged', power => console.log('power is now:', power));
 
 Protected methods
 -----------------

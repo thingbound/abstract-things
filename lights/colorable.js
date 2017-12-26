@@ -28,7 +28,7 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(LightState) {
 			.returns('color', 'The color of the light')
 			.done();
 
-		builder.event('color')
+		builder.event('colorChanged')
 			.type('color')
 			.description('The color of the light has changed')
 			.done();
@@ -63,7 +63,7 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(LightState) {
 
 	updateColor(color) {
 		if(this.updateState('color', color)) {
-			this.emitEvent('color', color);
+			this.emitEvent('colorChanged', color);
 		}
 	}
 

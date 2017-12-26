@@ -11,7 +11,7 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(Sensor) {
 	}
 
 	static availableAPI(builder) {
-		builder.event('motion')
+		builder.event('motionChanged')
 			.type('boolean')
 			.description('Change in detected motion')
 			.done();

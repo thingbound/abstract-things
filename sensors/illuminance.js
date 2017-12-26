@@ -10,7 +10,7 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(Sensor) {
 	}
 
 	static availableAPI(builder) {
-		builder.event('illuminance')
+		builder.event('illuminanceChanged')
 			.type('illuminance')
 			.description('Current illuminance has changed')
 			.done();

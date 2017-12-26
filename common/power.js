@@ -17,7 +17,7 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(State) {
 			.description('The power state of this appliance')
 			.done();
 
-		builder.event('power')
+		builder.event('powerChanged')
 			.type('boolean')
 			.description('The power state of the appliance has changed')
 			.done();
@@ -61,7 +61,7 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(State) {
 	*/
 	updatePower(power) {
 		if(this.updateState('power', power)) {
-			this.emitEvent('power', power);
+			this.emitEvent('powerChanged', power);
 		}
 	}
 

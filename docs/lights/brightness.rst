@@ -30,13 +30,13 @@ API
 Events
 ------
 
-.. js:data:: brightness
+.. js:data:: brightnessChanged
 
 	Brightness has changed.
 
 	.. sourcecode:: js
 
-		thing.on('brightness', bri => console.log('Brightness is now', bri));
+		thing.on('brightnessChanged', bri => console.log('Brightness is now', bri));
 
 Protected functions
 ------------------------

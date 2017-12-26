@@ -20,6 +20,11 @@ module.exports = Thing.mixin(Parent => class extends Parent {
 			.description('Get the temperature range this light supports')
 			.returns('object')
 			.done();
+
+		builder.event('colorTemperatureRangeChanged')
+			.type('object')
+			.description('The supported color temperature range has changed')
+			.done();
 	}
 
 	get colorTemperatureRange() {

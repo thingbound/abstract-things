@@ -10,7 +10,7 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(Sensor) {
 	}
 
 	static availableAPI(builder) {
-		builder.event('relativeHumidity')
+		builder.event('relativeHumidityChanged')
 			.type('percentage')
 			.description('Current relative humidity has changed')
 			.done();

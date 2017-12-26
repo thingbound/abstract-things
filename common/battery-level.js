@@ -12,7 +12,7 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(State) {
 			.description('Current battery level of the appliance')
 			.done();
 
-		builder.event('batteryLevel')
+		builder.event('batteryLevelChanged')
 			.type('percentage')
 			.description('Battery level of the appliance has changed')
 			.done();
@@ -40,7 +40,7 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(State) {
 	updateBatteryLevel(level) {
 		level = percentage(level);
 		if(this.updateState('batteryLevel', level)) {
-			this.emitEvent('batteryLevel', level);
+			this.emitEvent('batteryLevelChanged', level);
 		}
 	}
 });

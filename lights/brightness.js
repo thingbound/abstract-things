@@ -13,7 +13,7 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(State) {
 			.description('The brightness of this light')
 			.done();
 
-		builder.event('brightness')
+		builder.event('brightnessChanged')
 			.type('percentage')
 			.description('The brightness of the light has changed')
 			.done();
@@ -48,7 +48,7 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(State) {
 	 */
 	updateBrightness(brightness) {
 		if(this.updateState('brightness', brightness)) {
-			this.emitEvent('brightness', brightness);
+			this.emitEvent('brightnessChanged', brightness);
 		}
 	}
 });

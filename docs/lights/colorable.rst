@@ -48,13 +48,13 @@ API
 Events
 ------
 
-.. js:data:: color
+.. js:data:: colorChanged
 
 	Color has changed.
 
 	.. sourcecode:: js
 
-		thing.on('color', color => console.log('Color is now', color));
+		thing.on('colorChanged', color => console.log('Color is now', color));
 
 Protected methods
 -----------------

@@ -31,7 +31,7 @@ module.exports = Thing.type(Parent => class extends Parent.with(State) {
 			.description('Action with the given id has been triggered')
 			.done();
 
-		builder.action('actions')
+		builder.action('actionsChanged')
 			.description('Get the actions that this controller can emit')
 			.returns('array')
 			.done();
@@ -66,7 +66,7 @@ module.exports = Thing.type(Parent => class extends Parent.with(State) {
 	 */
 	updateActions(actions) {
 		if(this.updateState('actions', actions)) {
-			this.emitEvent('actions', actions);
+			this.emitEvent('actionsChanged', actions);
 		}
 	}
 });

@@ -14,7 +14,7 @@ module.exports = Thing.mixin(Parent => class extends Parent {
 	 * Get the API that appliances with state make available.
 	 */
 	static availableAPI(builder) {
-		builder.event('state')
+		builder.event('stateChanged')
 			.type('object')
 			.description('The state of the appliance has changed')
 			.done();

@@ -10,7 +10,7 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(Sensor) {
 	}
 
 	static availableAPI(builder) {
-		builder.event('contact')
+		builder.event('contactChanged')
 			.type('boolean')
 			.description('Change in detected contact')
 			.done();

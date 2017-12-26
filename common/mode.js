@@ -21,12 +21,12 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(State) {
 			.description('The available modes of this appliance')
 			.done();
 
-		builder.event('mode')
+		builder.event('modeChanged')
 			.type('string')
 			.description('The mode of the appliance has changed')
 			.done();
 
-		builder.event('modes')
+		builder.event('modesChanged')
 			.type('array')
 			.description('The availables modes of the appliance have changed')
 			.done();
@@ -77,7 +77,7 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(State) {
 	*/
 	updateMode(mode) {
 		if(this.updateState('mode', mode)) {
-			this.emitEvent('mode', mode);
+			this.emitEvent('modeChanged', mode);
 		}
 	}
 
@@ -93,7 +93,7 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(State) {
 	 */
 	updateModes(modes) {
 		if(this.updateState('modes', modes)) {
-			this.emitEvent('modes', modes);
+			this.emitEvent('modesChanged', modes);
 		}
 	}
 });

@@ -7,6 +7,8 @@
 
 	if(thing.matches('cap:mode')) {
 		console.log('Mode is', thing.mode());
+
+		thing.on('modeChanged', mode => console.log('Mode is now', mode));
 	}
 
 API
@@ -46,15 +48,15 @@ API
 Events
 -------
 
-.. describe:: mode
+.. describe:: modeChanged
 
 	The current mode has changed.
 
 	.. sourcecode:: js
 
-		thing.on('mode', mode => console.log('Mode is now', mode));
+		thing.on('modeChanged', mode => console.log('Mode is now', mode));
 
-.. describe:: modes
+.. describe:: modesChanged
 
 	The available modes have changed.
 

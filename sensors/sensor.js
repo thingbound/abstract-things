@@ -36,7 +36,7 @@ module.exports = Thing.type(Parent => class extends Parent.with(State) {
 
 	updateValue(sensorType, value) {
 		if(this.updateState(sensorType, value)) {
-			this.emitEvent(sensorType, value);
+			this.emitEvent(sensorType + 'Changed', value);
 			return true;
 		} else {
 			return false;
