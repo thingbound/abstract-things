@@ -14,6 +14,12 @@ The main type for lights is ``light``. Lights commonly use at least the
 
 .. toctree::
 	:maxdepth: 1
+	:caption: Topics
+
+	implementing
+
+.. toctree::
+	:maxdepth: 1
 	:caption: Capabilities
 
 	fading
