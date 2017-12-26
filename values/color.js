@@ -201,7 +201,7 @@ class Color {
 	}
 
 	get value() {
-		assertModel(this.model, 'hsv', 'mired', 'temperature');
+		assertModel(this.model, 'hsv', 'mired');
 		switch(this.model) {
 			case 'mired':
 				return this.values[0];
@@ -223,6 +223,11 @@ class Color {
 	get y() {
 		assertModel(this.model, 'xyz', 'xyY');
 		return this.values[1];
+	}
+
+	get Y() {
+		assertModel(this.model, 'xyY');
+		return this.values[2];
 	}
 
 	get z() {

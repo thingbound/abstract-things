@@ -13,6 +13,7 @@ including conversions from strings and to and from JSON.
 	array
 	boolean
 	buffer
+	color
 	duration
 	energy
 	illuminance
