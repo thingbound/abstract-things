@@ -135,6 +135,19 @@ class ValueRegistry {
 
 const values = module.exports = new ValueRegistry();
 
+function parseNumber(v) {
+	if(typeof v === 'number') return v;
+	if(typeof v !== 'string') {
+		throw new Error('Can not convert into a number, string is needed');
+	}
+
+	try {
+		return amounts.amount(v).value;
+	} catch(ex) {
+		throw new Error('Could not convert into a number, invalid format for string: ' + v);
+	}
+}
+
 /*
  * Mixed type for dynamic serialization to and from JSON. This type uses a
  * tag to track the type used.
@@ -296,7 +309,7 @@ values.register('number', {
 	create: function(value) {
 		if(typeof value === 'number') return value;
 
-		return parseFloat(value);
+		return parseNumber(value);
 	},
 
 	is: function(value) {
@@ -316,9 +329,18 @@ values.register('string', {
 
 values.register('percentage', {
 	create: function(value) {
-		if(typeof value === 'number') return value;
+		if(typeof value === 'string') {
+			value = value.trim();
 
-		value = parseFloat(value);
+			if(value.endsWith('%')) {
+				// Cut off % at the end
+				value = value.substring(0, value.length - 1);
+			}
+
+			value = parseNumber(value);
+		} else if(typeof value !== 'number') {
+			throw new Error('Can not translate to a percentage');
+		}
 
 		return value < 0 ? 0 : (value > 100 ? 100 : value);
 	},
