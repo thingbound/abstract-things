@@ -14,6 +14,13 @@ module.exports = Thing.mixin(Parent => class extends Parent {
 		return 'fading';
 	}
 
+	static availableAPI(builder) {
+		builder.action('maxChangeTime')
+			.description('Get the maximum duration a change can occur over')
+			.returns('duration')
+			.done();
+	}
+
 	get maxChangeTime() {
 		return this[maxChangeTime];
 	}
