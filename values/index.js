@@ -330,6 +330,7 @@ values.register('color', color);
 
 const quantities = [
 	'angle',
+	'area',
 	'duration',
 	'energy',
 	'illuminance',
