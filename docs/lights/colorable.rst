@@ -67,11 +67,55 @@ Protected methods
 
 	:param color: The color of the light.
 
-.. js:function:: changeColor(color, duration)
+	.. sourcecode:: js
+
+		this.updateColor('#ff00aa');
+
+		const { color } = require('abstract-things/values');
+		this.updateColor(color.rgb(255, 0, 170));
+
+.. js:function:: changeColor(color, options)
+
+	*Abstract*. Change the color of the light. Implementation should support
+	the following:
+
+	* ``color`` should be converted to something supported by the light.
+	* ``options.duration`` should be respected if the light supports fading.
 
 	:param color:
-	:param duration:
+		The new color of the light. The colorspace of the light can be be
+		anything, but is most commonly temperatures or rgb-values.
+	:param options:
+		Options for changing the color. The only option available is
+		``duration`` which indicates amount of time the change should occur
+		over.
 	:returns: Promise if change is asynchronous.
 
 Implementing capability
 -----------------------
+
+Implementations should call ``updateColor`` whenever the color of the light
+changes. ``changeColor`` needs to be implemented and will be called whenever a
+color change is requested. :doc:`color:temperature <color-temperature>` and
+:doc:`color:full <color-full>` should be implemented to indicate the type of
+color supported.
+
+.. sourcecode:: js
+
+	const { Light, Colorable, ColorFull } = require('abstract-things/lights');
+	const { color } = require('abstract-things/values');
+
+	class Example extends Light.with(Colorable, ColorFull) {
+
+		initCallback() {
+			return super.initCallback()
+				.then(() => this.updateColor(color.rgb(0, 0, 0));
+		}
+
+		changeColor(color, options) {
+			// Convert color to RGB colorspace
+			const rgb = color.rgb;
+
+			return setColorSomehow(rgb, options.duration);
+		}
+	}
