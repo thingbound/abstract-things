@@ -6,7 +6,7 @@ const { number } = require('../values');
 
 module.exports = Thing.mixin(Parent => class extends Parent.with(Sensor) {
 	static get capability() {
-		return 'carbonDioxide';
+		return 'carbon-dioxide';
 	}
 
 	static availableAPI(builder) {
