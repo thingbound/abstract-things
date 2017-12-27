@@ -18,5 +18,15 @@ The type ``sensor`` is used to mark things that read one or more values.
 	:caption: Capabilities
 
 	atmosphericPressure
+	carbonDioxide
+	carbonMonoxide
+	contact
+	illuminance
 	motion
+	pm2.5
+	pm10
+	powerConsumed
+	powerLoad
+	relativeHumidity
 	temperature
+	voltage

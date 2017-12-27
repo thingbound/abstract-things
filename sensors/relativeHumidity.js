@@ -20,6 +20,12 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(Sensor) {
 			.getterForState('relativeHumidity')
 			.returns('percentage', 'Current relative humidity')
 			.done();
+
+		builder.action('rh')
+			.description('Get the current relative humidity')
+			.getterForState('relativeHumidity')
+			.returns('percentage', 'Current relative humidity')
+			.done();
 	}
 
 	get sensorTypes() {
@@ -27,6 +33,10 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(Sensor) {
 	}
 
 	get relativeHumidity() {
+		return this.value('relativeHumidity');
+	}
+
+	get rh() {
 		return this.value('relativeHumidity');
 	}
 

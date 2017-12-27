@@ -1,24 +1,24 @@
-``atmosphericPressure`` - read atmospheric pressure
-===================================================
+``atmospheric-pressure`` - read atmospheric pressure
+====================================================
 
 This capability is used to mark sensors that report the atmospheric pressure.
 
 .. sourcecode:: js
 
-	if(thing.matches('cap:atmosphericPressure')) {
-		console.log('Atmospheric pressure:', thing.atmosphericPressure());
+	if(thing.matches('cap:atmospheric-pressure')) {
+		console.log('Atmospheric pressure:', thing.atmosphericPressure);
 	}
 
 API
 ---
 
-.. js:function:: atmosphericPressure()
+.. js:attribute:: atmosphericPressure
 
 	Get the current atmospheric pressure.
 
 	.. sourcecode:: js
 
-		console.log('Atmospheric pressure:', thing.atmosphericPressure());
+		console.log('Atmospheric pressure:', thing.atmosphericPressure);
 
 Events
 ------

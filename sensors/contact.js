@@ -34,8 +34,16 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(Sensor) {
 		return [ ...super.sensorTypes, 'contact' ];
 	}
 
-	get motion() {
+	get contact() {
 		return this.value('contact');
+	}
+
+	get open() {
+		return ! this.contact;
+	}
+
+	get closed() {
+		return this.contact;
 	}
 
 	updateContact(contact) {

@@ -1,0 +1,73 @@
+``pm10`` - read PM10 density (air quality)
+==========================================
+
+This capability is used to mark sensors that monitor particulate matter (PM)
+between 2.5 and 10 micrometers (μm).
+
+.. sourcecode:: js
+
+	if(thing.matches('cap:pm10')) {
+		console.log('PM10:', thing.pm10);
+	}
+
+API
+---
+
+.. js:attribute:: pm10
+
+	Get the current PM10 as micrograms per cubic meter (μg/m³). Value is a
+	:doc:`number </values/number>`.
+
+	.. sourcecode:: js
+
+		console.log('PM10:', thing.pm10);
+
+Events
+------
+
+.. js:data:: pm10Changed
+
+	The PM10 has changed. Payload is a :doc:`number </values/number>` with
+	the new PM10 as micrograms per cubic meter (μg/m³).
+
+	.. sourcecode:: js
+
+		thing.on('pm10Changed', v => console.log('Changed to:', v));
+
+Protected methods
+-----------------
+
+.. js:function:: updatePM10(value)
+
+	Update the current PM10 as micrograms per cubic meter (μg/m³). Should be
+	called whenever a change is detected.
+
+	:param value:
+		The new PM10 value. Will be converted to a
+		:doc:`number </values/number>`.
+
+	Example:
+
+	.. sourcecode:: js
+
+		this.updatePM10(5);
+
+Implementing capability
+-----------------------
+
+Implementors of this capability should call ``updatePM10`` whenever the
+detected PM10 changes.
+
+.. sourcecode:: js
+
+	const { Sensor, PM10 } = require('abstract-things/sensors');
+
+	class Example extends Sensor.with(PM10) {
+
+		constructor() {
+			super();
+
+			this.updatePM10(5);
+		}
+
+	}

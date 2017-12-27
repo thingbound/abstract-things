@@ -26,12 +26,6 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(Sensor) {
 			.getterForState('carbonDioxide')
 			.returns('number', 'Current carbon dixoide level')
 			.done();
-
-		builder.action('co²')
-			.description('Get the current carbon dioxide level')
-			.getterForState('carbonDioxide')
-			.returns('number', 'Current carbon dixoide level')
-			.done();
 	}
 
 	get sensorTypes() {
@@ -43,10 +37,6 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(Sensor) {
 	}
 
 	get co2() {
-		return this.value('carbonDioxide');
-	}
-
-	get ['co²']() {
 		return this.value('carbonDioxide');
 	}
 

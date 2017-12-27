@@ -1,31 +1,31 @@
 ``temperature`` - read temperature
 ==================================
 
-This capability is used to mark sensors that report a temperature.
+This capability is used to mark sensors that report a :doc:`temperature </values/temperature>`.
 
 .. sourcecode:: js
 
 	if(thing.matches('cap:temperature')) {
-		console.log('Temperature:', thing.temperature());
+		console.log('Temperature:', thing.temperature);
 	}
 
 API
 ---
 
-.. js:function:: temperature()
+.. js:attribute:: temperature
 
-	Get the current temperature.
+	Get the current :doc:`temperature </values/temperature>`.
 
 	.. sourcecode:: js
 
-		console.log('Temperature is:', thing.temperature());
+		console.log('Temperature is:', thing.temperature);
 
 Events
 ------
 
 .. js:data:: temperatureChanged
 
-	The temperature has changed.
+	The temperature has changed. Payload is the new :doc:`temperature </values/temperature>`.
 
 	.. sourcecode:: js
 
@@ -39,7 +39,10 @@ Protected methods
 	Update the current temperature. Should be called whenever a change in
 	temperature was detected.
 
-	:param value: The new temperature.
+	:param value:
+		The new temperature. Will be converted to a
+		:doc:`temperature </values/temperature>`, the default conversion uses
+		degrees Celsius.
 
 	Example:
 
