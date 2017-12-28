@@ -34,3 +34,4 @@ combined they describe a thing and what it can do.
 	common/index
 	lights/index
 	sensors/index
+	environmental/index
