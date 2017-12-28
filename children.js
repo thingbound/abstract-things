@@ -10,6 +10,29 @@ const childrenSymbol = Symbol('children');
  */
 module.exports = Thing.mixin(Parent => class extends Parent {
 
+	static get capability() {
+		return 'children';
+	}
+
+	static availableAPI(builder) {
+		builder.action('children')
+			.description('Get children of the thing')
+			.returns('array')
+			.done();
+
+		builder.action('getChild')
+			.description('Get child based on identifier')
+			.param('string', false, 'The id of the child')
+			.returns('thing')
+			.done();
+
+		builder.action('hasChild')
+			.description('Get if the this thing has the given child')
+			.param('string', false, 'The id of the child')
+			.returns('boolean')
+			.done();
+	}
+
 	constructor(...args) {
 		super(...args);
 
@@ -31,6 +54,10 @@ module.exports = Thing.mixin(Parent => class extends Parent {
 		if(! thing.id) {
 			throw new Error('Child needs to have an `id`');
 		}
+
+		// Link the thing to this one
+		thing.metadata.parent = this;
+		thing.metadata.addTypes('sub-thing');
 
 		const children = this[childrenSymbol];
 		const child = children.get(thing.id);
@@ -78,7 +105,8 @@ module.exports = Thing.mixin(Parent => class extends Parent {
 		if(typeof thingOrId === 'undefined') throw new Error('Thing or identifier needs to be specified');
 		const id = typeof thingOrId === 'string' ? thingOrId : thingOrId.id;
 
-		return this[childrenSymbol].has(id);
+		return this[childrenSymbol].has(id) ||
+			this[childrenSymbol].has(this.id + ':' + id);
 	}
 
 	/**
@@ -87,7 +115,8 @@ module.exports = Thing.mixin(Parent => class extends Parent {
 	 * @param {string} id
 	 */
 	getChild(id) {
-		return this[childrenSymbol].get(id);
+		return this[childrenSymbol].get(id) ||
+			this[childrenSymbol].get(this.id + ':' + id)
 	}
 
 	/**
