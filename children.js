@@ -22,13 +22,13 @@ module.exports = Thing.mixin(Parent => class extends Parent {
 
 		builder.action('getChild')
 			.description('Get child based on identifier')
-			.param('string', false, 'The id of the child')
+			.argument('string', false, 'The id of the child')
 			.returns('thing')
 			.done();
 
 		builder.action('hasChild')
 			.description('Get if the this thing has the given child')
-			.param('string', false, 'The id of the child')
+			.argument('string', false, 'The id of the child')
 			.returns('boolean')
 			.done();
 	}
