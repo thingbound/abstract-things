@@ -51,6 +51,8 @@ module.exports = toExtendable(class Thing {
 	init() {
 		if(this[isInitialized]) return Promise.resolve(this);
 
+		this[isDestroyed] = false;
+
 		return Promise.resolve(this.initCallback())
 			.then(() => {
 				/*
@@ -66,6 +68,8 @@ module.exports = toExtendable(class Thing {
 				}
 
 				this[isInitialized] = true;
+
+				this.emitEvent('thing:initialized');
 				return this;
 			});
 	}
@@ -83,7 +87,9 @@ module.exports = toExtendable(class Thing {
 		this[isDestroyed] = true;
 		this[isInitialized] = false;
 		return Promise.resolve(this.destroyCallback())
-			.then(() => undefined);
+			.then(() => {
+				this.emitEvent('thing:destroyed');
+			});
 	}
 
 	destroyCallback() {
