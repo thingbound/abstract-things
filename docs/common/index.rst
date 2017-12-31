@@ -10,7 +10,5 @@ Common capabilities
 	nameable
 	power
 	switchable-power
-	power-channels
-	switchable-power-channels
 	mode
 	switchable-mode
