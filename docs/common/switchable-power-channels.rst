@@ -1,5 +1,5 @@
-``switchable-power-channels`` - switch multiple power channels
-==============================================================
+``cap:switchable-power-channels`` - switch multiple power channels
+==================================================================
 
 ``switchable-power-channels`` is an extension to :doc:`power-channels <power-channels>`
 for things that can also switch the power state of their channels.

@@ -1,4 +1,4 @@
-``contact`` - contact sensing
+``cap:contact`` - contact sensing
 ==================================
 
 This capability is used to mark sensors that report a wether contact is

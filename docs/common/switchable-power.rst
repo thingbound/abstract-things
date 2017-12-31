@@ -1,5 +1,5 @@
-``switchable-power`` - switch power state
-=========================================
+``cap:switchable-power`` - switch power state
+=============================================
 
 The ``switchable-power``-capability is an extension to the :doc:`power-capability <power>`
 for things that can also switch their power state.

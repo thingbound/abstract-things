@@ -1,5 +1,5 @@
-``dimmable`` - change brightness
-================================
+``cap:dimmable`` - change brightness
+====================================
 
 Capability used when a light supports changing the brightness, extends
 :doc:`brightness <brightness>`-capability.

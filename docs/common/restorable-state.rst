@@ -1,5 +1,5 @@
-``restorable-state`` - capture and restore state
-================================================
+``cap:restorable-state`` - capture and restore state
+====================================================
 
 ``restorable-state`` provides an extension to :doc:`state <state>` that supports
 capturing and setting state.

@@ -1,5 +1,5 @@
-``relative-humidity`` - read humidity of air
-============================================
+``cap:relative-humidity`` - read humidity of air
+================================================
 
 This capability is used to mark sensors that report the relative humidity of
 the air.

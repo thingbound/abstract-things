@@ -1,5 +1,5 @@
-``carbon-monoxide`` - read carbon monoxide level
-=================================================
+``cap:carbon-monoxide`` - read carbon monoxide level
+====================================================
 
 This capability is used to mark sensors that report their carbon monoxide level
 as PPM (parts per million). The value is reported as a :doc:`number </values/number>`.

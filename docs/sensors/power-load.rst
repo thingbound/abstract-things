@@ -1,5 +1,5 @@
-``power-load`` - read the current power load
-============================================
+``cap:power-load`` - read the current power load
+================================================
 
 This capability is used to mark sensors that report power load, that is the
 :doc:`power </values/power>` currently being used.

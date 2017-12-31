@@ -1,5 +1,5 @@
-``atmospheric-pressure`` - read atmospheric pressure
-====================================================
+``cap:atmospheric-pressure`` - read atmospheric pressure
+=======================================================
 
 This capability is used to mark sensors that report the atmospheric pressure.
 

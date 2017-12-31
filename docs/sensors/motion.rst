@@ -1,5 +1,5 @@
-``motion`` - motion sensing
-===========================
+``cap:motion`` - motion sensing
+===============================
 
 This capability is used to mark sensors that monitor movement.
 

@@ -1,5 +1,5 @@
-``color:full`` - light supports full range of color
-====================================================
+``cap:color:full`` - light supports full range of color
+=======================================================
 
 Capability used to mark lights that support setting any color.
 

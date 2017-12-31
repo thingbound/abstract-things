@@ -1,5 +1,5 @@
-``switchable-mode`` - switch mode
-====================================
+``cap:switchable-mode`` - switch mode
+======================================
 
 Capability used for things that can switch their mode.
 

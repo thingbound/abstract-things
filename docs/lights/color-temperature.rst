@@ -1,5 +1,5 @@
-``color:temperature`` - light supports temperature
-==================================================
+``cap:color:temperature`` - light supports temperature
+======================================================
 
 Capability used to mark lights that support setting color temperature natively.
 

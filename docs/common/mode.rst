@@ -1,5 +1,5 @@
-``mode`` - monitor mode
-=======================
+``cap:mode`` - monitor mode
+===========================
 
 ``mode`` is used for things that have a mode that can be monitored.
 

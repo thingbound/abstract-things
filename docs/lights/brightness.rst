@@ -1,5 +1,5 @@
-``brightness`` - read brightness
-================================
+``cap:brightness`` - read brightness
+====================================
 
 Capability used when a light supports reading the brightness. Usually this is
 combined with :doc:`dimmable <dimmable>` for lights that can actually change

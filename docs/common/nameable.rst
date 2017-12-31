@@ -1,5 +1,5 @@
-``nameable`` - renameable things
-=================================
+``cap:nameable`` - renameable things
+====================================
 
 ``nameable`` is used by things that have a name that can be updated.
 

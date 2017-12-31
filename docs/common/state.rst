@@ -1,4 +1,4 @@
-``state`` - state tracking
+``cap:state`` - state tracking
 ===================================
 
 The ``state``-capability provides a way to get and update the state of a thing.

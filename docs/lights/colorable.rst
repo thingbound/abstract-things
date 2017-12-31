@@ -1,5 +1,5 @@
-``colorable`` - coloring of lights
-==================================
+``cap:colorable`` - coloring of lights
+======================================
 
 Capability used for lights that can be colored.
 

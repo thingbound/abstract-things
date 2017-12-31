@@ -1,5 +1,5 @@
-``pm10`` - read PM10 density (air quality)
-==========================================
+``cap:pm10`` - read PM10 density (air quality)
+==============================================
 
 This capability is used to mark sensors that monitor particulate matter (PM)
 between 2.5 and 10 micrometers (μm).

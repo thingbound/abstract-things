@@ -1,5 +1,5 @@
-``pm2.5`` - read PM2.5 density (air quality)
-============================================
+``cap:pm2.5`` - read PM2.5 density (air quality)
+================================================
 
 This capability is used to mark sensors that monitor fine particulate matter
 (PM) of up to 2.5 micrometers (μm).

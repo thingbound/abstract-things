@@ -1,5 +1,5 @@
-``temperature`` - read temperature
-==================================
+``cap:temperature`` - read temperature
+======================================
 
 This capability is used to mark sensors that report a :doc:`temperature </values/temperature>`.
 

@@ -1,5 +1,5 @@
-``voltage`` - read voltage of something
-=======================================
+``caPvoltage`` - read voltage of something
+==========================================
 
 This capability is used to mark sensors that report the
 :doc:`voltage </values/voltage>` of something.

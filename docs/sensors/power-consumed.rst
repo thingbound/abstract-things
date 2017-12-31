@@ -1,5 +1,5 @@
-``power-consumed`` - read power consumed
-========================================
+``cap:power-consumed`` - read power consumed
+============================================
 
 This capability is used to mark sensors that report power consumed by something.
 

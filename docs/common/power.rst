@@ -1,5 +1,5 @@
-``power`` - monitor power state
-===================================
+``cap:power`` - monitor power state
+====================================
 
 The ``power``-capability is used for any thing that can monitor its power
 state.

@@ -1,5 +1,5 @@
-``fading`` - support for fading changes
-=======================================
+``cap:fading`` - support for fading changes
+===========================================
 
 Capability used to mark lights that support fading of changes. When this
 capability is present the ``duration`` argument for other methods is available.

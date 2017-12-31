@@ -1,5 +1,5 @@
-``illuminance`` - read illuminance
-==================================
+``cap:illuminance`` - read illuminance
+======================================
 
 This capability is used to mark sensors that report
 :doc:`illuminance </values/illuminance>`. This is commonly used for sensors
