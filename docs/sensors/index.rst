@@ -17,16 +17,16 @@ The type ``sensor`` is used to mark things that read one or more values.
 	:maxdepth: 1
 	:caption: Capabilities
 
-	atmosphericPressure
-	carbonDioxide
-	carbonMonoxide
+	atmospheric-pressure
+	carbon-dioxide
+	carbon-monoxide
 	contact
 	illuminance
 	motion
 	pm2.5
 	pm10
-	powerConsumed
-	powerLoad
-	relativeHumidity
+	power-consumed
+	power-load
+	relative-humidity
 	temperature
 	voltage
