@@ -1,5 +1,5 @@
-Air Purifiers
-=============
+``type:air-purifier`` - Air purifiers
+=====================================
 
 Air purifiers are appliances that filter and purify the air. Commonly used
 with the :doc:`switchable-power </common/switchable-power>` and
@@ -16,7 +16,7 @@ Implementing type
 
 .. sourcecode:: js
 
-	const { AirPurifier } = require('abstract-things/environmental');
+	const { AirPurifier } = require('abstract-things/climate');
 
 	class Example extends AirPurifier.with(...) {
 
