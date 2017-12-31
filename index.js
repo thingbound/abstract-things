@@ -7,7 +7,7 @@ module.exports.RestorableState = require('./common/restorable-state');
 
 module.exports.Storage = require('./storage');
 
-module.exports.Children = require('./children');
+module.exports.Children = require('./common/children');
 
 module.exports.Nameable = require('./common/nameable');
 module.exports.EasyNameable = require('./common/easy-nameable');

@@ -4,6 +4,7 @@ Common capabilities
 .. toctree::
 	:maxdepth: 1
 
+	children
 	state
 	restorable-state
 	nameable

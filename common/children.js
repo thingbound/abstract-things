@@ -1,6 +1,6 @@
 'use strict';
 
-const Thing = require('./thing');
+const Thing = require('../thing');
 const childrenSymbol = Symbol('children');
 
 /**
@@ -20,7 +20,7 @@ module.exports = Thing.mixin(Parent => class extends Parent {
 			.returns('array')
 			.done();
 
-		builder.action('getChild')
+		builder.action('child')
 			.description('Get child based on identifier')
 			.argument('string', false, 'The id of the child')
 			.returns('thing')
@@ -88,7 +88,7 @@ module.exports = Thing.mixin(Parent => class extends Parent {
 		const id = typeof thingOrId === 'string' ? thingOrId : thingOrId.id;
 
 		const children = this[childrenSymbol];
-		const child = children.get(id);
+		const child = this.child(id);
 
 		if(child) {
 			children.delete(id);
@@ -114,7 +114,7 @@ module.exports = Thing.mixin(Parent => class extends Parent {
 	 *
 	 * @param {string} id
 	 */
-	getChild(id) {
+	child(id) {
 		return this[childrenSymbol].get(id) ||
 			this[childrenSymbol].get(this.id + ':' + id)
 	}
@@ -149,40 +149,6 @@ module.exports = Thing.mixin(Parent => class extends Parent {
 	 * @param {Function} func
 	 */
 	syncChildren(defs, func) {
-		if(! defs || ! defs[Symbol.iterator]) throw new Error('Definitions that are iterable are needed to synchronize');
-		if(typeof func !== 'function') throw new Error('A function that can create things from a definition is required');
 
-		const children = this[childrenSymbol];
-		const allIds = new Set();
-		for(const def of defs) {
-			if(! def.id) {
-				throw new Error('`id` is needed on definitions');
-			}
-
-			allIds.add(def.id);
-
-			if(! children.has(def.id)) {
-				// This child does not exist, create and register it
-				const child = func(null, def);
-				if(child) {
-					if(child.id != def.id) {
-						throw new Error('Thing created has id ' + child.id + ' which differs from defintion id of ' + def.id);
-					}
-					this.addChild(child);
-				}
-			} else {
-				const child = func(children.get(def.id), def);
-				if(! child) {
-					this.removeChild(child.id);
-				}
-			}
-		}
-
-		// Remove all the ids that are no longer present
-		for(const id of this[childrenSymbol].keys()) {
-			if(! allIds.has(id)) {
-				this.removeChild(id);
-			}
-		}
 	}
 });
