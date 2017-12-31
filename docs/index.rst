@@ -35,3 +35,4 @@ combined they describe a thing and what it can do.
 	lights/index
 	sensors/index
 	climate/index
+	electrical/index
