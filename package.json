@@ -22,7 +22,8 @@
     "dwaal": "^0.1.4",
     "foibles": "^0.2.0",
     "is-mergeable-object": "^1.1.0",
-    "mkdirp": "^0.5.1"
+    "mkdirp": "^0.5.1",
+    "tinkerhub-discovery": "^0.3.1"
   },
   "devDependencies": {
     "eslint": "^4.12.0",

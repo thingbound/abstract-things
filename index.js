@@ -2,6 +2,8 @@
 
 module.exports.Thing = require('./thing');
 
+module.exports.Discovery = require('./discovery');
+
 module.exports.State = require('./common/state');
 module.exports.RestorableState = require('./common/restorable-state');
 
