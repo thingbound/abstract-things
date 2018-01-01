@@ -2,6 +2,7 @@
 
 const Thing = require('../thing');
 const State = require('../common/state');
+const { percentage } = require('../values');
 
 module.exports = Thing.mixin(Parent => class extends Parent.with(State) {
 	/**
@@ -20,7 +21,6 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(State) {
 
 		builder.action('brightness')
 			.description('Get or set the brightness of this light')
-			.argument('change:brightness', true, 'The change in brightness or absolute brightness')
 			.returns('percentage', 'The brightness of the light')
 			.getterForState('brightness')
 			.done();
@@ -47,6 +47,8 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(State) {
 	 * @param {*} brightness
 	 */
 	updateBrightness(brightness) {
+		brightness = percentage(brightness, 0, 100);
+
 		if(this.updateState('brightness', brightness)) {
 			this.emitEvent('brightnessChanged', brightness);
 		}

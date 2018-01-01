@@ -328,7 +328,7 @@ values.register('string', {
 });
 
 values.register('percentage', {
-	create: function(value) {
+	create: function(value, min, max) {
 		if(typeof value === 'string') {
 			value = value.trim();
 
@@ -342,7 +342,19 @@ values.register('percentage', {
 			throw new Error('Can not translate to a percentage');
 		}
 
-		return value < 0 ? 0 : (value > 100 ? 100 : value);
+		if(typeof min !== 'undefined') {
+			if(value < min) {
+				value = min;
+			}
+		}
+
+		if(typeof max !== 'undefined') {
+			if(value > max) {
+				value = max;
+			}
+		}
+
+		return value;
 	},
 
 	comparable: true

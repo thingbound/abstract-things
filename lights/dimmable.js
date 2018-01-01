@@ -13,7 +13,7 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(Brightness, Lig
 	static availableAPI(builder) {
 		builder.action('brightness')
 			.description('Get or set the brightness of this light')
-			.argument('change:brightness', true, 'The change in brightness or absolute brightness')
+			.argument('percentage:change', true, 'The change in brightness or absolute brightness')
 			.returns('percentage', 'The brightness of the light')
 			.getterForState('brightness')
 			.done();
@@ -79,7 +79,7 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(Brightness, Lig
 
 	setBrightness(brightness, duration0=Light.DURATION, powerOn=true) {
 		if(typeof brightness === 'undefined') throw new Error('Brightness must be specified');
-		brightness = percentage(brightness);
+		brightness = percentage(brightness, 0, 100);
 
 		const options = {
 			duration: duration(duration0),
