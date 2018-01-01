@@ -47,7 +47,7 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(State) {
 	 * @param {*} brightness
 	 */
 	updateBrightness(brightness) {
-		brightness = percentage(brightness, 0, 100);
+		brightness = percentage(brightness, { min: 0, max: 100, precision: 1 });
 
 		if(this.updateState('brightness', brightness)) {
 			this.emitEvent('brightnessChanged', brightness);

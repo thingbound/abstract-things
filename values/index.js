@@ -10,7 +10,12 @@ const TYPE_TAG = '_:value-type';
 const change = require('./change');
 
 function createPublicApi(def) {
-	const api = function(value, required, msg) {
+	const api = function(value, options, required, msg) {
+		if(typeof options !== 'object') {
+			msg = required;
+			required = options;
+		}
+
 		if(typeof required != 'boolean') {
 			msg = required;
 			required = false;
@@ -20,7 +25,7 @@ function createPublicApi(def) {
 			throw new Error(msg || 'Value required');
 		}
 
-		return def.create(value);
+		return def.create(value, options);
 	};
 
 	for(const m of Object.keys(def.create)) {
@@ -328,7 +333,7 @@ values.register('string', {
 });
 
 values.register('percentage', {
-	create: function(value, min, max) {
+	create: function(value, options) {
 		if(typeof value === 'string') {
 			value = value.trim();
 
@@ -342,15 +347,25 @@ values.register('percentage', {
 			throw new Error('Can not translate to a percentage');
 		}
 
-		if(typeof min !== 'undefined') {
-			if(value < min) {
-				value = min;
+		if(typeof options !== 'undefined') {
+			const min = options.min;
+			if(typeof min !== 'undefined') {
+				if(value < min) {
+					value = min;
+				}
 			}
-		}
 
-		if(typeof max !== 'undefined') {
-			if(value > max) {
-				value = max;
+			const max = options.max;
+			if(typeof max !== 'undefined') {
+				if(value > max) {
+					value = max;
+				}
+			}
+
+			const precision = options.precision;
+			if(typeof precision !== 'undefined') {
+				const p = Math.pow(10, precision);
+				value = Math.round(value * p) / p;
 			}
 		}
 
