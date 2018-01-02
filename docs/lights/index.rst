@@ -17,6 +17,8 @@ The main type for lights is ``light``. Lights commonly use at least the
 	:caption: Topics
 
 	implementing
+	bulbs
+	strips
 
 .. toctree::
 	:maxdepth: 1
