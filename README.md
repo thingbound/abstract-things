@@ -65,10 +65,9 @@ Types are used to describe what a thing is and capabilities describe what a
 thing can do. A thing can have many capabilities but usually its only a few
 types.
 
-This library includes only a very limitied set of capabilities that are useful
-for any type of thing. More specific ones can be found in
-[Appliances](https://github.com/tinkerhub/appliances) that provides types
-and capabilities for common IoT-devices such as lights, sensors and much more.
+This library includes a set of capabilities and types that are intended to
+cover many common appliances and devices. Information about these can
+be found in the [detailed documentation](http://abstract-things.readthedocs.io/en/latest/).
 
 ### Using a capability
 
