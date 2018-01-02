@@ -12,6 +12,9 @@ child of other types such as the individual outlets in a
 	:caption: Types
 
 	outlets
+	channels
 	strips
 	plugs
 	wall-outlets
+	switches
+	wall-switches
