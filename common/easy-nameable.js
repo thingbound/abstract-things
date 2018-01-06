@@ -15,7 +15,7 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(Nameable, Stora
 	initCallback() {
 		return super.initCallback()
 			.then(() => this.storage.get('name'))
-			.then(name => this.metadata.name = name);
+			.then(name => name && (this.metadata.name = name));
 	}
 
 	changeName(name) {
