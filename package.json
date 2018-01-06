@@ -1,6 +1,6 @@
 {
   "name": "abstract-things",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "license": "MIT",
   "description": "Base for building libraries that interact with physical things, such as IoT-devices",
   "repository": "tinkerhub/abstract-things",
@@ -9,7 +9,7 @@
     "test": "node_modules/.bin/eslint ."
   },
   "engines": {
-    "node": ">=6.0.0"
+    "node": ">=6.6.0"
   },
   "dependencies": {
     "amounts": "^0.5.0",
