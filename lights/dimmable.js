@@ -79,7 +79,7 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(Brightness, Lig
 
 	setBrightness(brightness, duration0=Light.DURATION, powerOn=true) {
 		if(typeof brightness === 'undefined') throw new Error('Brightness must be specified');
-		brightness = percentage(brightness, { min: 0, max: 100 })
+		brightness = percentage(brightness, { min: 0, max: 100 });
 
 		const options = {
 			duration: duration(duration0),

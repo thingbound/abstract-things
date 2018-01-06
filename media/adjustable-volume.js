@@ -64,7 +64,7 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(Volume) {
 	}
 
 	setVolume(volume) {
-		volume = percentage(volume, { min: 0, max: 100 });
+		volume = percentage(volume, { min: 0, max: 100 });
 
 		return Promise.resolve(this.changeVolume(volume))
 			.then(() => this.state.volume);

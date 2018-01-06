@@ -257,7 +257,7 @@ module.exports.toJSON = function(value) {
 	return {
 		values: value.values,
 		model: value.model
-	}
+	};
 };
 
 module.exports.is = function(v) {

@@ -16,12 +16,12 @@ function createPublicApi(def) {
 			required = options;
 		}
 
-		if(typeof required != 'boolean') {
+		if(typeof required !== 'boolean') {
 			msg = required;
 			required = false;
 		}
 
-		if(required && (typeof value === 'undefined' || value == null)) {
+		if(required && (typeof value === 'undefined' || value === null)) {
 			throw new Error(msg || 'Value required');
 		}
 
@@ -41,7 +41,7 @@ class ValueRegistry {
 
 	register(type, def) {
 		if(! def) {
-			throw 'A definition with create (and optionally toJSON) needed for type ' + type;
+			throw new Error('A definition with create (and optionally toJSON) needed for type ' + type);
 		}
 
 		if(typeof def === 'function') {
@@ -53,7 +53,7 @@ class ValueRegistry {
 		}
 
 		if(! def.create) {
-			throw 'create function required for type ' + type;
+			throw new Error('create function required for type ' + type);
 		}
 
 		if(! def.toJSON) {
@@ -280,7 +280,7 @@ values.register('buffer', {
 	toJSON(value) {
 		return {
 			encoded: value.toString('base64')
-		}
+		};
 	}
 });
 

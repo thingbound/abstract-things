@@ -135,7 +135,7 @@ module.exports.EventEmitter = class EventEmitter {
 		this.on(eventName, removingListener);
 		return {
 			stop: () => {
-				this.off(eventName, removingListener)
+				this.off(eventName, removingListener);
 			}
 		};
 	}
@@ -181,4 +181,4 @@ module.exports.EventEmitter = class EventEmitter {
 			listener.apply(ctx, allArgs);
 		}
 	}
-}
+};

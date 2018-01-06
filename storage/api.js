@@ -79,4 +79,4 @@ module.exports = {
 	instance(id) {
 		return new SubStorage(resolveStorage(), 'instance/' + id);
 	}
-}
+};

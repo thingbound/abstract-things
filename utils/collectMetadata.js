@@ -35,7 +35,7 @@ module.exports = function collectMetadata(Parent, instance) {
 	const builder = new DefinitionBuilder();
 
 	let prototype = instance.constructor;
-	while(prototype != Parent) {
+	while(prototype !== Parent) {
 		const tags = [];
 
 		// static get types() { return [ 'typeA', 'typeB ] }

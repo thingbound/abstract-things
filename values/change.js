@@ -7,15 +7,15 @@ class Change {
 	}
 
 	get isIncrease() {
-		return this.type == 'increase';
+		return this.type === 'increase';
 	}
 
 	get isDecrease() {
-		return this.type == 'decrease';
+		return this.type === 'decrease';
 	}
 
 	get isSet() {
-		return this.type == 'set';
+		return this.type === 'set';
 	}
 }
 
@@ -27,7 +27,7 @@ module.exports = function(delegate) {
 
 			if(parsed) {
 				const value = delegate.create(parsed[2]);
-				return new Change(value, parsed[1] == '+' ? 'increase' : 'decrease');
+				return new Change(value, parsed[1] === '+' ? 'increase' : 'decrease');
 			}
 
 			return new Change(delegate.create(value), 'set');
@@ -42,7 +42,7 @@ module.exports = function(delegate) {
 		return {
 			value: delegate.toJSON(value.value),
 			type: value.type
-		}
+		};
 	};
 
 	return create;

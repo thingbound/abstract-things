@@ -4,7 +4,7 @@
   "env": {},
   "globals": {},
   "rules": {
-    "strict": [ "error", "global" ],
+		"strict": [ "error", "global" ],
     "node/no-unsupported-features": [
       "error",
       {
@@ -16,6 +16,12 @@
       2,
       "single"
 		],
-		"no-unused-vars": [ "error", { "args": "none" } ]
+		"no-unused-vars": [
+			"error",
+			{ "vars": "all", "args": "none", "ignoreRestSiblings": false }
+		],
+		"eqeqeq": [ "error" ],
+		"no-throw-literal": [ "error" ],
+		"semi": [ "error", "always" ]
   }
 }

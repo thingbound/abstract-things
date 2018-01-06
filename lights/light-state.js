@@ -32,7 +32,7 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(RestorableState
 			.then(() => {
 				const stateCopy = Object.assign({}, state);
 				this.mapLightState(stateCopy);
-				return this.setLightState(stateCopy)
+				return this.setLightState(stateCopy);
 			});
 	}
 });

@@ -116,7 +116,7 @@ module.exports = Thing.mixin(Parent => class extends Parent {
 	 */
 	child(id) {
 		return this[childrenSymbol].get(id) ||
-			this[childrenSymbol].get(this.id + ':' + id)
+			this[childrenSymbol].get(this.id + ':' + id);
 	}
 
 	/**
