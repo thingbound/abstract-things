@@ -1,6 +1,28 @@
 Using things
 =============
 
+Things provide a basic shared API no matter their types and capabilities. The
+``matches`` method can be used to match tags and to figure out what a thing is
+and what it can do:
+
+.. sourcecode:: js
+
+	if(thing.matches('cap:colorable')) {
+		console.log('Current color:', thing.color());
+	}
+
+Events are one of the most important parts of things and listeners can be added
+via the ``on`` method:
+
+.. sourcecode:: js
+
+	thing.on('colorChanged', color => console.log('The color has changed'));
+
+	// Listeners receive the thing as the second argument
+	const handler = (color, thing) => console.log('Color is now', color, 'for thing', thing);
+	thing1.on('colorChanged', handler);
+	thing2.on('colorChanged', handler);
+
 Thing API
 ----------
 
