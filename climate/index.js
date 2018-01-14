@@ -15,3 +15,7 @@ module.exports.AdjustableTargetHumidity = require('./adjustable-target-humidity'
 
 module.exports.FanSpeed = require('./fan-speed');
 module.exports.AdjustableFanSpeed = require('./adjustable-fan-speed');
+
+module.exports.CleaningState = require('./cleaning-state');
+module.exports.AutonomousCleaning = require('./autonomous-cleaning');
+module.exports.SpotCleaning = require('./spot-cleaning');
