@@ -2,6 +2,7 @@
 
 const amounts = require('amounts');
 const color = require('./color');
+const Code = require('./code');
 
 const IDENTITY = function(input) { return input; };
 const ALWAYS_FALSE = function() { return false; };
@@ -373,6 +374,24 @@ values.register('percentage', {
 	},
 
 	comparable: true
+});
+
+values.register('code', {
+	create: function(value) {
+		if(typeof value === 'object') {
+			return new Code(value.id || value.code, value.description || value.message);
+		} else if(typeof value === 'string') {
+			return new Code(value);
+		} else if(typeof value === 'number') {
+			return new Code(String(value));
+		}
+
+		throw new Error('Can not convert into code');
+	},
+
+	is: function(value) {
+		return value instanceof Code;
+	}
 });
 
 values.register('color', color);
