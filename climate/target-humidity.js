@@ -18,7 +18,7 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(State) {
 
 		builder.action('targetHumidity')
 			.description('Get the target humidity')
-			.returns('targetHumidity')
+			.returns('percentage', 'The target humidity')
 			.done();
 	}
 

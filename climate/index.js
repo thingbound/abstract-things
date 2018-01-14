@@ -8,6 +8,7 @@ module.exports.Fan = require('./fan');
 module.exports.Humidifier = require('./humidifier');
 module.exports.Dehumidifier = require('./dehumidifier');
 
-module.exports.TargetHumidity = require('./target-humidity');
-
 module.exports.Vacuum = require('./vacuum');
+
+module.exports.TargetHumidity = require('./target-humidity');
+module.exports.AdjustableTargetHumidity = require('./adjustable-target-humidity');
