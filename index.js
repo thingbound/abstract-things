@@ -8,6 +8,8 @@ module.exports.Polling = require('./polling');
 module.exports.State = require('./common/state');
 module.exports.RestorableState = require('./common/restorable-state');
 
+module.exports.ErrorState = require('./common/error-state');
+
 module.exports.Storage = require('./storage');
 
 module.exports.Children = require('./common/children');
