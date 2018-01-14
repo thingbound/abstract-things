@@ -1,5 +1,6 @@
 'use strict';
 
+module.exports.AirMonitor = require('./air-monitor');
 module.exports.AirPurifier = require('./air-purifier');
 
 module.exports.Humidifier = require('./humidifier');
