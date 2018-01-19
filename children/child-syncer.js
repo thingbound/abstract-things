@@ -16,7 +16,7 @@ module.exports = class ChildSyncer {
 
 			// Remove reference to thing
 			this.children.delete(thing[defId]);
-			this.removeChild(thing);
+			this.parent.removeChild(thing);
 		};
 
 		/*
@@ -24,7 +24,7 @@ module.exports = class ChildSyncer {
 		 * parent is destroyed.
 		 */
 		this.parent.on('thing:destroyed', () => {
-			for(const child of this.children) {
+			for(const child of this.children.values()) {
 				child.destroy();
 			}
 		});
