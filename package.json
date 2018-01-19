@@ -1,6 +1,6 @@
 {
   "name": "abstract-things",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "license": "MIT",
   "description": "Base for building libraries that interact with physical things, such as IoT-devices",
   "repository": "tinkerhub/abstract-things",
