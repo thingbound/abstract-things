@@ -61,7 +61,7 @@ module.exports.EventEmitter = class EventEmitter {
 	off(eventName, listener) {
 		if(! listener) return;
 
-		const listeners = this.registeredListeners[eventName];
+		const listeners = this[registeredListeners][eventName];
 		if(! listeners) return;
 
 		var idx = listeners.indexOf(listener);
