@@ -379,11 +379,15 @@ values.register('percentage', {
 values.register('code', {
 	create: function(value) {
 		if(typeof value === 'object') {
-			return new Code(value.id || value.code, value.description || value.message);
+			if(Array.isArray(value)) {
+				return new Code(value[0], value[1]);
+			} else {
+				return new Code(value.id || value.code, value.description || value.message);
+			}
 		} else if(typeof value === 'string') {
-			return new Code(value);
+			return Code.parse(value);
 		} else if(typeof value === 'number') {
-			return new Code(String(value));
+			return Code.parse(String(value));
 		}
 
 		throw new Error('Can not convert into code');
