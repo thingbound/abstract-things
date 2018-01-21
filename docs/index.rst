@@ -32,6 +32,7 @@ combined they describe a thing and what it can do.
 	:caption: Types and capabilities
 
 	common/index
+	controllers/index
 	lights/index
 	sensors/index
 	climate/index

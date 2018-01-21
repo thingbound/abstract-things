@@ -1,3 +1,3 @@
 'use strict';
 
-module.exports.Controller = require('./controller');
+module.exports.Actions = require('./actions');

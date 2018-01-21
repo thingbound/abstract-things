@@ -2,13 +2,14 @@
 
 const Thing = require('../thing');
 const State = require('../common/state');
+const { code } = require('../values');
 
 /**
- * Controller, such as switches and remote controls.
+ * Actions, such as switches and remote controls.
  */
-module.exports = Thing.type(Parent => class extends Parent.with(State) {
-	static get type() {
-		return 'controller';
+module.exports = Thing.mixin(Parent => class extends Parent.with(State) {
+	static get capability() {
+		return 'actions';
 	}
 
 	static availableAPI(builder) {
@@ -24,7 +25,7 @@ module.exports = Thing.type(Parent => class extends Parent.with(State) {
 
 		builder.event('action')
 			.description('A certain action has been triggered')
-			.type('string')
+			.type('object')
 			.done();
 
 		builder.event('action:<id>')
@@ -57,7 +58,7 @@ module.exports = Thing.type(Parent => class extends Parent.with(State) {
 	 * Get the available actions for this controller. All of these actions
 	 * can be emitted.
 	 */
-	actions() {
+	get actions() {
 		return this.getState('actions');
 	}
 
@@ -65,8 +66,13 @@ module.exports = Thing.type(Parent => class extends Parent.with(State) {
 	 * Update the available actions of the controller.
 	 */
 	updateActions(actions) {
-		if(this.updateState('actions', actions)) {
-			this.emitEvent('actionsChanged', actions);
+		let mapped = [];
+		for(const a of actions) {
+			mapped.push(code(a));
+		}
+
+		if(this.updateState('actions', mapped)) {
+			this.emitEvent('actionsChanged', mapped);
 		}
 	}
 });
