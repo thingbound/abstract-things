@@ -13,7 +13,6 @@ available vary from thing to thing.
 	actions
 
 .. toctree::
-
 	:maxdepth: 1
 	:caption: Types
 
