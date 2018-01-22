@@ -26,7 +26,7 @@ API
 
 	.. sourcecode:: js
 
-		const actions = thing.actions();
+		const actions = thing.actions;
 
 		const action = actions[0];
 		console.log('First action id:', action.id);
