@@ -11,3 +11,12 @@ available vary from thing to thing.
 	:caption: Capabilities
 
 	actions
+
+.. toctree::
+
+	:maxdepth: 1
+	:caption: Types
+
+	buttons
+	remote-controls
+	wall-controllers
