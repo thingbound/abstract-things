@@ -34,16 +34,17 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(Sensor) {
 		return [ ...super.sensorTypes, 'contact' ];
 	}
 
-	get contact() {
+	contact() {
 		return this.value('contact');
 	}
 
-	get open() {
-		return ! this.contact;
+	isOpen() {
+		return this.contact()
+			.then(v => ! v);
 	}
 
-	get closed() {
-		return this.contact;
+	isClosed() {
+		return this.contact();
 	}
 
 	updateContact(contact) {

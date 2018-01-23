@@ -23,7 +23,7 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(State) {
 	}
 
 	fanSpeed() {
-		return this.getState('fanSpeed');
+		return Promise.resolve(this.getState('fanSpeed'));
 	}
 
 	updateFanSpeed(fanSpeed) {

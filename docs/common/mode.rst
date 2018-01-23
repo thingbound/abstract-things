@@ -6,7 +6,7 @@
 .. sourcecode:: js
 
 	if(thing.matches('cap:mode')) {
-		console.log('Mode is', thing.mode());
+		console.log('Mode is', await thing.mode());
 
 		thing.on('modeChanged', mode => console.log('Mode is now', mode));
 	}
@@ -18,15 +18,21 @@ API
 
 	Get the current mode of the thing.
 
-	:returns: :doc:`String </values/string>` indicating the mode.
+	:returns:
+		Promises that resolves to a :doc:`string </values/string>`indicating
+		the mode.
 
 	Example:
 
 	.. sourcecode:: js
 
-		console.log(thing.mode());
+		thing.mode()
+			.then(mode => ...)
+			.catch(...);
 
-.. js:attribute:: modes
+		const mode = await thing.mode();
+
+.. js:function:: modes()
 
 	Get the modes that this thing supports. Will return an array with strings
 	representing the modes.
@@ -36,14 +42,6 @@ API
 	.. sourcecode:: js
 
 		console.log(thing.modes);
-
-.. js:attribute:: state.mode
-
-	State-key representing the current mode.
-
-.. js:attribute:: state.modes
-
-	State-key representing the modes.
 
 Events
 -------

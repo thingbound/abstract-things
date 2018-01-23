@@ -53,8 +53,8 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(ErrorState, Sta
 	/**
 	 * Get if thing is cleaning.
 	 */
-	get cleaning() {
-		return this.getState('cleaning');
+	cleaning() {
+		return Promise.resolve(this.getState('cleaning'));
 	}
 
 	updateCleaning(cleaning) {

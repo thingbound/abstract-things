@@ -8,7 +8,7 @@ have the :doc:`battery-level <battery-level>` capability.
 .. sourcecode:: js
 
 	if(thing.matches('cap:charging-state')) {
-		if(thing.charging) {
+		if(await thing.charging()) {
 			// This thing is charging
 		}
 	}
@@ -16,18 +16,22 @@ have the :doc:`battery-level <battery-level>` capability.
 API
 ---
 
-.. js:attribute:: charging
+.. js:function:: charging()
 
 	Get the current charging state as a :doc:`boolean </values/boolean>`.
 	``true`` indicates that the thing is charging.
 
-	:returns: The current charging state.
+	:returns: Promise that resolves to the current charging state.
 
 	Example:
 
 	.. sourcecode:: js
 
-		const isCharging = thing.charging;
+		thing.charging()
+			.then(isCharging => ...)
+			.catch(...);
+
+		const isCharging = await thing.charging();
 
 Events
 ------

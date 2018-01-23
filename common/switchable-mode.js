@@ -58,11 +58,15 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(Mode) {
 	* @param {string} mode
 	*/
 	setMode(mode) {
-		if(typeof mode === 'undefined') throw new Error('Mode must be specified');
-		mode = String(mode);
+		try {
+			if(typeof mode === 'undefined') throw new Error('Mode must be specified');
+			mode = String(mode);
 
-		return Promise.resolve(this.changeMode(mode))
-			.then(() => this.getState('mode'));
+			return Promise.resolve(this.changeMode(mode))
+				.then(() => this.getState('mode'));
+		} catch(ex) {
+			return Promise.reject(ex);
+		}
 	}
 
 	/**

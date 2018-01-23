@@ -46,10 +46,14 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(Muted) {
 	}
 
 	setMuted(muted) {
-		muted = boolean(muted, true, 'Boolean for new muted state is required');
+		try {
+			muted = boolean(muted, true, 'Boolean for new muted state is required');
 
-		return Promise.resolve(this.changeMuted(muted))
-			.then(() => this.state.muted);
+			return Promise.resolve(this.changeMuted(muted))
+				.then(() => this.state.muted);
+		} catch(ex) {
+			return Promise.reject(ex);
+		}
 	}
 
 	mute() {
@@ -61,7 +65,8 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(Muted) {
 	}
 
 	toggleMuted() {
-		return this.setMuted(! this.muted());
+		return this.muted()
+			.then(muted => this.setMuted(! muted));
 	}
 
 	changeMuted(muted) {

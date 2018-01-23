@@ -6,15 +6,22 @@ This capability is used to mark sensors that report a :doc:`temperature </values
 .. sourcecode:: js
 
 	if(thing.matches('cap:temperature')) {
-		console.log('Temperature:', thing.temperature);
+		const temperature = await thing.temperature();
+		console.log('Temperature:', temperature.celsius);
 	}
 
 API
 ---
 
-.. js:attribute:: temperature
+.. js:function:: temperature()
 
 	Get the current :doc:`temperature </values/temperature>`.
+
+	:returns:
+		Promise that resolves to the current
+		:doc:`temperature </values/temperature>`.
+
+	Example:
 
 	.. sourcecode:: js
 
@@ -26,6 +33,8 @@ Events
 .. js:data:: temperatureChanged
 
 	The temperature has changed. Payload is the new :doc:`temperature </values/temperature>`.
+
+	Example:
 
 	.. sourcecode:: js
 

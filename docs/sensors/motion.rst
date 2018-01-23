@@ -6,7 +6,7 @@ This capability is used to mark sensors that monitor movement.
 .. sourcecode:: js
 
 	if(thing.matches('cap:motion')) {
-		console.log('Detected motion:', thing.motion);
+		console.log('Detected motion:', await thing.motion());
 
 		thing.on('movement', () => console.log('Motion detected'));
 		thing.on('inactivity', () => console.log('Inactivity detected'));
@@ -15,10 +15,15 @@ This capability is used to mark sensors that monitor movement.
 API
 ---
 
-.. js:attribute:: motion
+.. js:function:: motion()
 
-	Get the motion status. :doc:`Boolean </values/boolean>` indicating if
-	movement is currently detected.
+	Get the motion status.
+
+	:returns:
+		Promise that resolves to a :doc:`boolean </values/boolean>` indicating
+		if movement is currently detected.
+
+	Example:
 
 	.. sourcecode:: js
 

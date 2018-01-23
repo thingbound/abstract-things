@@ -33,8 +33,8 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(State) {
 		this.updateState('batteryLevel', -1);
 	}
 
-	get batteryLevel() {
-		return this.getState('batteryLevel');
+	batteryLevel() {
+		return Promise.resolve(this.getState('batteryLevel'));
 	}
 
 	updateBatteryLevel(level) {

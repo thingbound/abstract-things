@@ -6,20 +6,28 @@ This capability is used to mark sensors that report power consumed by something.
 .. sourcecode:: js
 
 	if(thing.matches('cap:power-consumed')) {
-		console.log('Power consumed:', thing.powerConsumed.wattHours);
+		const powerConsumed = await thing.powerConsumed();
+		console.log('Power consumed:', powerConsumed.wattHours);
 	}
 
 API
 ---
 
-.. js:attribute:: powerConsumed
+.. js:function:: powerConsumed
 
-	Get the current amount of power consumed, reports values as
-	:doc:`energy </values/energy>`.
+	Get the current amount of power consumed.
+	.
+
+	:returns:
+		Promise that resolves to the amount of power consumed as
+		:doc:`energy </values/energy>`.
+
+	Example:
 
 	.. sourcecode:: js
 
-		console.log('Power consumed:', thing.powerConsumed.wattHours);
+		const powerConsumed = await thing.powerConsumed();
+		console.log('Power consumed:', powerConsumed.wattHours);
 
 Events
 ------
@@ -28,6 +36,8 @@ Events
 
 	The amount of power consumed has changed. Payload is the power consumed
 	as :doc:`energy </values/energy>`.
+
+	Example:
 
 	.. sourcecode:: js
 

@@ -6,12 +6,10 @@ Capability used for things that can switch their mode.
 .. sourcecode:: js
 
 	if(thing.matches('cap:switchable-mode')) {
-		console.log('Mode is', thing.mode());
+		console.log('Mode is', await thing.mode());
 
 		// Switch the mode
-		thing.mode('new-mode')
-			.then(mode => console.log('Mode is now', mode))
-			.catch(err => console.log('Failed to switch mode', err));
+		await thing.mode('new-mode');
 	}
 
 API
@@ -30,7 +28,7 @@ API
 	.. sourcecode:: js
 
 		// Getting returns a string
-		const currentMode = thing.mode();
+		const currentMode = await thing.mode();
 
 		// Switching returns a promise
 		thing.mode('new-mode')
@@ -48,9 +46,11 @@ API
 
 	.. sourcecode:: js
 
-		thing.setMode('new-mode)
+		thing.setMode('new-mode')
 			.then(result => console.log('Mode is now', result))
 			.catch(err => console.log('Error occurred', err);
+
+		await thing.setMode('new-mode');
 
 Protected methods
 -----------------

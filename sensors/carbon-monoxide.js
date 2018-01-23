@@ -32,11 +32,11 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(Sensor) {
 		return [ ...super.sensorTypes, 'carbonMonoxide' ];
 	}
 
-	get carbonMonoxide() {
+	carbonMonoxide() {
 		return this.value('carbonMonoxide');
 	}
 
-	get co() {
+	co() {
 		return this.value('carbonMonoxide');
 	}
 

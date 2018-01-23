@@ -8,12 +8,10 @@ Capability used when a light supports changing the brightness, extends
 
 	if(thing.matches('cap:dimmable')) {
 		// Get the current brightness
-		console.log(thing.brightness());
+		console.log(await thing.brightness());
 
 		// Set the current brightness
-		thing.brightness(10)
-			.then(bri => console.log('Brightness is now', bri))
-			.catch(err => console.log('Could not change brightness', err));
+		const newBrightness = await thing.brightness(10);
 	}
 
 API
@@ -33,7 +31,7 @@ API
 		Optional :doc:`duration </values/duration>` to perform change in
 		brightness over. Supported when the light has the
 		:doc:`fading <fading>`-capability.
-	:returns: Current brightness when getting, promise when setting.
+	:returns: Promise that resolves to the current or the set brightness.
 
 	Example:
 

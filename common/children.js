@@ -136,19 +136,8 @@ module.exports = Thing.mixin(Parent => class extends Parent {
 	/**
 	 * Get all of the children that are registered.
 	 */
-	get children() {
+	children() {
 		return this[childrenSymbol].values();
 	}
 
-	/**
-	 * Synchronize the children based on the given definitions. This will remove
-	 * any child that is not in the list of definitions and create new ones
-	 * for new definitions.
-	 *
-	 * @param {Iterable} defs
-	 * @param {Function} func
-	 */
-	syncChildren(defs, func) {
-
-	}
 });

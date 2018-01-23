@@ -19,7 +19,7 @@ API
 	Update the name of this thing.
 
 	:param string name: Name for thing.
-	:returns: The name set
+	:returns: Promise that resolves to the name set.
 
 Protected methods
 -----------------

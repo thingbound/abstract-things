@@ -77,10 +77,14 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(Power, Restorab
 	 * @param {boolean} power
 	 */
 	setPower(power) {
-		power = boolean(power);
+		try {
+			power = boolean(power);
 
-		return Promise.resolve(this.changePower(power))
-			.then(() => this.power());
+			return Promise.resolve(this.changePower(power))
+				.then(() => this.power());
+		} catch(ex) {
+			return Promise.reject(ex);
+		}
 	}
 
 	togglePower() {

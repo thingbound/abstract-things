@@ -7,28 +7,25 @@ the air.
 .. sourcecode:: js
 
 	if(thing.matches('cap:relative-humidity')) {
-		console.log('RH:', thing.relativeHumidity);
+		console.log('RH:', await thing.relativeHumidity());
 	}
 
 API
 ---
 
-.. js:attribute:: relativeHumidity
+.. js:function:: relativeHumidity()
 
 	Get the current relative humidity as a :doc:`percentage </values/percentage>`.
 
-	.. sourcecode:: js
+	:returns:
+		Promise that resolves to the current relative humidity as a
+		:doc:`percentage </values/percentage>`.
 
-		console.log('RH:', thing.relativeHumidity);
-
-
-.. js:attribute:: rh
-
-	Get the current relative humidity as a :doc:`percentage </values/percentage>`.
+	Example:
 
 	.. sourcecode:: js
 
-		console.log('RH:', thing.rh);
+		console.log('RH:', await thing.relativeHumidity());
 
 Events
 ------
@@ -37,6 +34,8 @@ Events
 
 	The relative humidity has changed. Payload is the new humidity as a
 	:doc:`percentage </values/percentage>`.
+
+	Example:
 
 	.. sourcecode:: js
 

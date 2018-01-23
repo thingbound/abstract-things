@@ -6,11 +6,10 @@ Capability used for lights that can be colored.
 .. sourcecode:: js
 
 	if(thing.matches('type:light', 'cap:colorable')) {
-		console.log('Current color', thing.color());
+		console.log('Current color', await thing.color());
 
-		thing.color('red')
-			.then(color => console.log('Color is now', color))
-			.catch(err => console.log('Error while setting color', err));
+		// Set the color
+		await thing.color('red');
 	}
 
 API
@@ -29,23 +28,21 @@ API
 		Optional :doc:`duration </values/duration>` to perform change in
 		brightness over. Supported when the light has the
 		:doc:`fading <fading>`-capability.
+	:returns:
+		Promise that resolves to the current or set color.
 
 	Example:
 
 	.. sourcecode:: js
 
 		// Get the current color
-		const currentColor = thing.color();
+		const currentColor = await thing.color();
 
 		// Change color
-		thing.color('4000K')
-			.then(color => console.log('Color is now', color))
-			.catch(err => console.log('Error while setting color', err));
+		const newColor = await thing.color('4000K');
 
 		// Change color over 2 seconds
-		thing.color('#00ffff', '2s')
-			.then(...)
-			.catch(...);
+		await thing.color('#00ffff', '2s');
 
 Events
 ------

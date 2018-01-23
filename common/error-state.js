@@ -30,11 +30,6 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(State) {
 			.description('Get the current error state')
 			.returns('code', 'The current error state or null if no error')
 			.done();
-
-		builder.action('hasError')
-			.description('Get if the thing is in an error state')
-			.returns('boolean')
-			.done();
 	}
 
 	static get capability() {
@@ -51,7 +46,7 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(State) {
 	 * Get if thing has an error.
 	 */
 	get error() {
-		return this.getState('error');
+		return Promise.resolve(this.getState('error'));
 	}
 
 	updateError(error) {

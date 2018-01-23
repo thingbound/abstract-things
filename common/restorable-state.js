@@ -51,7 +51,7 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(State) {
 		for(const property of this.restorableState) {
 			result[property] = this.state[property];
 		}
-		return result;
+		return Promise.resolve(result);
 	}
 
 	/**
@@ -60,8 +60,12 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(State) {
 	 * @param {object} state
 	 */
 	setState(state) {
-		return Promise.resolve(this.changeState(state))
-			.then(() => this.state);
+		try {
+			return Promise.resolve(this.changeState(state))
+				.then(() => this.state);
+		} catch(ex) {
+			return Promise.reject(ex);
+		}
 	}
 
 	/**

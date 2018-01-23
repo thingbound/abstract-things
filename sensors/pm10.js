@@ -26,7 +26,7 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(Sensor) {
 		return [ ...super.sensorTypes, 'pm10' ];
 	}
 
-	get pm10() {
+	pm10() {
 		return this.value('pm10');
 	}
 

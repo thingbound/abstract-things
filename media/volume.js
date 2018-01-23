@@ -22,7 +22,7 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(State) {
 	}
 
 	volume() {
-		return this.getState('volume');
+		return Promise.resolve(this.getState('volume'));
 	}
 
 	updateVolume(volume) {

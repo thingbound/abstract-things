@@ -49,7 +49,7 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(State) {
 	*   boolean indicating the power level
 	*/
 	power() {
-		return this.getState('power');
+		return Promise.resolve(this.getState('power'));
 	}
 
 	/**

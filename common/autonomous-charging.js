@@ -17,8 +17,12 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(State, Charging
 	}
 
 	charge() {
-		return Promise.resolve(this.activateCharging())
-			.then(() => null);
+		try {
+			return Promise.resolve(this.activateCharging())
+				.then(() => null);
+		} catch(ex) {
+			return Promise.reject(ex);
+		}
 	}
 
 	activateCharging() {

@@ -7,7 +7,8 @@ This capability is used to mark sensors that report the
 .. sourcecode:: js
 
 	if(thing.matches('cap:voltage')) {
-		console.log('Voltage:', thing.voltage.volts);
+		const voltage = await thing.voltage();
+		console.log('Voltage:', voltage.volts);
 	}
 
 API
@@ -17,9 +18,15 @@ API
 
 	Get the current :doc:`voltage </values/voltage>`.
 
+	:returns:
+		Promise that resolves to the current :doc:`voltage </values/voltage>`.
+
+	Example:
+
 	.. sourcecode:: js
 
-		console.log('Voltage:', thing.voltage.volts);
+		const voltage = await thing.voltage();
+		console.log('Voltage:', voltage.volts);
 
 Events
 ------
@@ -28,6 +35,8 @@ Events
 
 	The voltage has changed. Payload is the new voltage as a
 	:doc:`voltage </values/voltage>`.
+
+	Example:
 
 	.. sourcecode:: js
 

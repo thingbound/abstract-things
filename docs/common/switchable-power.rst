@@ -7,12 +7,10 @@ for things that can also switch their power state.
 .. sourcecode:: js
 
 	if(thing.matches('cap:switchable-power')) {
-		console.log('Power is', thing.power());
+		console.log('Power is', await thing.power());
 
 		// Switch the thing on
-		thing.power(true)
-			.then(() => console.log('Power is now on'))
-			.catch(err => console.log('Failed to switch power', err));
+		await thing.power(true);
 	}
 
 Related capabilities: :doc:`power <power>`, :doc:`state <state>`
@@ -32,7 +30,7 @@ API
 	.. sourcecode:: js
 
 		// Getting returns a boolean
-		const powerIsOn = thing.power();
+		const powerIsOn = await thing.power();
 
 		// Switching returns a promise
 		thing.power(false)
@@ -53,6 +51,8 @@ API
 		thing.setPower(true)
 			.then(result => console.log('Power is now', result))
 			.catch(err => console.log('Error occurred', err);
+
+		await thing.setPower(true);
 
 .. js:function:: togglePower()
 

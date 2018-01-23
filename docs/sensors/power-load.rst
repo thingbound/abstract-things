@@ -7,20 +7,27 @@ This capability is used to mark sensors that report power load, that is the
 .. sourcecode:: js
 
 	if(thing.matches('cap:power-load')) {
-		console.log('Power load:', thing.powerLoad.watts);
+		const powerLoad = await thing.powerLoad();
+		console.log('Power load:', powerLoad.watts);
 	}
 
 API
 ---
 
-.. js:attribute:: powerLoad
+.. js:function:: powerLoad()
 
-	Get the current amount of power used, reports values as
-	:doc:`power </values/power>`.
+	Get the current amount of power being used.
+
+	:returns:
+		Promise that resolves to the current amount of power used  as a
+		:doc:`power </values/power>`.
+
+	Example:
 
 	.. sourcecode:: js
 
-		console.log('Power load:', thing.powerLoad.watts);
+		const powerLoad = await thing.powerLoad();
+		console.log('Power load:', powerLoad.watts);
 
 Events
 ------
@@ -29,6 +36,8 @@ Events
 
 	The amount of power being used has changed. Payload is the power load
 	as :doc:`power </values/power>`.
+
+	Example:
 
 	.. sourcecode:: js
 

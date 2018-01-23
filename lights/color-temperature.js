@@ -27,17 +27,17 @@ module.exports = Thing.mixin(Parent => class extends Parent {
 			.done();
 	}
 
-	get colorTemperatureRange() {
+	colorTemperatureRange() {
 		const range = this[colorTemperatureRange];
 
 		if(! range) {
-			throw new Error('Temperature range has not been set');
+			return Promise.reject(new Error('Temperature range has not been set'));
 		}
 
-		return {
+		return Promise.resolve({
 			min: range.min,
 			max: range.max
-		};
+		});
 	}
 
 	updateColorTemperatureRange(min, max) {

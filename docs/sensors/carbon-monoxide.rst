@@ -13,23 +13,29 @@ as PPM (parts per million). The value is reported as a :doc:`number </values/num
 API
 ---
 
-.. js:attribute:: carbonMonoxide
+.. js:function:: carbonMonoxide
 
-	Get the current carbon monoxide levels as PPM. Reported as a
-	:doc:`number </values/number>`.
+	Get the current carbon monoxide levels as PPM.
 
-	.. sourcecode:: js
-
-		console.log('CO is:', thing.carbonMonoxide);
-
-.. js:attribute:: co()
-
-	Get the current carbon monoxide levels as PPM. Reported as a
-	:doc:`number </values/number>`.
+	:returns:
+		Promise that resolves to the current value as a
+		:doc:`number </values/number>`.
 
 	.. sourcecode:: js
 
-		console.log('CO is:', thing.co);
+		console.log('CO is:', await thing.carbonMonoxide());
+
+.. js:function:: co()
+
+	Get the current carbon monoxide levels as PPM.
+
+	:returns:
+		Promise that resolves to the current value as a
+		:doc:`number </values/number>`.
+
+	.. sourcecode:: js
+
+		console.log('CO is:', await thing.co());
 
 Events
 ------
@@ -38,6 +44,8 @@ Events
 
 	The carbon monoxide level has changed. Payload is the new PPM as a
 	:doc:`number </values/number>`.
+
+	Example:
 
 	.. sourcecode:: js
 

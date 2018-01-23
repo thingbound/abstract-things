@@ -7,29 +7,41 @@ This capability is used to mark sensors that monitor fine particulate matter
 .. sourcecode:: js
 
 	if(thing.matches('cap:pm2.5')) {
-		console.log('PM2.5:', thing.pm2_5);
+		console.log('PM2.5:', await thing.pm2_5());
 	}
 
 API
 ---
 
-.. js:attribute:: pm2_5
+.. js:function:: pm2_5()
 
 	Get the current PM2.5 as micrograms per cubic meter (μg/m³). Value is a
 	:doc:`number </values/number>`.
 
+	:returns:
+		The current value as micrograms per cubic meter (μg/m³). Value is a
+		:doc:`number </values/number>`.
+
+	Example:
+
 	.. sourcecode:: js
 
-		console.log('PM2.5:', thing.pm2_5);
+		console.log('PM2.5:', await thing.pm2_5());
 
-.. js:attribute:: 'pm2.5'
+.. js:function:: 'pm2.5'()
 
 	Get the current PM2.5 as micrograms per cubic meter (μg/m³). Value is a
 	:doc:`number </values/number>`.
 
+	:returns:
+		The current value as micrograms per cubic meter (μg/m³). Value is a
+		:doc:`number </values/number>`.
+
+	Example:
+
 	.. sourcecode:: js
 
-		console.log('PM2.5:', thing['pm2.5']);
+		console.log('PM2.5:', await thing['pm2.5']());
 
 Events
 ------
@@ -38,6 +50,8 @@ Events
 
 	The PM2.5 has changed. Payload is a :doc:`number </values/number>` with
 	the new PM2.5 as micrograms per cubic meter (μg/m³).
+
+	Example:
 
 	.. sourcecode:: js
 

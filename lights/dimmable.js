@@ -48,25 +48,30 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(Brightness, Lig
 	 * Get or change the brightness of this light.
 	 */
 	brightness(brightness, duration=Light.DURATION) {
-		let currentBrightness = super.brightness();
+		try {
+			let currentBrightness = this.getState('brightness', 0);
 
-		if(typeof brightness !== 'undefined') {
-			brightness = change(brightness);
+			if(typeof brightness !== 'undefined') {
+				brightness = change(brightness);
 
-			let powerOn = true;
-			let toSet;
-			if(brightness.isIncrease) {
-				toSet = currentBrightness + brightness.value;
-			} else if(brightness.isDecrease) {
-				toSet = currentBrightness - brightness.value;
-				powerOn = false;
-			} else {
-				toSet = brightness.value;
+				let powerOn = true;
+				let toSet;
+				if(brightness.isIncrease) {
+					toSet = currentBrightness + brightness.value;
+				} else if(brightness.isDecrease) {
+					toSet = currentBrightness - brightness.value;
+					powerOn = false;
+				} else {
+					toSet = brightness.value;
+				}
+
+				return this.setBrightness(toSet, duration, powerOn);
 			}
-			return this.setBrightness(toSet, duration, powerOn);
-		}
 
-		return currentBrightness;
+			return Promise.resolve(currentBrightness);
+		} catch(ex) {
+			return Promise.reject(ex);
+		}
 	}
 
 	increaseBrightness(amount, duration=Light.DURATION) {
@@ -78,16 +83,20 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(Brightness, Lig
 	}
 
 	setBrightness(brightness, duration0=Light.DURATION, powerOn=true) {
-		if(typeof brightness === 'undefined') throw new Error('Brightness must be specified');
-		brightness = percentage(brightness, { min: 0, max: 100 });
+		try {
+			if(typeof brightness === 'undefined') throw new Error('Brightness must be specified');
+			brightness = percentage(brightness, { min: 0, max: 100 });
 
-		const options = {
-			duration: duration(duration0),
-			powerOn: brightness <= 0 ? false : boolean(powerOn)
-		};
+			const options = {
+				duration: duration(duration0),
+				powerOn: brightness <= 0 ? false : boolean(powerOn)
+			};
 
-		return Promise.resolve(this.changeBrightness(brightness, options))
-			.then(() => this.getState('brightness', 0));
+			return Promise.resolve(this.changeBrightness(brightness, options))
+				.then(() => this.getState('brightness', 0));
+		} catch(ex) {
+			return Promise.reject(ex);
+		}
 	}
 
 	/**

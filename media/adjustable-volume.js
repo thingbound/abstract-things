@@ -36,23 +36,28 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(Volume) {
 	}
 
 	volume(volume) {
-		let currentVolume = super.volume();
+		try {
+			let currentVolume = this.getState('volume');
 
-		if(typeof volume !== 'undefined') {
-			volume = change(volume);
+			if(typeof volume !== 'undefined') {
+				volume = change(volume);
 
-			let toSet;
-			if(volume.isIncrease) {
-				toSet = currentVolume + volume.value;
-			} else if(volume.isDecrease) {
-				toSet = currentVolume - volume.value;
-			} else {
-				toSet = volume.value;
+				let toSet;
+				if(volume.isIncrease) {
+					toSet = currentVolume + volume.value;
+				} else if(volume.isDecrease) {
+					toSet = currentVolume - volume.value;
+				} else {
+					toSet = volume.value;
+				}
+
+				return this.setVolume(toSet);
 			}
-			return this.setVolume(toSet);
-		}
 
-		return currentVolume;
+			return Promise.resolve(currentVolume);
+		} catch(ex) {
+			return Promise.reject(ex);
+		}
 	}
 
 	increaseVolume(amount) {
@@ -64,10 +69,14 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(Volume) {
 	}
 
 	setVolume(volume) {
-		volume = percentage(volume, { min: 0, max: 100 });
+		try {
+			volume = percentage(volume, { min: 0, max: 100 });
 
-		return Promise.resolve(this.changeVolume(volume))
-			.then(() => this.state.volume);
+			return Promise.resolve(this.changeVolume(volume))
+				.then(() => this.state.volume);
+		} catch(ex) {
+			return Promise.reject(ex);
+		}
 	}
 
 	changeVolume(volume) {

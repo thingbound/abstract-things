@@ -10,12 +10,10 @@ capturing and setting state.
 		console.log('Keys that can be restored:' , thing.restorableState);
 
 		// Capture the state
-		const state = thing.captureState();
+		const state = await thing.captureState();
 
 		// A bit later the state can be restored
-		thing.setState(state)
-			.then(() => console.log('State has been restored'))
-			.catch(err => console.log('Error during state restore', err));
+		await thing.setState(state);
 	}
 
 API
@@ -36,13 +34,17 @@ API
 
 	Capture all the state that can be restored.
 
-	:returns: Object representing the state.
+	:returns: Promise that resolves to the object representing the state.
 
 	Example:
 
 	.. sourcecode:: js
 
-		const state = thing.captureState();
+		thing.setState(state)
+			.then(...)
+			.catch(...);
+
+		const state = await thing.captureState();
 
 .. js:function:: setState(state)
 
@@ -59,6 +61,8 @@ API
 		thing.setState(state)
 			.then(...)
 			.catch(...);
+
+		await thing.setState(state);
 
 Protected methods
 -----------------

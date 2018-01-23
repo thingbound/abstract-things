@@ -29,8 +29,12 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(FanSpeed) {
 	setFanSpeed(speed) {
 		speed = percentage(speed, true);
 
-		return this.changeFanSpeed(speed)
-			.then(() => super.fanSpeed());
+		try {
+			return Promise.resolve(this.changeFanSpeed(speed))
+				.then(() => super.fanSpeed());
+		} catch(ex) {
+			return Promise.reject(ex);
+		}
 	}
 
 	changeFanSpeed(speed) {

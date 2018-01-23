@@ -28,11 +28,15 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(RestorableState
 	 * @param {object} state
 	 */
 	changeState(state) {
-		return Promise.resolve(super.changeState(state))
-			.then(() => {
-				const stateCopy = Object.assign({}, state);
-				this.mapLightState(stateCopy);
-				return this.setLightState(stateCopy);
-			});
+		try {
+			return Promise.resolve(super.changeState(state))
+				.then(() => {
+					const stateCopy = Object.assign({}, state);
+					this.mapLightState(stateCopy);
+					return this.setLightState(stateCopy);
+				});
+		} catch(ex) {
+			return Promise.reject(ex);
+		}
 	}
 });

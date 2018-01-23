@@ -17,8 +17,12 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(State, Cleaning
 	}
 
 	spotClean() {
-		return Promise.resolve(this.activateSpotClean())
-			.then(() => null);
+		try {
+			return Promise.resolve(this.activateSpotClean())
+				.then(() => null);
+		} catch(ex) {
+			return Promise.reject(ex);
+		}
 	}
 
 	activateSpotClean() {

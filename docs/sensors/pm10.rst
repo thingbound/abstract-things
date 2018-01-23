@@ -7,20 +7,25 @@ between 2.5 and 10 micrometers (μm).
 .. sourcecode:: js
 
 	if(thing.matches('cap:pm10')) {
-		console.log('PM10:', thing.pm10);
+		console.log('PM10:', await thing.pm10());
 	}
 
 API
 ---
 
-.. js:attribute:: pm10
+.. js:function:: pm10()
 
-	Get the current PM10 as micrograms per cubic meter (μg/m³). Value is a
-	:doc:`number </values/number>`.
+	Get the current PM10 as micrograms per cubic meter (μg/m³).
+
+	:returns:
+		The current value as micrograms per cubic meter (μg/m³). Value is a
+		:doc:`number </values/number>`.
+
+	Example:
 
 	.. sourcecode:: js
 
-		console.log('PM10:', thing.pm10);
+		console.log('PM10:', await thing.pm10());
 
 Events
 ------
@@ -29,6 +34,8 @@ Events
 
 	The PM10 has changed. Payload is a :doc:`number </values/number>` with
 	the new PM10 as micrograms per cubic meter (μg/m³).
+
+	Example:
 
 	.. sourcecode:: js
 

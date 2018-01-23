@@ -8,7 +8,7 @@ their brightness.
 .. sourcecode:: js
 
 	if(thing.matches('cap:brightness')) {
-		console.log(thing.brightness());
+		console.log(await thing.brightness());
 	}
 
 API
@@ -19,14 +19,14 @@ API
 	Get the brightness of the light.
 
 	:returns:
-		:doc:`Percentage </values/percentage>`, number between 0 and 100,
-		representing the brightness.
+		Promise that resolves to a :doc:`percentage </values/percentage>`
+		between 0 and 100, representing the brightness.
 
 	Example:
 
 	.. sourcecode:: js
 
-		console.log(thing.brightness);
+		console.log(await thing.brightness());
 
 Events
 ------

@@ -21,13 +21,21 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(State, Cleaning
 	}
 
 	clean() {
-		return Promise.resolve(this.activateCleaning())
-			.then(() => null);
+		try {
+			return Promise.resolve(this.activateCleaning())
+				.then(() => null);
+		} catch(ex) {
+			return Promise.reject(ex);
+		}
 	}
 
 	stop() {
-		return Promise.resolve(this.deactivateCleaning())
-			.then(() => null);
+		try {
+			return Promise.resolve(this.deactivateCleaning())
+				.then(() => null);
+		} catch(ex) {
+			return Promise.reject(ex);
+		}
 	}
 
 	activateCleaning() {

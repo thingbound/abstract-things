@@ -58,8 +58,8 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(State) {
 	 * Get the available actions for this controller. All of these actions
 	 * can be emitted.
 	 */
-	get actions() {
-		return this.getState('actions');
+	actions() {
+		return Promise.resolve(this.getState('actions'));
 	}
 
 	/**

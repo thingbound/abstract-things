@@ -6,19 +6,25 @@ This capability is used to mark sensors that report the atmospheric pressure.
 .. sourcecode:: js
 
 	if(thing.matches('cap:atmospheric-pressure')) {
-		console.log('Atmospheric pressure:', thing.atmosphericPressure);
+		console.log('Atmospheric pressure:', await thing.atmosphericPressure());
 	}
 
 API
 ---
 
-.. js:attribute:: atmosphericPressure
+.. js:function:: atmosphericPressure()
 
 	Get the current atmospheric pressure.
 
+	:returns:
+		Promise that resolves to the atmospheric pressure as a
+		:doc:`pressure </values/pressure>`.
+
+	Example:
+
 	.. sourcecode:: js
 
-		console.log('Atmospheric pressure:', thing.atmosphericPressure);
+		console.log('Atmospheric pressure:', await thing.atmosphericPressure());
 
 Events
 ------
@@ -26,6 +32,8 @@ Events
 .. js:data:: atmosphericPressureChanged
 
 	The atmospheric pressure has changed.
+
+	Example:
 
 	.. sourcecode:: js
 

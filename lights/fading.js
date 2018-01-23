@@ -21,11 +21,11 @@ module.exports = Thing.mixin(Parent => class extends Parent {
 			.done();
 	}
 
-	get maxChangeTime() {
-		return this[maxChangeTime];
+	maxChangeTime() {
+		return Promise.resolve(this[maxChangeTime]);
 	}
 
-	set maxChangeTime(t) {
+	updateMaxChangeTime(t) {
 		this[maxChangeTime] = duration(t);
 	}
 });

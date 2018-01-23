@@ -3,6 +3,8 @@
 const Thing = require('../thing');
 const deepEqual = require('deep-equal');
 
+const state = Symbol('state');
+
 /**
  * State capability for things. Exposes a property named `state` to clients.
  *
@@ -35,7 +37,11 @@ module.exports = Thing.mixin(Parent => class extends Parent {
 	constructor(...args) {
 		super(...args);
 
-		this.state = {};
+		this[state] = {};
+	}
+
+	state() {
+		return Promise.resolve(this[state]);
 	}
 
 	/**
@@ -45,12 +51,12 @@ module.exports = Thing.mixin(Parent => class extends Parent {
 	 * @param {*} value
 	 */
 	updateState(key, value) {
-		if(deepEqual(this.state[key], value)) {
+		if(deepEqual(this[state][key], value)) {
 			// If the value has not changed, skip updating and emitting event
 			return false;
 		} else {
 			// Value has changed, update and queue event emittal
-			this.state[key] = value;
+			this[state][key] = value;
 			const event = {
 				key: key,
 				value: value
@@ -69,8 +75,8 @@ module.exports = Thing.mixin(Parent => class extends Parent {
 	 * @param {string} key
 	 */
 	removeState(key) {
-		const emitEvent = typeof this.state[key] !== 'undefined';
-		delete this.state[key];
+		const emitEvent = typeof this[state][key] !== 'undefined';
+		delete this[state][key];
 
 		if(emitEvent) {
 			const event = {
@@ -90,7 +96,7 @@ module.exports = Thing.mixin(Parent => class extends Parent {
 	 * @param {*} defaultValue
 	 */
 	getState(key, defaultValue=null) {
-		const value = this.state[key];
+		const value = this[state][key];
 		return typeof value === 'undefined' ? defaultValue : value;
 	}
 });

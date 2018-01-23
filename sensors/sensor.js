@@ -19,7 +19,7 @@ module.exports = Thing.type(Parent => class extends Parent.with(State) {
 	}
 
 	value(sensorType) {
-		return this.getState(sensorType);
+		return Promise.resolve(this.getState(sensorType));
 	}
 
 	get sensorTypes() {
@@ -31,7 +31,7 @@ module.exports = Thing.type(Parent => class extends Parent.with(State) {
 		for(const type of this.sensorTypes) {
 			result[type] = this.getState(type);
 		}
-		return result;
+		return Promise.resolve(result);
 	}
 
 	updateValue(sensorType, value) {

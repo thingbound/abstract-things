@@ -45,7 +45,7 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(State) {
 	 * Get if thing is charging.
 	 */
 	get charging() {
-		return this.getState('charging');
+		return Promise.resolve(this.getState('charging'));
 	}
 
 	updateCharging(charging) {

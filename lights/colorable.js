@@ -49,19 +49,23 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(LightState) {
 			return this.setColor(color, duration);
 		}
 
-		return this.getState('color');
+		return Promise.resolve(this.getState('color'));
 	}
 
 	setColor(color0, duration0=Light.DURATION) {
-		if(typeof color0 === 'undefined') throw new Error('Color must be specified');
-		color0 = color(color0);
+		try {
+			if(typeof color0 === 'undefined') throw new Error('Color must be specified');
+			color0 = color(color0);
 
-		const options = {
-			duration: duration(duration0)
-		};
+			const options = {
+				duration: duration(duration0)
+			};
 
-		return Promise.resolve(this.changeColor(color0, options))
-			.then(() => this.getState('color'));
+			return Promise.resolve(this.changeColor(color0, options))
+				.then(() => this.getState('color'));
+		} catch(ex) {
+			return Promise.reject(ex);
+		}
 	}
 
 	updateColor(color) {

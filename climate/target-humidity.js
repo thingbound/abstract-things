@@ -23,7 +23,7 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(State) {
 	}
 
 	targetHumidity() {
-		return this.getState('targetHumidity');
+		return Promise.resolve(this.getState('targetHumidity'));
 	}
 
 	updateTargetHumidity(target) {

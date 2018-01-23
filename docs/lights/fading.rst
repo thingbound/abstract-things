@@ -8,7 +8,8 @@ capability is present the ``duration`` argument for other methods is available.
 
 	if(thing.matches('type:light', 'cap:fading')) {
 		// This light supports fading
-		console.log('Maximum fading time in milliseconds:', this.maxChangeTime.ms);
+		const time = await this.maxChangeTime();
+		console.log('Maximum fading time in milliseconds:', time.ms);
 	}
 
 API
@@ -17,6 +18,21 @@ API
 .. js:attribute:: maxChangeTime
 
 	The maximum :doc:`duration </values/duration>` of time a change can be.
+
+Protected methods
+-----------------
+
+.. js:function:: updateMaxChangeTime(time)
+
+	:param duration time:
+		The maximum time the light can fade as a
+		:doc:`duration </values/duration>`.
+
+	Example:
+
+	.. sourcecode:: js
+
+		this.updateMaxChangeTime('20s');
 
 Implementing capability
 -----------------------
@@ -35,7 +51,7 @@ Example:
 		initCallback() {
 			return super.initCallback()
 				// Set the maximum change time to 5 seconds
-				.then(() => this.maxChangeTime = '5s'));
+				.then(() => this.updateMaxChangeTime('5s'));
 		}
 
 	}

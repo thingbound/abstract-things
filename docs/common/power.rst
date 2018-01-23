@@ -7,7 +7,7 @@ state.
 .. sourcecode:: js
 
 	if(thing.matches('cap:power')) {
-		console.log('Power is', thing.power());
+		console.log('Power is', await thing.power());
 
 		thing.on('powerChanged', power => console.log('Power is now', power));
 	}
@@ -21,23 +21,19 @@ API
 
 	Get the current power state.
 
-	:returns: :doc:`Boolean </values/boolean>` representing the current power state.
+	:returns:
+		Promise that resolves to a :doc:`boolean </values/boolean>`
+		representing the current power state.
 
 	Example:
 
 	.. sourcecode:: js
 
-		const powerIsOn = thing.power();
+		thing.power()
+			.then(power => ...)
+			.catch(...);
 
-.. js:attribute:: state.power
-
-	State-key indicating the current power state.
-
-	Example:
-
-	.. sourcecode:: js
-
-		console.log(thing.state.power);
+		const powerIsOn = await thing.power();
 
 Events
 ------
@@ -79,7 +75,7 @@ Example:
 
 			// Indicate that power has been switched every second
 			setInterval(() => {
-				this.updatePower(! this.state.power);
+				this.updatePower(! this.getState('power'));
 			}, 1000);
 		}
 	}

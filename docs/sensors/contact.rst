@@ -8,38 +8,55 @@ window is open.
 .. sourcecode:: js
 
 	if(thing.matches('cap:contact')) {
-		console.log('Has contact:', thing.contact);
+		console.log('Has contact:', await thing.contact());
 	}
 
 API
 ---
 
-.. js:attribute:: contact
+.. js:function:: contact()
 
 	:doc:`Boolean </values/boolean>` representing if the sensor is currently
 	detecting contact.
 
+	:returns:
+		Promise that resolves to if the sensor is detecting contact.
+
+	Example:
+
 	.. sourcecode:: js
 
-		console.log('Contact is:', thing.contact);
+		if(await thing.contact()) {
+			console.log('Thing has detected contact');
+		}
 
-.. js:attribute:: open
+.. js:function:: isOpen()
 
 	:doc:`Boolean </values/boolean>` representing if the sensor is currently
 	open (not detecting contact).
 
+	:returns:
+		Promise that resolves to if the sensor is in an open state.
+
+	Example:
+
 	.. sourcecode:: js
 
-		console.log('Is open:', thing.open);
+		console.log('Is open:', await thing.isOpen());
 
-.. js:attribute:: closed
+.. js:function:: isClosed()
 
 	:doc:`Boolean </values/boolean>` representing if the sensor is currently
 	closed (detecting contact).
 
+	:returns:
+		Promise that resolves to if the sensir is in a closed state.
+
+	Example:
+
 	.. sourcecode:: js
 
-		console.log('Is closed:', thing.closed);
+		console.log('Is closed:', await thing.isClosed());
 Events
 ------
 
@@ -47,6 +64,8 @@ Events
 
 	The contact value has changed. Payload is the new contact state as a
 	:doc:`boolean </values/boolean>`.
+
+	Example:
 
 	.. sourcecode:: js
 
@@ -56,6 +75,8 @@ Events
 
 	The sensor has detected it is does not have contact and is now opened.
 
+	Example:
+
 	.. sourcecode:: js
 
 		thing.on('opened', v => console.log('Sensor is now open'));
@@ -63,6 +84,8 @@ Events
 .. js::data:: closed
 
 	The sensor has detect it has contact is is now closed.
+
+	Example:
 
 	.. sourcecode:: js
 

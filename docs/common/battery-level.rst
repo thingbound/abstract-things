@@ -9,24 +9,28 @@ being charged.
 .. sourcecode:: js
 
 	if(thing.matches('cap:battery-level')) {
-		console.log('Current battery level:', thing.batteryLevel);
+		console.log('Current battery level:', await thing.batteryLevel());
 	}
 
 API
 ---
 
-.. js:attribute:: batteryLevel
+.. js:function:: batteryLevel()
 
 	Get the current battery level as a :doc:`percentage </values/percentage>`
 	between 0 and 100.
 
-	:returns: The battery level in percent.
+	:returns: Promise that resolves to the battery level in percent.
 
 	Example:
 
 	.. sourcecode:: js
 
-		const level = thing.batteryLevel;
+		thing.batteryLevel()
+			.then(level => ...)
+			.catch(...);
+
+		const level = await thing.batteryLevel();
 
 Events
 ------

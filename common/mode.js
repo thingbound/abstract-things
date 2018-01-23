@@ -61,13 +61,11 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(State) {
 	/**
 	* Get or switch the mode of the appliance.
 	*
-	* @param {string} mode
-	*   optional mode to switch to
 	* @returns
 	*   string indicating the mode
 	*/
-	mode(mode=undefined) {
-		return this.getState('mode');
+	mode() {
+		return Promise.resolve(this.getState('mode'));
 	}
 
 	/**
@@ -84,8 +82,8 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(State) {
 	/**
 	 * Get the available modes of the device.
 	 */
-	get modes() {
-		return this.getState('modes');
+	modes() {
+		return Promise.resolve(this.getState('modes'));
 	}
 
 	/**

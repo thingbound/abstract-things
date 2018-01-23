@@ -30,7 +30,7 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(State) {
 	}
 
 	muted() {
-		return this.getState('muted');
+		return Promise.resolve(this.getState('muted'));
 	}
 
 	updateMuted(muted) {

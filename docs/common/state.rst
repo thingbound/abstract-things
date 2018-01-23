@@ -13,17 +13,19 @@ State is split into several state keys that are updated separately.
 API
 ---
 
-.. js:attribute:: state
+.. js:function:: state()
 
 	Get the current overall state.
 
-	:returns: Object representing the current state. Keys represent names of the state key.
+	:returns:
+		Promise that resolves to an object representing the current state.
+		Keys represent names of the state key.
 
 	Usage:
 
 	.. sourcecode:: js
 
-		const state = thing.state;
+		const state = await thing.state();
 		console.log('State is', state);
 		console.log('Value of power is', state.power);
 

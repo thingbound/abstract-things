@@ -19,7 +19,7 @@ support control or monitoring of their indivudal outlets.
 API
 ---
 
-.. js:attribute:: children
+.. js:function:: children()
 
 	Get the children of the thing as an iterable.
 

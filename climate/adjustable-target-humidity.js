@@ -29,8 +29,12 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(TargetHumidity)
 	setTargetHumidity(humidity) {
 		humidity = percentage(humidity, true);
 
-		return this.changeTargetHumidity(humidity)
-			.then(() => super.targetHumidity());
+		try {
+			return Promise.resolve(this.changeTargetHumidity(humidity))
+				.then(() => super.targetHumidity());
+		} catch(ex) {
+			return Promise.reject(ex);
+		}
 	}
 
 	changeTargetHumidity(humidity) {

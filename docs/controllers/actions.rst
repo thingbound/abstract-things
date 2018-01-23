@@ -17,16 +17,19 @@ such a button press occurs.
 API
 ---
 
-.. js:attribute:: actions
+.. js:function:: actions();
 
-	Get the actions that the thing supports. Array containing actions supported
-	as :doc:`codes </values/code>`.
+	Get the actions that the thing supports.
+
+	:returns:
+		Promise that resolves to any array containing the actions as
+		:doc:`codes </values/code>`.
 
 	Example:
 
 	.. sourcecode:: js
 
-		const actions = thing.actions;
+		const actions = await thing.actions();
 
 		const action = actions[0];
 		console.log('First action id:', action.id);

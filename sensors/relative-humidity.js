@@ -32,11 +32,11 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(Sensor) {
 		return [ ...super.sensorTypes, 'relativeHumidity' ];
 	}
 
-	get relativeHumidity() {
+	relativeHumidity() {
 		return this.value('relativeHumidity');
 	}
 
-	get rh() {
+	rh() {
 		return this.value('relativeHumidity');
 	}
 

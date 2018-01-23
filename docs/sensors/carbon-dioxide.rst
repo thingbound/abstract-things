@@ -7,29 +7,40 @@ as PPM (parts per million). The value is reported as a :doc:`number </values/num
 .. sourcecode:: js
 
 	if(thing.matches('cap:carbon-dioxide')) {
-		console.log('Carbon dioxide:', thing.carbonDioxide);
+		console.log('Carbon dioxide:', await thing.carbonDioxide());
 	}
 
 API
 ---
 
-.. js:attribute:: carbonDioxide
+.. js:function:: carbonDioxide()
+
+	Get the current carbon dioxide levels as PPM.
+
+	:returns:
+		Promise that resolves to the current value as a
+		:doc:`number </values/number>`.
+
+	Example:
+
+	.. sourcecode:: js
+
+		console.log('CO2 is:', await thing.carbonDioxide());
+
+.. js:function:: co2()
 
 	Get the current carbon dioxide levels as PPM. Reported as a
 	:doc:`number </values/number>`.
 
-	.. sourcecode:: js
+	:returns:
+		Promise that resolves to the current value as a
+		:doc:`number </values/number>`.
 
-		console.log('CO2 is:', thing.carbonDioxide);
-
-.. js:attribute:: co2
-
-	Get the current carbon dioxide levels as PPM. Reported as a
-	:doc:`number </values/number>`.
+	Example:
 
 	.. sourcecode:: js
 
-		console.log('CO2 is:', thing.co2);
+		console.log('CO2 is:', await thing.co2());
 
 Events
 ------
@@ -38,6 +49,8 @@ Events
 
 	The carbon dioxide level has changed. Payload is the new PPM as a
 	:doc:`number </values/number>`.
+
+	Example:
 
 	.. sourcecode:: js
 
