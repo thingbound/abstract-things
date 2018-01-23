@@ -2,7 +2,7 @@
 
 const Thing = require('../thing');
 
-module.exports = Thing.mixin(Parent => class extends Parent {
+module.exports = Thing.type(Parent => class extends Parent {
 
 	static get type() {
 		return 'controller';
