@@ -3,7 +3,8 @@
 
 Remote controls are marked with the type ``remote-control``. Many remote
 controls are capable of emitting events when buttons are pressed and implement
-the :doc:`actions-capability <actions>`.
+the :doc:`actions-capability <actions>`. Remote controls are automatically
+marked as :doc:`controllers </controllers>`.
 
 .. sourcecode:: js
 

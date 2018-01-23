@@ -1,10 +1,11 @@
 ``type:wall-controller`` - Controllers mounted on a wall
 =======================================================
 
-Things marked with ``wall-controller`` is used for controllers that are
-commonly mounted on a wall, such as switches and scene controllers.
+``wall-controller`` is used for controllers that are commonly mounted on a
+wall, such as switches and scene controllers. Wall controllers are
+automatically marked as :doc:`controllers </controllers>`.
 
-Wall controller may emit events when buttons are pressed while implementing
+Wall controllers may emit events when buttons are pressed while implementing
 the :doc:`actions-capability <actions>`.
 
 .. sourcecode:: js

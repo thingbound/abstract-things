@@ -16,6 +16,7 @@ available vary from thing to thing.
 	:maxdepth: 1
 	:caption: Types
 
+	controllers
 	buttons
 	remote-controls
 	wall-controllers

@@ -3,7 +3,8 @@
 
 If a thing is a single button the type ``button`` is commonly used.
 Buttons may emit events when buttons are pressed while implementing
-the :doc:`actions-capability <actions>`.
+the :doc:`actions-capability <actions>`. Buttons are automatically marked as
+:doc:`controllers </controllers>`.
 
 .. sourcecode:: js
 
