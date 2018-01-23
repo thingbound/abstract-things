@@ -14,6 +14,12 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(TargetHumidity)
 		builder.action('targetHumidity')
 			.description('Get or set the target humidity')
 			.argument('percentage', true, 'Optional target humidity to set')
+			.returns('percentage', 'The current or set target humidity')
+			.done();
+
+		builder.action('setTargetHumidity')
+			.description('Set the target humidity')
+			.argument('percentage', false, 'Target humidity to set')
 			.returns('percentage', 'The target humidity')
 			.done();
 	}
@@ -27,9 +33,9 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(TargetHumidity)
 	}
 
 	setTargetHumidity(humidity) {
-		humidity = percentage(humidity, true);
-
 		try {
+			humidity = percentage(humidity, true);
+
 			return Promise.resolve(this.changeTargetHumidity(humidity))
 				.then(() => super.targetHumidity());
 		} catch(ex) {
