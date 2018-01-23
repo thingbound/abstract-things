@@ -2,6 +2,7 @@
 
 const Thing = require('../thing');
 const State = require('./state');
+const { code } = require('../values');
 
 /**
  * Mode capability, for appliances that support different modes.
@@ -13,27 +14,27 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(State) {
 	static availableAPI(builder) {
 		builder.state('mode')
 			.type('string')
-			.description('The current mode of this appliance')
+			.description('The current mode of this thing')
 			.done();
 
 		builder.state('modes')
 			.type('array')
-			.description('The available modes of this appliance')
+			.description('The available modes of this thing')
 			.done();
 
 		builder.event('modeChanged')
 			.type('string')
-			.description('The mode of the appliance has changed')
+			.description('The mode of the thing has changed')
 			.done();
 
 		builder.event('modesChanged')
 			.type('array')
-			.description('The availables modes of the appliance have changed')
+			.description('The availables modes of the thing have changed')
 			.done();
 
 		builder.action('mode')
-			.description('Get the mode of this appliance')
-			.returns('mode', 'The mode of the appliance')
+			.description('Get the mode of this thing')
+			.returns('mode', 'The mode of the thing')
 			.getterForState('mode')
 			.done();
 
@@ -90,8 +91,13 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(State) {
 	 * Get the available modes of the device.
 	 */
 	updateModes(modes) {
-		if(this.updateState('modes', modes)) {
-			this.emitEvent('modesChanged', modes);
+		const mapped = [];
+		for(const m of modes) {
+			mapped.push(code(m));
+		}
+
+		if(this.updateState('modes', mapped)) {
+			this.emitEvent('modesChanged', mapped);
 		}
 	}
 });

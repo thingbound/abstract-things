@@ -19,8 +19,8 @@ API
 	Get the current mode of the thing.
 
 	:returns:
-		Promises that resolves to a :doc:`string </values/string>`indicating
-		the mode.
+		Promises that resolves to a :doc:`string </values/string>` indicating
+		the identifier of the mode.
 
 	Example:
 
@@ -34,14 +34,21 @@ API
 
 .. js:function:: modes()
 
-	Get the modes that this thing supports. Will return an array with strings
-	representing the modes.
+	Get the modes that this thing supports.
+
+	:returns:
+		Promise that will resolve to the modes as an array containing
+		:doc:`codes </values/code>`.
 
 	Example:
 
 	.. sourcecode:: js
 
-		console.log(thing.modes);
+		const modes = await thing.modes();
+
+		const firstMode = modes[0];
+		console.log('Id:', firstMode.id);
+		console.log('Description:', firstMode.description);
 
 Events
 -------
@@ -67,7 +74,7 @@ Protected methods
 	Update the currently detected mode. Calling this method with a new mode
 	will change the mode and trigger the ``mode`` event.
 
-	:param string mode: The current mode.
+	:param string mode: The id of the current mode.
 
 	Example:
 
@@ -79,13 +86,19 @@ Protected methods
 
 	Update the modes that are available for the thing.
 
-	:param array modes: Array of modes as string.
+	:param array modes:
+		Array of modes as :doc:`codes </values/code>`. Entries in the array
+		will be automatically converted to codes if possible.
 
 	Example:
 
 	.. sourcecode:: js
 
-		this.updateModes([ 'idle', 'silent', 'auto' ]);
+		this.updateModes([
+			'idle',
+			'silent: Silent speed',
+			{ id: 'auto', description: 'Autoselect speed' }
+		]);
 
 Implementing capability
 -----------------------
