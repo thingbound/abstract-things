@@ -11,3 +11,4 @@ climate of a space, such as air purifiers, humidifiers, fans and thermostats.
 	air-purifiers
 	humidifiers
 	dehumidifiers
+	vacuums
