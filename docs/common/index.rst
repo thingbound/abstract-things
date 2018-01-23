@@ -12,5 +12,6 @@ Common capabilities
 	switchable-power
 	mode
 	switchable-mode
+	error-state
 	battery-level
 	charging-state
