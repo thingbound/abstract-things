@@ -27,4 +27,4 @@ module.exports.BatteryLevel = require('./common/battery-level');
 module.exports.ChargingState = require('./common/charging-state');
 module.exports.AutonomousCharging = require('./common/autonomous-charging');
 
-module.exports.Placeholder = require('./placeholder'),
+module.exports.Placeholder = require('./placeholder');
