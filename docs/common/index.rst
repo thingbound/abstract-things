@@ -15,3 +15,4 @@ Common capabilities
 	error-state
 	battery-level
 	charging-state
+	autonomous-charging
