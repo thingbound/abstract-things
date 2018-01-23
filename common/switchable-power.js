@@ -88,7 +88,8 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(Power, Restorab
 	}
 
 	togglePower() {
-		return this.setPower(! this.power());
+		return this.power()
+			.then(power => this.setPower(! power));
 	}
 
 	turnOn() {
