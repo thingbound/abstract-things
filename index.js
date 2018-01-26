@@ -27,4 +27,7 @@ module.exports.BatteryLevel = require('./common/battery-level');
 module.exports.ChargingState = require('./common/charging-state');
 module.exports.AutonomousCharging = require('./common/autonomous-charging');
 
+module.exports.AudioFeedback = require('./common/audio-feedback');
+module.exports.SwitchableAudioFeedback = require('./common/switchable-audio-feedback');
+
 module.exports.Placeholder = require('./placeholder');

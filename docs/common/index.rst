@@ -16,3 +16,5 @@ Common capabilities
 	battery-level
 	charging-state
 	autonomous-charging
+	audio-feedback
+	switchable-audio-feedback
