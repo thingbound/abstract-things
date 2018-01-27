@@ -14,5 +14,5 @@ module.exports.PowerConsumed = require('./power-consumed');
 module.exports.PowerLoad = require('./power-load');
 module.exports.RelativeHumidity = require('./relative-humidity');
 module.exports.Temperature = require('./temperature');
-module.exports.Smoke = require('./smoke');
+module.exports.SmokeDetection = require('./smoke-detection');
 module.exports.Voltage = require('./voltage');

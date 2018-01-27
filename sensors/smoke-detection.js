@@ -6,11 +6,11 @@ const { boolean } = require('../values');
 
 module.exports = Thing.mixin(Parent => class extends Parent.with(Sensor) {
 	static get capability() {
-		return 'smoke';
+		return 'smoke-detection';
 	}
 
 	static availableAPI(builder) {
-		builder.event('smokeChanged')
+		builder.event('smokeDetectedChanged')
 			.type('boolean')
 			.description('Change in smoke detected')
 			.done();
@@ -23,23 +23,23 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(Sensor) {
 			.description('Smoke is no longer detected')
 			.done();
 
-		builder.action('smoke')
+		builder.action('smokeDetected')
 			.description('Get if smoke is currently detected')
 			.returns('boolean', 'Current smoke detected status')
 			.done();
 	}
 
 	get sensorTypes() {
-		return [ ...super.sensorTypes, 'smoke' ];
+		return [ ...super.sensorTypes, 'smokeDetected' ];
 	}
 
-	smoke() {
-		return this.value('smoke');
+	smokeDetected() {
+		return this.value('smokeDetected');
 	}
 
-	updateSmoke(smoke) {
+	updateSmokeDetected(smoke) {
 		smoke = boolean(smoke);
-		if(this.updateValue('smoke', smoke)) {
+		if(this.updateValue('smokeDetected', smoke)) {
 			if(smoke) {
 				this.emitEvent('smoke');
 			} else {
