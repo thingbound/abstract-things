@@ -18,6 +18,7 @@ climate of a space, such as air purifiers, humidifiers, fans and thermostats.
 	:maxdepth: 1
 	:caption: Types
 
+	air-monitor
 	air-purifiers
 	humidifiers
 	dehumidifiers
