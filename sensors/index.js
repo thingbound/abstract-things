@@ -3,8 +3,8 @@
 module.exports.Sensor = require('./sensor');
 
 module.exports.AtmosphericPressure = require('./atmospheric-pressure');
-module.exports.CarbonDioxide = require('./carbon-dioxide');
-module.exports.CarbonMonoxide = require('./carbon-monoxide');
+module.exports.CarbonDioxideLevel = require('./carbon-dioxide-level');
+module.exports.CarbonMonoxideLevel = require('./carbon-monoxide-level');
 module.exports.Contact = require('./contact');
 module.exports.Illuminance = require('./illuminance');
 module.exports.Motion = require('./motion');

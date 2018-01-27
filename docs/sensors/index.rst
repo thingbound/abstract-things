@@ -18,8 +18,8 @@ The type ``sensor`` is used to mark things that read one or more values.
 	:caption: Capabilities
 
 	atmospheric-pressure
-	carbon-dioxide
-	carbon-monoxide
+	carbon-dioxide-level
+	carbon-monoxide-level
 	contact
 	illuminance
 	motion

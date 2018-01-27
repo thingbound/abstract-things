@@ -6,22 +6,22 @@ const { number } = require('../values');
 
 module.exports = Thing.mixin(Parent => class extends Parent.with(Sensor) {
 	static get capability() {
-		return 'carbon-dioxide';
+		return 'carbon-dioxide-level';
 	}
 
 	static availableAPI(builder) {
-		builder.event('carbonDioxideChanged')
+		builder.event('carbonDioxideLevelChanged')
 			.type('number')
 			.description('Carbon dioxide level has changed')
 			.done();
 
-		builder.action('carbonDioxide')
+		builder.action('carbonDioxideLevel')
 			.description('Get the current carbon dioxide level')
 			.getterForState('carbonDioxide')
 			.returns('number', 'Current carbon dixoide level')
 			.done();
 
-		builder.action('co2')
+		builder.action('co2Level')
 			.description('Get the current carbon dioxide level')
 			.getterForState('carbonDioxide')
 			.returns('number', 'Current carbon dixoide level')
@@ -29,18 +29,18 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(Sensor) {
 	}
 
 	get sensorTypes() {
-		return [ ...super.sensorTypes, 'carbonDioxide' ];
+		return [ ...super.sensorTypes, 'carbonDioxideLevel' ];
 	}
 
-	carbonDioxide() {
-		return this.value('carbonDioxide');
+	carbonDioxideLevel() {
+		return this.value('carbonDioxideLevel');
 	}
 
-	co2() {
-		return this.value('carbonDioxide');
+	co2Level() {
+		return this.value('carbonDioxideLevel');
 	}
 
-	updateCarbonDioxide(value) {
-		this.updateValue('carbonDioxide', number(value));
+	updateCarbonDioxideLevel(value) {
+		this.updateValue('carbonDioxideLevel', number(value));
 	}
 });
