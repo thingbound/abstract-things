@@ -1,12 +1,12 @@
-``cap:motion`` - motion sensing
-===============================
+``cap:motion-detection`` - motion sensing
+=========================================
 
 This capability is used to mark sensors that monitor movement.
 
 .. sourcecode:: js
 
-	if(thing.matches('cap:motion')) {
-		console.log('Detected motion:', await thing.motion());
+	if(thing.matches('cap:motion-detection')) {
+		console.log('Detected motion:', await thing.motionDetected());
 
 		thing.on('movement', () => console.log('Motion detected'));
 		thing.on('inactivity', () => console.log('Inactivity detected'));
@@ -15,7 +15,7 @@ This capability is used to mark sensors that monitor movement.
 API
 ---
 
-.. js:function:: motion()
+.. js:function:: motionDetected()
 
 	Get the motion status.
 
@@ -27,20 +27,21 @@ API
 
 	.. sourcecode:: js
 
-		console.log('Motion is:', thing.motion);
+		// Using async/await
+		console.log('Motion is:', awwait thing.motionDetected());
 
 Events
 ------
 
-.. js:data:: motionChanged
+.. describe:: motionDetectedChanged
 
 	The current motion status has changed.
 
 	.. sourcecode:: js
 
-		thing.on('motionChanged', value => console.log('Motion changed to:', value));
+		thing.on('motionDetectedChanged', value => console.log('Motion changed to:', value));
 
-.. js:data:: movement
+.. describe:: movement
 
 	Emitted when movement has been detected and ``motion`` changes to ``true``.
 
@@ -48,7 +49,7 @@ Events
 
 		thing.on('movement', () => console.log('Movement detected'));
 
-.. js:data:: inactivity
+.. describe:: inactivity
 
 	Emitted when movement is no longer detected and ``motion`` changes to
 	``false``.
@@ -60,7 +61,7 @@ Events
 Protected methods
 -----------------
 
-.. js:function:: updateMotion(value[, autoIdleTimeout])
+.. js:function:: updateMotionDetected(value[, autoIdleTimeout])
 
 	Update the current motion status.
 
@@ -73,10 +74,10 @@ Protected methods
 
 	.. sourcecode:: js
 
-		this.updateMotion(false);
+		this.updateMotionDetected(false);
 
 		// Set motion to true and automatically switch back after 20 seconds
-		this.updateMotion(true, '20s');
+		this.updateMotionDetected(true, '20s');
 
 Implementing capability
 -----------------------
@@ -87,14 +88,14 @@ switching motion back to ``false`` or managing the switchin on their own.
 
 .. sourcecode:: js
 
-	const { Sensor, Motion } = require('abstract-things/sensors');
+	const { Sensor, MotionDetection } = require('abstract-things/sensors');
 
-	class Example extends Sensor.with(Motion) {
+	class Example extends Sensor.with(MotionDetection) {
 
 		constructor() {
 			super();
 
-			this.updateMotion(true, '1m');
+			this.updateMotionDetected(true, '1m');
 		}
 
 	}

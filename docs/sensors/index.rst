@@ -22,7 +22,7 @@ The type ``sensor`` is used to mark things that read one or more values.
 	carbon-monoxide-level
 	contact-detection
 	illuminance
-	motion
+	motion-detection
 	pm2.5
 	pm10
 	power-consumed

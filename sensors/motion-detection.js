@@ -7,11 +7,11 @@ const idleTimer = Symbol('autoIdle');
 
 module.exports = Thing.mixin(Parent => class extends Parent.with(Sensor) {
 	static get capability() {
-		return 'motion';
+		return 'motion-detection';
 	}
 
 	static availableAPI(builder) {
-		builder.event('motionChanged')
+		builder.event('motionDetectedChanged')
 			.type('boolean')
 			.description('Change in detected motion')
 			.done();
@@ -24,7 +24,7 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(Sensor) {
 			.description('Inactivity has been detected, no motion detected')
 			.done();
 
-		builder.action('motion')
+		builder.action('motionDetected')
 			.description('Get if motion is currently detected')
 			.getterForState('motion')
 			.returns('boolean', 'Current motion detected status')
@@ -32,16 +32,16 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(Sensor) {
 	}
 
 	get sensorTypes() {
-		return [ ...super.sensorTypes, 'motion' ];
+		return [ ...super.sensorTypes, 'motionDetected' ];
 	}
 
-	motion() {
-		return this.value('motion');
+	motionDetected() {
+		return this.value('motionDetected');
 	}
 
-	updateMotion(motion, autoIdleTimeout=null) {
+	updateMotionDetected(motion, autoIdleTimeout=null) {
 		motion = boolean(motion);
-		if(this.updateValue('motion', motion)) {
+		if(this.updateValue('motionDetected', motion)) {
 			if(motion) {
 				// Emit the movement event if movement is detected
 				this.emitEvent('movement');
