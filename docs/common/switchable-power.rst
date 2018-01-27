@@ -22,17 +22,20 @@ API
 
 	Get or set the current power state.
 
-	:param boolean powerState: Optional :doc:`boolean </values/boolean>` to change power state to.
-	:returns: Promise when switching state, :doc:`boolean </values/boolean>` if getting.
+	:param boolean powerState:
+		Optional :doc:`boolean </values/boolean>` to change power state to.
+	:returns:
+		Promise that resolves to the current power state as a
+		:doc:`boolean </values/boolean>`.
 
 	Example:
 
 	.. sourcecode:: js
 
-		// Getting returns a boolean
+		// Getting via async/await
 		const powerIsOn = await thing.power();
 
-		// Switching returns a promise
+		// Switching via promise then/catch
 		thing.power(false)
 			.then(result => console.log('Power is now', result))
 			.catch(err => console.log('Error occurred', err);
@@ -48,11 +51,14 @@ API
 
 	.. sourcecode:: js
 
+		// Using async/await
+		await thing.setPower(true);
+
+		// Using promise then/catch
 		thing.setPower(true)
 			.then(result => console.log('Power is now', result))
 			.catch(err => console.log('Error occurred', err);
 
-		await thing.setPower(true);
 
 .. js:function:: togglePower()
 
@@ -65,6 +71,10 @@ API
 
 	.. sourcecode:: js
 
+		// Using async/await
+		await thing.togglePower();
+
+		// Using promise then/catch
 		thing.togglePower()
 			.then(result => console.log('Power is now', result))
 			.catch(err => console.log('Error occurred', err);
@@ -79,6 +89,10 @@ API
 
 	.. sourcecode:: js
 
+		// Using async/await
+		await thing.turnOn();
+
+		// Using promise then/catch
 		thing.turnOn()
 			.then(result => console.log('Power is now', result))
 			.catch(err => console.log('Error occurred', err);
@@ -93,6 +107,10 @@ API
 
 	.. sourcecode:: js
 
+		// Using async/await
+		await thing.turnOff();
+
+		// Using promise then/catch
 		thing.turnOff()
 			.then(result => console.log('Power is now', result))
 			.catch(err => console.log('Error occurred', err);
