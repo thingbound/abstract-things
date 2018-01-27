@@ -10,6 +10,9 @@ climate of a space, such as air purifiers, humidifiers, fans and thermostats.
 
 	target-humidity
 	adjustable-target-humidity
+	cleaning-state
+	autonomous-cleaning
+	spot-cleaning
 
 .. toctree::
 	:maxdepth: 1
