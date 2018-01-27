@@ -20,7 +20,7 @@ The type ``sensor`` is used to mark things that read one or more values.
 	atmospheric-pressure
 	carbon-dioxide-level
 	carbon-monoxide-level
-	contact
+	contact-detection
 	illuminance
 	motion
 	pm2.5

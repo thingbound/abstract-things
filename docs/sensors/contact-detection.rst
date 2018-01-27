@@ -1,20 +1,22 @@
-``cap:contact`` - contact sensing
-==================================
+``cap:contact-detection`` - contact sensing
+===========================================
 
-This capability is used to mark sensors that report a wether contact is
+This capability is used to mark sensors that report if contact is
 detected, such as for door and window sensors that detect if the door or
 window is open.
 
 .. sourcecode:: js
 
-	if(thing.matches('cap:contact')) {
-		console.log('Has contact:', await thing.contact());
+	if(thing.matches('cap:contact-detection')) {
+		console.log('Has contact:', await thing.contactDetected());
+
+		thing.on('contactDetectedChanged', v => console.log('Contact is now:', c));
 	}
 
 API
 ---
 
-.. js:function:: contact()
+.. js:function:: contactDetected()
 
 	:doc:`Boolean </values/boolean>` representing if the sensor is currently
 	detecting contact.
@@ -26,7 +28,7 @@ API
 
 	.. sourcecode:: js
 
-		if(await thing.contact()) {
+		if(await thing.contactDetected()) {
 			console.log('Thing has detected contact');
 		}
 
@@ -60,7 +62,7 @@ API
 Events
 ------
 
-.. js:data:: contactChanged
+.. js:data:: contactDetectedChanged
 
 	The contact value has changed. Payload is the new contact state as a
 	:doc:`boolean </values/boolean>`.
@@ -69,7 +71,7 @@ Events
 
 	.. sourcecode:: js
 
-		thing.on('contactChanged', v => console.log('Contact is now:', c));
+		thing.on('contactDetectedChanged', v => console.log('Contact is now:', c));
 
 .. js:data:: opened
 
@@ -94,7 +96,7 @@ Events
 Protected methods
 -----------------
 
-.. js:function:: updateContact(value)
+.. js:function:: updateContactDetected(value)
 
 	Update if the sensor is currently detecting contact.
 
@@ -106,7 +108,7 @@ Protected methods
 	.. sourcecode:: js
 
 		// Set the sensor to open
-		this.updateContact(false);
+		this.updateContactDetected(false);
 
 Implementing capability
 -----------------------
@@ -116,14 +118,14 @@ contact state changes.
 
 .. sourcecode:: js
 
-	const { Sensor, Contact } = require('abstract-things/sensors');
+	const { Sensor, ContactDetection } = require('abstract-things/sensors');
 
-	class Example extends Sensor.with(Contact) {
+	class Example extends Sensor.with(ContactDetection) {
 
 		constructor() {
 			super();
 
-			this.updateContact(true);
+			this.updateContactDetected(true);
 		}
 
 	}

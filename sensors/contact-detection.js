@@ -6,11 +6,11 @@ const { boolean } = require('../values');
 
 module.exports = Thing.mixin(Parent => class extends Parent.with(Sensor) {
 	static get capability() {
-		return 'contact';
+		return 'contact-detection';
 	}
 
 	static availableAPI(builder) {
-		builder.event('contactChanged')
+		builder.event('contactDetectedChanged')
 			.type('boolean')
 			.description('Change in detected contact')
 			.done();
@@ -23,33 +23,42 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(Sensor) {
 			.description('Contact sensor is closed, contact has been detected')
 			.done();
 
-		builder.action('contact')
+		builder.action('contactDetected')
 			.description('Get if contact is currently detected')
-			.getterForState('contact')
 			.returns('boolean', 'Current contact status')
+			.done();
+
+		builder.action('isOpen')
+			.description('Get if the contact indicates an open state')
+			.returns('boolean', 'If open - no contact detected')
+			.done();
+
+		builder.action('isClosed')
+			.description('Get if the contact indicates a cloded state')
+			.returns('boolean', 'If closed - contact detected')
 			.done();
 	}
 
 	get sensorTypes() {
-		return [ ...super.sensorTypes, 'contact' ];
+		return [ ...super.sensorTypes, 'contactDetected' ];
 	}
 
-	contact() {
-		return this.value('contact');
+	contactDetected() {
+		return this.value('contactDetected');
 	}
 
 	isOpen() {
-		return this.contact()
+		return this.contactDetected()
 			.then(v => ! v);
 	}
 
 	isClosed() {
-		return this.contact();
+		return this.contactDetected();
 	}
 
-	updateContact(contact) {
+	updateContactDetected(contact) {
 		contact = boolean(contact);
-		if(this.updateValue('contact', contact)) {
+		if(this.updateValue('contactDetected', contact)) {
 			if(contact) {
 				// Emit the closed event if contact is true
 				this.emitEvent('closed');
