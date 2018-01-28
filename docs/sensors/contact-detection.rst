@@ -102,13 +102,17 @@ Protected methods
 
 	:param value:
 		The new contact status as a :doc:`boolean </values/boolean>`.
+	:param duration autoIdleTimeout:
+		Optional duration to switch back the contact detection status to ``false``.
 
 	Example:
 
 	.. sourcecode:: js
 
-		// Set the sensor to open
+		// Set the sensor to contact not detected (open)
 		this.updateContactDetected(false);
+
+		this.updateContactDetected(true, '1m');
 
 Implementing capability
 -----------------------

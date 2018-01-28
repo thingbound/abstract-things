@@ -18,7 +18,9 @@ The type ``sensor`` is used to mark things that read one or more values.
 	:caption: Capabilities
 
 	atmospheric-pressure
+	carbon-dioxide-detection
 	carbon-dioxide-level
+	carbon-monoxide-detection
 	carbon-monoxide-level
 	contact-detection
 	illuminance
@@ -28,5 +30,7 @@ The type ``sensor`` is used to mark things that read one or more values.
 	power-consumed
 	power-load
 	relative-humidity
+	smoke-detection
 	temperature
 	voltage
+	water-detection
