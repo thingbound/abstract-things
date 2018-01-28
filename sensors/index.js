@@ -3,7 +3,9 @@
 module.exports.Sensor = require('./sensor');
 
 module.exports.AtmosphericPressure = require('./atmospheric-pressure');
+module.exports.CarbonDioxideDetection = require('./carbon-dioxide-detection');
 module.exports.CarbonDioxideLevel = require('./carbon-dioxide-level');
+module.exports.CarbonMonoxideDetection = require('./carbon-monoxide-detection');
 module.exports.CarbonMonoxideLevel = require('./carbon-monoxide-level');
 module.exports.ContactDetection = require('./contact-detection');
 module.exports.Illuminance = require('./illuminance');
@@ -16,3 +18,4 @@ module.exports.RelativeHumidity = require('./relative-humidity');
 module.exports.Temperature = require('./temperature');
 module.exports.SmokeDetection = require('./smoke-detection');
 module.exports.Voltage = require('./voltage');
+module.exports.WaterDetection = require('./water-detection');
