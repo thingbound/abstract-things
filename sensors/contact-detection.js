@@ -2,7 +2,9 @@
 
 const Thing = require('../thing');
 const Sensor = require('./sensor');
-const { boolean } = require('../values');
+const { boolean, duration } = require('../values');
+
+const idleTimer = Symbol('autoIdle');
 
 module.exports = Thing.mixin(Parent => class extends Parent.with(Sensor) {
 	static get capability() {
@@ -56,7 +58,7 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(Sensor) {
 		return this.contactDetected();
 	}
 
-	updateContactDetected(contact) {
+	updateContactDetected(contact, autoIdleTimeout=null) {
 		contact = boolean(contact);
 		if(this.updateValue('contactDetected', contact)) {
 			if(contact) {
@@ -66,6 +68,18 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(Sensor) {
 				// Emit the opened event if contact is false
 				this.emitEvent('opened');
 			}
+		}
+
+		// Always clear the idle timer
+		clearTimeout(this[idleTimer]);
+
+		if(contact && autoIdleTimeout) {
+			/*
+			 * When contact has been detected and automatic idle is requested
+			 * set a timer.
+			 */
+			const ms = duration(autoIdleTimeout).ms;
+			this[idleTimer] = setTimeout(() => this.updateContactDetected(false), ms);
 		}
 	}
 });

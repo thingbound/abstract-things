@@ -2,7 +2,9 @@
 
 const Thing = require('../thing');
 const Sensor = require('./sensor');
-const { boolean } = require('../values');
+const { boolean, duration } = require('../values');
+
+const idleTimer = Symbol('autoIdle');
 
 module.exports = Thing.mixin(Parent => class extends Parent.with(Sensor) {
 	static get capability() {
@@ -37,7 +39,7 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(Sensor) {
 		return this.value('smokeDetected');
 	}
 
-	updateSmokeDetected(smoke) {
+	updateSmokeDetected(smoke, autoIdleTimeout=null) {
 		smoke = boolean(smoke);
 		if(this.updateValue('smokeDetected', smoke)) {
 			if(smoke) {
@@ -45,6 +47,18 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(Sensor) {
 			} else {
 				this.emitEvent('smokeCleared');
 			}
+		}
+
+		// Always clear the idle timer
+		clearTimeout(this[idleTimer]);
+
+		if(smoke && autoIdleTimeout) {
+			/*
+			 * When smoke has been detected and automatic idle is requested
+			 * set a timer.
+			 */
+			const ms = duration(autoIdleTimeout).ms;
+			this[idleTimer] = setTimeout(() => this.updateSmokeDetected(false), ms);
 		}
 	}
 });
