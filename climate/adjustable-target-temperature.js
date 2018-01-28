@@ -29,14 +29,14 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(TargetTemperatu
 			return super.targetTemperature();
 		}
 
-		return this.setTargetTemperature(humidity);
+		return this.setTargetTemperature(temperature);
 	}
 
 	setTargetTemperature(target) {
 		try {
 			target = temperature(target, true);
 
-			return Promise.resolve(this.changeTargetTemperature(humidity))
+			return Promise.resolve(this.changeTargetTemperature(temperature))
 				.then(() => super.targetTemperature());
 		} catch(ex) {
 			return Promise.reject(ex);
