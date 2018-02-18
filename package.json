@@ -6,7 +6,7 @@
   "repository": "tinkerhub/abstract-things",
   "keywords": [],
   "scripts": {
-    "test": "node_modules/.bin/eslint ."
+    "test": "jest && node_modules/.bin/eslint ."
   },
   "engines": {
     "node": ">=6.6.0"
@@ -26,7 +26,9 @@
     "tinkerhub-discovery": "^0.3.1"
   },
   "devDependencies": {
+    "dumbfound-jest": "^0.3.1",
     "eslint": "^4.12.0",
-    "eslint-plugin-node": "^5.2.1"
+    "eslint-plugin-node": "^5.2.1",
+    "jest": "^22.2.2"
   }
 }
