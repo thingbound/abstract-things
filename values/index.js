@@ -8,6 +8,7 @@ const ALWAYS_FALSE = function() { return false; };
 const TYPE_TAG = '_:value-type';
 
 const change = require('./change');
+const marker = Symbol('marker');
 
 function createPublicApi(def) {
 	const api = function(value, options, required, msg) {
@@ -31,6 +32,11 @@ function createPublicApi(def) {
 	for(const m of Object.keys(def.create)) {
 		api[m] = def.create[m];
 	}
+
+	// toJSON and mark as a value type
+	api.toJSON = def.toJSON;
+	api[marker] = true;
+
 	return api;
 }
 
@@ -73,7 +79,17 @@ class ValueRegistry {
 	}
 
 	get(type) {
-		return this.defs[type];
+		// Check if this is already a value type
+		if(type && type[marker]) return type;
+
+		const resolved = this[type];
+		if(resolved && resolved[marker]) {
+			// Resolved to something that is a value type, return it
+			return resolved;
+		} else {
+			// Resolved to anything else return null
+			return null;
+		}
 	}
 
 	_toJSON(converter, value) {
@@ -84,17 +100,27 @@ class ValueRegistry {
 	}
 
 	fromJSON(type, value) {
-		const def = this.defs[type] || this.defs.mixed;
-		return def.create(value);
+		if(typeof value === 'undefined') {
+			return undefined;
+		} else if(value === null) {
+			return null;
+		}
+
+		type = this.get(type) || this.get('mixed');
+		return type(value);
 	}
 
 	toJSON(type, value) {
-		const def = this.defs[type] || this.defs.mixed;
-		return def.toJSON(value);
+		if(typeof value === 'undefined') {
+			return undefined;
+		}
+
+		type = this.get(type) || this.get('mixed');
+		return type.toJSON(value);
 	}
 
 	createToJSON(types) {
-		let mixed = this.get('mixed');
+		let mixed = this.defs.mixed;
 		if(Array.isArray(types)) {
 			const converters = types.map(t => {
 				if(t.type) t = t.type;
@@ -115,7 +141,7 @@ class ValueRegistry {
 	}
 
 	createConversion(types) {
-		let mixed = this.get('mixed');
+		let mixed = this.defs.mixed;
 		if(Array.isArray(types)) {
 			const converters = types.map(t => {
 				if(t.type) t = t.type;
@@ -148,11 +174,11 @@ values.register('mixed', {
 	create: function(value) {
 		let type;
 		if(value && value[TYPE_TAG]) {
-			type = values.get(value[TYPE_TAG]);
+			type = values.defs[TYPE_TAG];
 		}
 
 		if(! type && Array.isArray(value)) {
-			type = values.get('array');
+			type = values.defs.array;
 		} else if(! type && typeof value === 'object' && value !== null) {
 			let found = false;
 			for(let key in values.defs) {
@@ -165,7 +191,7 @@ values.register('mixed', {
 			}
 
 			if(! found) {
-				type = values.get('object');
+				type = values.defs.object;
 			}
 		}
 
@@ -192,9 +218,9 @@ values.register('mixed', {
 		}
 
 		if(Array.isArray(value)) {
-			return values.get('array').toJSON(value);
+			return values.defs.array.toJSON(value);
 		} else if(typeof value === 'object') {
-			return values.get('object').toJSON(value);
+			return values.defs.object.toJSON(value);
 		}
 		return value;
 	}
