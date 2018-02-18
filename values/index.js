@@ -2,7 +2,6 @@
 
 const amounts = require('amounts');
 const color = require('./color');
-const Code = require('./code');
 
 const IDENTITY = function(input) { return input; };
 const ALWAYS_FALSE = function() { return false; };
@@ -141,19 +140,6 @@ class ValueRegistry {
 
 const values = module.exports = new ValueRegistry();
 
-function parseNumber(v) {
-	if(typeof v === 'number') return v;
-	if(typeof v !== 'string') {
-		throw new Error('Can not convert into a number, string is needed');
-	}
-
-	try {
-		return amounts.amount(v).value;
-	} catch(ex) {
-		throw new Error('Could not convert into a number, invalid format for string: ' + v);
-	}
-}
-
 /*
  * Mixed type for dynamic serialization to and from JSON. This type uses a
  * tag to track the type used.
@@ -253,150 +239,12 @@ values.register('array', {
 	}
 });
 
-values.register('buffer', {
-	create: function(value) {
-		if(value instanceof Buffer) {
-			return value;
-		}
-
-		if(Array.isArray(value)) {
-			// Assume this is an array with octets
-			return Buffer.from(value);
-		} else if(typeof value === 'object') {
-			value = value.encoded;
-		}
-
-		if(typeof value === 'string') {
-			// Assume this is Base-64 encoded string
-			return Buffer.from(value, 'base64');
-		} else {
-			throw new Error('Can not create buffer from value');
-		}
-	},
-
-	is: function(value) {
-		return value instanceof Buffer;
-	},
-
-	toJSON(value) {
-		return {
-			encoded: value.toString('base64')
-		};
-	}
-});
-
-values.register('boolean', {
-	create: function(value) {
-		if(typeof value === 'boolean') return value;
-
-		value = String(value).toLowerCase();
-		switch(value) {
-			case 'true':
-			case 'yes':
-			case 'on':
-			case '1':
-				return true;
-			case 'false':
-			case 'no':
-			case 'off':
-			case '0':
-				return false;
-			default:
-				throw new Error('Can not translate `' + value + '` into a boolean');
-		}
-	},
-
-	is: function(value) {
-		return typeof value === 'boolean';
-	}
-});
-
-values.register('number', {
-	create: function(value) {
-		if(typeof value === 'number') return value;
-
-		return parseNumber(value);
-	},
-
-	is: function(value) {
-		return typeof value === 'number';
-	}
-});
-
-values.register('string', {
-	create: function(value) {
-		return String(value);
-	},
-
-	is: function(value) {
-		return typeof value === 'string';
-	}
-});
-
-values.register('percentage', {
-	create: function(value, options) {
-		if(typeof value === 'string') {
-			value = value.trim();
-
-			if(value.endsWith('%')) {
-				// Cut off % at the end
-				value = value.substring(0, value.length - 1);
-			}
-
-			value = parseNumber(value);
-		} else if(typeof value !== 'number') {
-			throw new Error('Can not translate to a percentage');
-		}
-
-		if(typeof options !== 'undefined') {
-			const min = options.min;
-			if(typeof min !== 'undefined') {
-				if(value < min) {
-					value = min;
-				}
-			}
-
-			const max = options.max;
-			if(typeof max !== 'undefined') {
-				if(value > max) {
-					value = max;
-				}
-			}
-
-			const precision = options.precision;
-			if(typeof precision !== 'undefined') {
-				const p = Math.pow(10, precision);
-				value = Math.round(value * p) / p;
-			}
-		}
-
-		return value;
-	},
-
-	comparable: true
-});
-
-values.register('code', {
-	create: function(value) {
-		if(typeof value === 'object') {
-			if(Array.isArray(value)) {
-				return new Code(value[0], value[1]);
-			} else {
-				return new Code(value.id || value.code, value.description || value.message);
-			}
-		} else if(typeof value === 'string') {
-			return Code.parse(value);
-		} else if(typeof value === 'number') {
-			return Code.parse(String(value));
-		}
-
-		throw new Error('Can not convert into code');
-	},
-
-	is: function(value) {
-		return value instanceof Code;
-	}
-});
+values.register('buffer', require('./buffer'));
+values.register('boolean', require('./boolean'));
+values.register('number', require('./number'));
+values.register('string', require('./string'));
+values.register('percentage', require('./percentage'));
+values.register('code', require('./code'));
 
 values.register('color', color);
 
