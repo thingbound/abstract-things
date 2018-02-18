@@ -45,13 +45,13 @@ class SubStorage {
 		this._path = sub;
 	}
 
-	get(key) {
+	get(key, type='mixed') {
 		return this._storage.get(this._path + '/' + key)
-			.then(json => values.fromJSON('mixed', json));
+			.then(json => values.fromJSON(type, json));
 	}
 
-	set(key, value) {
-		return this._storage.set(this._path + '/' + key, values.toJSON('mixed', value));
+	set(key, value, type='mixed') {
+		return this._storage.set(this._path + '/' + key, values.toJSON(type, value));
 	}
 
 	sub(key) {
