@@ -19,7 +19,7 @@
     "color-temperature": "^0.2.7",
     "debug": "^3.1.0",
     "deep-equal": "^1.0.1",
-    "dwaal": "^0.1.4",
+    "dwaal": "^0.2.0",
     "foibles": "^0.2.0",
     "is-mergeable-object": "^1.1.0",
     "mkdirp": "^0.5.1",
