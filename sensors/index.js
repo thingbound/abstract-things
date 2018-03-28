@@ -21,3 +21,6 @@ module.exports.Voltage = require('./voltage');
 module.exports.WaterDetection = require('./water-detection');
 
 module.exports.Depth = require('./depth');
+
+module.exports.SmokeDetection = require('./smoke-detection');
+module.exports.Density = require('./density');
