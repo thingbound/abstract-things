@@ -1,4 +1,4 @@
-``type:humidifer`` - Humidifiers
+``type:humidifier`` - Humidifiers
 =================================
 
 Humidifiers are appliances that increase the humidity of the air. Many
