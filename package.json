@@ -6,10 +6,11 @@
   "repository": "tinkerhub/abstract-things",
   "keywords": [],
   "scripts": {
+    "lint": "eslint .",
     "test": "jest && node_modules/.bin/eslint ."
   },
   "engines": {
-    "node": ">=6.6.0"
+    "node": ">=8.0.0"
   },
   "dependencies": {
     "amounts": "^0.5.0",

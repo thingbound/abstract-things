@@ -4,16 +4,13 @@ const Thing = require('../thing');
 const Storage = require('../storage');
 const values = require('../values');
 
-const Data = require('./data');
+const RootGroup = require('./root-group');
 const Group = require('./group');
 const Property = require('./property');
 
-const findGroup = require('./findGroup');
-const findProperty = require('./findProperty');
 const parsePath = require('./parsePath');
 
 const description = Symbol('configDescription');
-const data = Symbol('data');
 
 /**
  * Mixin that makes a thing configurable. Configurable things support getting
@@ -29,6 +26,10 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(Storage) {
 		builder.event('configPropertyChanged')
 			.type('object')
 			.description('Configuration property has changed')
+			.done();
+
+		builder.action('configDescription')
+			.description('Get described configuration groups and values')
 			.done();
 
 		builder.action('config')
@@ -47,33 +48,31 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(Storage) {
 	constructor(...args) {
 		super(...args);
 
-		this[description] = new Group();
-		this[data] = new Data();
+		this[description] = new RootGroup(this);
 	}
 
-	configDescription() {
-		return Promise.resolve(this[description]);
+	async configDescription() {
+		return await this[description].getDescription();
 	}
 
-	initCallback() {
-		return super.initCallback()
-			.then(() => {
-				// TODO: Request loading of stored properties and set default values
-				const promises = [];
-				function initAll(group) {
-					for(const v of group.children) {
-						if(v instanceof Group) {
-							initAll(v);
-						} else {
-							promises.push(v.load());
-						}
-					}
+	async initCallback() {
+		await super.initCallback();
+
+		// TODO: Request loading of stored properties and set default values
+		const promises = [];
+		function initAll(group) {
+			for(const v of group.children) {
+				if(v instanceof Group) {
+					initAll(v);
+				} else {
+					promises.push(v.load());
 				}
+			}
+		}
 
-				initAll(this[description]);
+		initAll(this[description]);
 
-				return Promise.all(promises);
-			});
+		await Promise.all(promises);
 	}
 
 	/**
@@ -85,16 +84,16 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(Storage) {
 	 * @param {*} value
 	 *   Optional value to set for the given property key.
 	 */
-	config(key=undefined, value=undefined) {
+	async config(key=undefined, value=undefined) {
 		if(typeof key === 'undefined' && typeof value === 'undefined') {
-			return Promise.resolve(this[data].asPlainObject());
+			return this[description].getValues();
 		}
 
 		if(typeof value === 'undefined') {
-			return Promise.resolve(this.getConfig(key));
+			return this.getConfig(key);
 		}
 
-		return this.setConfigProperty(key, value);
+		return await this.setConfigProperty(key, value);
 	}
 
 	/**
@@ -103,7 +102,14 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(Storage) {
 	 * @param {string} key
 	 */
 	getConfig(key) {
-		return this[data].get(key);
+		const value = this[description].get(key);
+		if(value instanceof Group) {
+			return value.getValues();
+		} else if(value instanceof Property) {
+			return value.get();
+		}
+
+		return null;
 	}
 
 	/**
@@ -112,18 +118,13 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(Storage) {
 	 * @param {string} key
 	 * @param {*} value
 	 */
-	setConfigProperty(key, value) {
-		try {
-			// Find the property that is being updated
-			const property = findProperty(this[description], key);
-			if(! property) {
-				return Promise.reject(new Error('Property ' + key + ' does not exist'));
-			}
-
-			return property.set(value);
-		} catch(ex) {
-			return Promise.reject(ex);
+	async setConfigProperty(key, value) {
+		const property = this[description].get(key);
+		if(! (property instanceof Property)) {
+			throw new Error('Property ' + key + ' does not exist');
 		}
+
+		return await property.set(value);
 	}
 
 	/**
@@ -133,36 +134,62 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(Storage) {
 		throw new Error('setConfig is not implemented yet');
 	}
 
+	findConfigProperty(key) {
+		const property = this[description].get(key);
+		if(! (property instanceof Property)) {
+			throw new Error('Property ' + key + ' does not exist');
+		}
+
+		return property;
+	}
+
 	/**
 	 * Define a group with configuration.
 	 *
-	 * @param {*} group
+	 * @param {string} key
 	 */
-	defineConfigGroup(group) {
-		const parent = findGroup(this[description], group);
-		if(! parent) {
-			throw new Error('Parent of the configuration group does not exist');
+	defineConfigGroup(key) {
+		const parts = parsePath(key);
+
+		let group = this[description];
+		if(parts.length > 1) {
+			group = group.get(parts.slice(0, parts.length - 1));
+
+			if(! group) {
+				throw new Error('Parent of the configuration property `' + key + '` does not exist');
+			} else if(! (group instanceof Group)) {
+				throw new Error('Parent of the configuration property `' + key + '` is not a group');
+			}
 		}
 
-		return new ConfigGroupBuilder(def => {
-			const parts = parsePath(group);
-			const id = parts[parts.length - 1];
+		const id = parts[parts.length - 1];
 
-			parent.add(new Group(id, def));
+		return new ConfigGroupBuilder(def => {
+			new Group(group, id, def);
 			return this;
 		});
 	}
 
-	defineConfig(key) {
-		const parent = findGroup(this[description], key);
-		if(! parent) {
-			throw new Error('Parent of the configuration property does not exist');
+	/**
+	 * Define an individual configuration property.
+	 */
+	defineConfigProperty(key) {
+		const parts = parsePath(key);
+
+		let group = this[description];
+		if(parts.length > 1) {
+			group = group.get(parts.slice(0, parts.length - 1));
+
+			if(! group) {
+				throw new Error('Parent of the configuration property `' + key + '` does not exist');
+			} else if(! (group instanceof Group)) {
+				throw new Error('Parent of the configuration property `' + key + '` is not a group');
+			}
 		}
 
-		return new ConfigDefBuilder((def, required) => {
-			const parts = parsePath(key);
-			const id = parts[parts.length - 1];
+		const id = parts[parts.length - 1];
 
+		return new ConfigDefBuilder((def, required) => {
 			if(def.stored) {
 				def.setter = v => {
 					/*
@@ -184,19 +211,19 @@ module.exports = Thing.mixin(Parent => class extends Parent.with(Storage) {
 				};
 			}
 
-			const property = new Property(this, this[data], id, def);
-			parent.add(property);
-
+			const property = new Property(group, id, def);
 			return property;
 		});
 	}
 });
 
 class ConfigDefBuilder {
-	constructor(receiver) {
+	constructor(receiver, path) {
 		this.receiver = receiver;
 
+		this.path = path;
 		this.def = {
+			typeName: 'mixed',
 			type: values.mixed
 		};
 	}
@@ -232,6 +259,7 @@ class ConfigDefBuilder {
 			throw new Error('The type ' + type + ' does not exist');
 		}
 
+		this.def.typeName = type;
 		this.def.type = v;
 		return this;
 	}

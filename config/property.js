@@ -1,44 +1,52 @@
 'use strict';
 
 const EMPTY_FUNC = function() {};
+const mergePath = require('./mergePath');
+const { getValue, setValue } = require('./symbols');
 
 /**
  * Configuration property.
  */
 module.exports = class Property {
 
-	constructor(thing, data, key, def) {
-		this.thing = thing;
-		this.data = data;
+	constructor(group, id, def) {
+		this.group = group;
 
-		this.id = key;
-		this.key = key;
+		this.id = id;
 		this.def = def;
+
+		this.thing = group.thing;
+		this.key = mergePath(group.key, id);
 
 		this.type = def.type;
 
-		this.setter = def.setter ? def.setter.bind(thing) : EMPTY_FUNC;
-		this.onUpdate = def.onUpdate ? def.onUpdate.bind(thing) : EMPTY_FUNC;
-		this.loader = def.loader ? def.loader.bind(thing) : EMPTY_FUNC;
+		this.setter = def.setter ? def.setter.bind(group.thing) : EMPTY_FUNC;
+		this.onUpdate = def.onUpdate ? def.onUpdate.bind(group.thing) : EMPTY_FUNC;
+		this.loader = def.loader ? def.loader.bind(group.thing) : EMPTY_FUNC;
+
+		// Add this property to the group
+		group.add(this);
 	}
 
 	/**
 	 * Get the current value.
 	 */
 	get() {
-		return this.data.get(this.key);
+		return this.group[getValue](this.key);
 	}
 
 	/**
 	 * Load the value.
 	 */
-	load() {
-		return Promise.resolve(this.loader())
-			.then(v => {
-				v = typeof v === 'undefined' ? this.def.value : v;
+	async load() {
+		// Load via the loader function
+		const v = await this.loader();
 
-				return this.update(v);
-			});
+		// Update the value from the initial load
+		return this.update(
+			// If no value was loaded fallback to the default value
+			typeof v === 'undefined' ? this.def.value : v
+		);
 	}
 
 	/**
@@ -46,9 +54,12 @@ module.exports = class Property {
 	 *
 	 * @param {*} v
 	 */
-	set(v) {
-		return Promise.resolve(this.def.setter(v))
-			.then(() => this.get());
+	async set(v) {
+		// Call the setter function to update the value
+		await this.def.setter(v);
+
+		// Fetch the updated value
+		return this.get();
 	}
 
 	/**
@@ -56,21 +67,36 @@ module.exports = class Property {
 	 *
 	 * @param {*} v
 	 */
-	update(value) {
+	async update(value) {
 		// Convert the value into the correct type
 		value = typeof value === undefined ? undefined : this.type(value);
 
 		// Set the value and emit an event if it changes
-		if(this.data.set(this.key, value)) {
-			// Call the onChange handler and let it perform updates
-			return Promise.resolve(this.onUpdate(value))
-				.then(() => {
-					// Emit configPropertyUpdated event when onChange is done
-					this.thing.emitEvent('configPropertyUpdated', {
-						key: this.key,
-						value: value
-					});
-				});
+		if(this.group[setValue](this.key, value)) {
+			// Call the onUpdate handler and let it perform updates
+			await this.onUpdate(value);
+
+			// Emit configPropertyUpdated event when onChange is done
+			this.thing.emitEvent('configPropertyUpdated', {
+				key: this.key,
+				value: value
+			});
 		}
+	}
+
+	getDescription() {
+		return {
+			id: this.id,
+			path: this.key,
+
+			name: this.def.name,
+			description: this.def.description,
+
+			type: this.def.typeName,
+			context: this.def.context,
+
+			defaultValue: this.def.value,
+			currentValue: this.get()
+		};
 	}
 };

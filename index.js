@@ -2,6 +2,8 @@
 
 module.exports.Thing = require('./thing');
 
+module.exports.Configurable = require('./config/configurable');
+
 module.exports.Discovery = require('./discovery');
 module.exports.Polling = require('./polling');
 
