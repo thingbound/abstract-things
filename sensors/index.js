@@ -19,3 +19,4 @@ module.exports.Temperature = require('./temperature');
 module.exports.SmokeDetection = require('./smoke-detection');
 module.exports.Voltage = require('./voltage');
 module.exports.WaterDetection = require('./water-detection');
+module.exports.WaterLevel = require('./water-level');
