@@ -51,8 +51,8 @@ module.exports = Thing.mixin(Parent => class extends Parent {
 		}
 
 		const range = { min, max };
-		if(! isDeepEqual(this[colorTemperatureRange], range)) {
-			this[colorTemperatureRange] = range;
+		if(! isDeepEqual(this.colorTemperatureRange, range)) {
+			this.colorTemperatureRange = range;
 			this.emitEvent('colorTemperatureRangeChanged', range);
 		}
 	}
