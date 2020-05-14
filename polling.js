@@ -52,7 +52,7 @@ module.exports = Thing.mixin(Parent => class extends Parent {
 		// Perform poll async - and schedule new poll after it has resolved
 		return Promise.resolve(this.poll(isInitial))
 			.catch(ex => {
-				this.debug('Could not poll:', ex);
+				console.log('Could not poll:', ex);
 				return new Error('Polling issue');
 			})
 			.then(r => {
